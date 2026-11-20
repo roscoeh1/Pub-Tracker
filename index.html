@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#14252a"><title>Aberdeen Pub Challenge 🍻</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101e25;color:#f4f1e7;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:860px;margin:auto;padding:18px 14px 80px}h1{font-size:27px;margin:0}h2{font-size:18px;margin:0 0 12px}.muted,small{color:#b2c4c9}small{font-size:12px}header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}header b{color:#f1c971}.panel{background:#1c303a;border:1px solid #38535d;border-radius:15px;padding:16px;margin-bottom:14px}.hero{background:linear-gradient(115deg,#22594c,#233848);border:1px solid #578276}.stats{display:flex;align-items:end;justify-content:space-between;gap:10px}.big{font-size:37px;font-weight:900}.big span{font-size:15px;font-weight:400}.percent{font-weight:900;color:#f4d278;font-size:26px}.progress{margin:12px 0;height:11px;background:#102c2c;border-radius:20px;overflow:hidden}#fill{height:100%;background:#e9cd76;width:0%}input,select,textarea,button{font:inherit}input,select,textarea{color:#fff;background:#11252e;border:1px solid #53717c;border-radius:9px;padding:11px;width:100%;min-height:45px;font-size:16px}button{border:1px solid #799099;background:#2a4653;color:#fff;border-radius:10px;padding:10px 13px;min-height:42px;cursor:pointer;font-weight:700}button.primary{background:#e7c875;border-color:#e7c875;color:#18282d}button.good{background:#227355;border-color:#469b78}button:disabled{opacity:.5}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.row>*{min-width:0}.row button{flex:1}.field{display:grid;gap:5px;margin:11px 0}.hidden{display:none!important}.tabs{display:flex;gap:8px;margin:12px 0}.tabs button{flex:1}.tabs button.active{background:#e7c875;color:#13272d}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.pub{background:#1b2d37;border:1px solid #425c64;padding:12px;border-radius:11px;display:grid;gap:7px}.pub.done{border-color:#4aae80;background:#193b33}.pub h3{margin:0;font-size:15px}.pub .row button{font-size:12px;padding:8px;min-height:38px}.badge{color:#d4dccd;font-size:11px}.map{height:420px;border-radius:12px;overflow:hidden;border:1px solid #546d74;background:#d4e0da}.route{padding:10px;background:#203c48;border-radius:9px;margin:6px 0}.note{font-size:12px;line-height:1.5;color:#bed0d2}.error{color:#ffb8aa}dialog{width:min(450px,calc(100vw - 20px));max-height:85vh;overflow:auto;background:#1b313b;color:#f4eee3;border:1px solid #829093;border-radius:14px;padding:17px}dialog::backdrop{background:#000b}dialog .field{margin:12px 0}#status{font-size:12px;line-height:1.4}.link{color:#f4d278;overflow-wrap:anywhere}#listStatus{margin:9px 0;color:#bdd1d5;font-size:12px}@media(max-width:550px){.grid{grid-template-columns:1fr}.map{height:360px}.big{font-size:31px}}
+</style></head><body><main>
+<header><div><small>ONE CITY • TWO MATES • EVERY PUB</small><h1>🍻 Aberdeen <b>Pub Challenge</b></h1></div><span id="cloud" class="muted">Connecting…</span></header>
+<section id="login" class="panel"><h2>🔐 Sign in to your shared challenge</h2><div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="pass">Password (at least 6 characters)</label><input id="pass" type="password" autocomplete="current-password"></div><div class="row"><button id="signIn" class="primary">Sign in</button><button id="signUp">Create account</button></div><p class="note">Each of you uses a separate account. Never share passwords.</p></section>
+<section id="lobby" class="panel hidden"><h2>🤝 Start your joint challenge</h2><p class="muted">Create it once, then send your pal the private invite.</p><button id="create" class="primary">Create our challenge</button><div class="field"><label for="join">Or paste your pal's invite link</label><input id="join" placeholder="Invite link"></div><button id="joinBtn">Join challenge</button></section>
+<section id="app" class="hidden"><section class="panel hero"><div class="stats"><div><small>COMPLETED TOGETHER</small><div class="big"><span id="doneN">0</span><span> / <span id="totalN">196</span> pubs</span></div></div><span class="percent" id="percent">0%</span></div><div class="progress"><div id="fill"></div></div><small id="remaining">Tracking 231 researched leads. Some still need verification.</small></section>
+<section class="panel"><div class="row"><span id="team">👥 One shared challenge</span><button id="signOut">Sign out</button></div><p class="note" id="syncStatus">Waiting for Firestore…</p><div class="field"><label for="invite">Private invitation for your pal</label><input id="invite" readonly></div><button id="copyInvite">Copy invitation</button></section>
+<div class="tabs"><button class="active" data-tab="map">🗺️ Map</button><button data-tab="pubs">🍺 Pubs</button><button data-tab="route">🚶 Crawl</button></div>
+<section id="mapTab"><div class="panel"><h2>Aberdeen map</h2><p class="note">Pins use postcode centres, so they are approximate, not exact door locations. Some venues do not have postcodes yet.</p><div id="map" class="map"></div><p class="note" id="mapStatus">Loading available postcodes…</p></div></section>
+<section id="pubsTab" class="hidden"><div class="panel"><h2>All researched venues</h2><input id="search" placeholder="Search pub, postcode or area"><div class="row" style="margin-top:8px"><select id="area"><option value="">All areas</option></select><select id="filter"><option value="all">All pubs</option><option value="todo">Unvisited</option><option value="done">Completed</option></select></div><label class="row" style="margin-top:12px"><input type="checkbox" id="clubs" style="width:20px;min-height:20px"> Include private members' clubs</label><p id="listStatus"></p><div class="grid" id="pubList"></div></div><div class="panel"><h2>Missing a pub?</h2><p class="note">Add a venue you find and it'll appear on both phones.</p><input id="newName" placeholder="Pub name"><input id="newPost" placeholder="AB postcode (optional)" style="margin:8px 0"><button id="addPub" class="primary">Add missing pub</button></div></section>
+<section id="routeTab" class="hidden"><div class="panel"><h2>🚶 Your shared pub crawl</h2><p class="note">Add pubs from the Pubs tab. Reorder stops with the arrows, then open walking directions.</p><div id="routeList"></div><div class="row"><button id="directions" class="primary">Open walking route ↗</button><button id="clearRoute">Clear crawl</button></div></div></section>
+</section><p id="status" role="status" class="muted"></p><p class="note">Research inventory from November 2026; not a guaranteed list of currently trading premises. Confirm opening hours and location before visiting. Please drink responsibly.</p>
+</main>
+<dialog id="editDialog"><h2 id="dialogTitle">Pub details</h2><p class="note" id="dialogPlace"></p><label class="row"><input type="checkbox" id="visited" style="width:24px;min-height:24px"> Both visited together</label><div class="field"><label for="date">Date visited</label><input id="date" type="date"></div><div class="field"><label for="rating">Rating / 10</label><select id="rating"><option value="">Not rated</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div><div class="field"><label for="notes">Notes</label><textarea id="notes" rows="3" maxlength="1200"></textarea></div><div class="row"><button id="saveVisit" class="good">Save to both phones</button><button id="closeDialog">Cancel</button></div><p class="note" id="dialogNote"></p></dialog>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js';
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js';
+import {getFirestore,doc,collection,getDoc,setDoc,updateDoc,onSnapshot,serverTimestamp,arrayUnion} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
+const config={apiKey:'AIzaSyAcK-u6SXyUAvGwdrsxa5BAu1RpaKGlZ7Q',authDomain:'pub-tracker-ef1f9.firebaseapp.com',projectId:'pub-tracker-ef1f9',storageBucket:'pub-tracker-ef1f9.firebasestorage.app',messagingSenderId:'1077333857895',appId:'1:1077333857895:web:6696bc45e3212cf704e6c2'};
+const auth=getAuth(initializeApp(config)),db=getFirestore();const $=id=>document.getElementById(id),show=(id,v)=>$(id).classList.toggle('hidden',!v);
+const AREAS=`Aberdeen Beach|Altens|Bieldside|Bridge of Don|Bridge of Don / Links|Bucksburn|Castlegate|City centre|Cove Bay|Cults|Dyce|Ferryhill|Footdee|Garthdee|George Street|Hazlehead|Holburn|Kincorth|King Street / Pittodrie|Kingswells|Kittybrewster|Mannofield|Mastrick|Old Aberdeen|Peterculter|Pitfodels|Pittodrie|Quayside|Rosemount|Seaton|Summerhill|Torry|West End|Woodside`.split('|');
+const VENUES=`21 Crimes|AB10 1TN|7|0|1
+3 Mad Hatters|AB11 6EP|7|0|0
+524 Bar|AB25 3XJ|14|0|0
+612 Social Club|AB24 2DB|33|1|0
+Aberdeen Boat Club||31|1|0
+Aberdeen Grammar School Former Pupils Club|AB15 4YQ|32|1|0
+Aberdeen Indoor Bowling Club|AB15 6LN|30|1|0
+Aberdeen Masonic Temple Club|AB11 6EX|7|1|0
+Aberdeen Trades Council Social Club||7|1|0
+Aberdeen Transport Club|AB25 3TL|20|1|0
+Aberdeenshire Cricket Club||21|1|0
+Abergeldie Bar|AB10 7LY|16|0|0
+Abergeldie Bowling Club|AB10 6EE|21|1|0
+Adams Lounge / Hawthorn Bar||16|0|0
+Aitchie's Ale House|AB11 5LY|7|0|0
+Albyn||32|0|1
+All Bar One|AB10 1BL|7|0|1
+Arcadia Bar & Games|AB10 1JJ|7|0|1
+Archibald Simpson|AB11 5BQ|6|0|1
+Atholl Hotel|AB15 4YN|32|0|0
+Auchmill Golf Club||5|1|0
+Balaclava Bar||7|0|0
+Bankhead Inn|AB21 9HQ|5|0|0
+Bar One-Eighty|AB11 6HD|7|0|1
+Bardots|AB11 6EQ|7|0|0
+Bartenders Lounge|AB10 1RL|7|0|1
+Bieldside Inn|AB15 9DB|2|0|0
+Bit on the Side|AB11 5BZ|7|0|0
+Black Dog|AB23 8PA|3|0|0
+Blacks Bar / Richmond Arms|AB14 0UL|24|0|0
+Blue Lamp|AB25 1BU|7|0|0
+Bobbin|AB24 5ST|23|0|0
+Bon Accord Golf Club Bar||23|1|0
+Botanical Bar||7|0|0
+BrewDog Castlegate|AB11 5BU|7|0|1
+Bridge Bar|AB11 6JJ|7|0|0
+Brig Inn / Shish Tandoori|AB23 8EB|3|0|0
+Brig O' Dee|AB10 7JN|13|0|0
+Brig O'Don|AB24 1XZ|3|0|0
+Buckie Farm||3|0|0
+Butchers Arms|AB25 3YB|14|0|0
+Carlton||7|0|0
+Casa del Fuego|AB10 1LB|7|0|1
+Castle Bar|AB11 5BQ|6|0|0
+Cellar 35|AB25 1NQ|28|0|0
+Central Bar|AB24 2EU|20|0|0
+Characters Café Bar|AB11 5BE|27|0|0
+Cheerz|AB11 6PH|7|0|1
+Chesters Hotel|AB15 4YP|32|0|0
+Chez Mal (Malmaison Aberdeen)|AB15 4YP|32|0|1
+Chop Grill & Bar Aberdeen|AB25 1HG|7|0|1
+Cocket Hat||5|0|0
+Coda Café Bar|AB10 1QS|7|0|1
+Codona's Bowl & Bar|AB24 5ED|0|0|1
+College Bar|AB10 1YD|32|0|1
+Common Sense Coffee House & Bar|AB10 1DF|7|0|1
+Coopers Bar|AB25 1LN|7|0|0
+Cove Bay Hotel|AB12 3NA|8|0|0
+Cove Rangers Social Club|AB12 3NR|8|1|0
+Craftsman Company|AB11 6NE|7|0|1
+Croft and Cairns|AB16 5TT|22|0|0
+Crown Bar|AB24 2DB|20|0|0
+Culter Mills Sports & Social Club|AB14 0QD|24|1|0
+Cults Bowling Club|AB15 9PA|9|1|0
+Dee Swimming Club||7|1|0
+Deeside Golf Club Bar|AB15 9DL|2|1|0
+Distilling House||10|0|0
+Drummonds|AB10 1JR|7|0|0
+Durty Murphy's|AB10 1TT|32|0|1
+Dusk|AB11 6EN|7|0|1
+Dutch Mill|AB15 4NR|32|0|0
+Dyce Farm|AB21 0BH|10|0|0
+East End Football Club||26|1|0
+ENVY||7|0|0
+Faffless|AB10 1RB|7|0|0
+Ferryhill House Hotel|AB11 6UA|11|0|0
+Fibbers Irish Snug|AB11 6EN|7|0|1
+Fierce 1983 Lounge|AB24 5QH|26|0|0
+Fierce Bar|AB11 5BW|7|0|1
+Fierce Brewery Tap Room||10|0|0
+Fittie Bar|AB11 5BT|12|0|0
+Flight Path at TECA|AB21 9FX|10|0|0
+Foundry|AB10 6BR|7|0|0
+Fountain Bar|AB24 2AX|20|0|0
+Four Mile House||19|0|0
+Four Mile Inn|AB21 9BB|5|0|0
+Freedom an' Whisky|AB25 1HG|7|0|1
+Frigate Bar|AB10 1AU|7|0|0
+Gilcomston Bar|AB25 1UW|32|0|0
+Glentanar|AB10 6BS|7|0|0
+Globe Inn|AB10 1RJ|7|0|1
+Golden Tee||31|1|0
+Gordonians FP Club|AB15 7YT|32|1|0
+Grampian Bar|AB11 9LS|31|0|0
+Granite City|AB21 7DU|10|0|0
+Grape & Grain|AB10 1UY|7|0|1
+Grays Inn|AB16 5PY|22|0|0
+Great Western Hotel|AB10 6PS|32|0|0
+Grill|AB11 6BA|7|0|1
+Hammerman's Restaurant & Cocktail Bar|AB10 1RD|7|0|1
+Hayloft Bar|AB11 6LN|11|0|0
+Hazlehead Golf Club Bar|AB15 8BD|15|1|0
+Holburn Bar|AB10 6BL|16|0|0
+Howff|AB11 6BT|32|0|0
+Ivy Lodge|AB11 5BZ|7|0|0
+Justice Mill|AB11 6DA|32|0|1
+Kings Bar||7|0|0
+Kirkgate Bar|AB10 1BA|7|0|0
+Kittybrewster Bar|AB25 3PY|20|0|1
+Krakatoa|AB11 5AA|7|0|0
+Kultura|AB10 1JS|7|0|1
+Lane7 Aberdeen|AB11 5BY|7|0|1
+Legends Sports Bar|AB11 6HD|7|0|0
+Lemon Tree|AB24 5AT|7|0|0
+Lord Byron||24|0|0
+Ma Cameron's|AB10 1JG|7|0|1
+Mains of Scotstown Inn|AB22 8WT|3|0|0
+Malones|AB11 5BZ|7|0|1
+Mara Wine Bar|AB10 1XD|7|0|0
+Market Arms||7|0|0
+Masada Bar & Rusty Nail Lounge|AB25 1NR|28|0|0
+McNasty's|AB10 1SB|32|0|0
+Mill of Mundurno||3|0|0
+Mither Tap|AB25 1BT|7|0|0
+Molly Malones|AB10 1TL|7|0|1
+Monty's||7|0|0
+Moossh Café & Wine Bar|AB10 6NN|21|0|1
+Motif|AB11 6EN|7|0|0
+Murcar Links Golf Club Bar|AB23 8BD|3|1|0
+Murdo's|AB16 5UR|22|0|0
+New Greentrees||10|0|0
+Nigg Bay Golf Club Bar|AB11 9QT|31|1|0
+Ninety-Nine Bar & Kitchen|AB10 1JN|7|0|1
+Noose & Monkey|AB25 1NQ|28|0|1
+Northern Bar|AB25 1EE|14|0|0
+Northern Bowling Club|AB24 3DP|23|1|0
+Northern Golf Club|AB24 5QB|4|1|0
+Number 10|AB10 1XL|32|0|1
+O'Donoghues|AB11 6EP|7|0|0
+O'Malley's|AB11 6HA|7|0|0
+O'Neill's|AB10 1JN|7|0|1
+OGV Taproom|AB11 6HZ|7|0|0
+Old Bank Bar|AB14 0UQ|24|0|0
+Old Blackfriars|AB11 5BB|6|0|1
+Old Kings Highway|AB11 6NY|7|0|1
+Old Machar Legion||23|1|0
+Old School House||7|0|0
+On The Corner||7|0|0
+Palm Court Hotel|AB15 7YX|32|0|0
+Paramount|AB11 6EA|7|0|1
+Parkvale FC Social Club|AB24 5AX|23|1|0
+Parkway Inn||3|0|0
+Pinehurst Lodge|AB21 0DP|10|0|0
+Pittodrie Bar|AB24 5AP|23|0|0
+Ploughman||24|0|0
+Polmuir Bowling Club|AB11 7RS|11|1|0
+Portals Bar|AB11 5BQ|7|0|0
+Portland Club|AB25 1GA|7|1|0
+Prince of Wales|AB10 1HF|7|0|1
+Prohibition|AB11 6DX|7|0|0
+Queen Vic|AB25 2YU|28|0|0
+R U A Social Club|AB11 6DL|7|1|0
+Red Lion / Beastie|AB24 3JU|23|0|0
+Regent Bridge Bar|AB11 5AH|7|0|0
+Revolution|AB10 1JS|7|0|1
+Rileys|AB11 6HZ|7|0|0
+Rock Bottom|AB11 6HD|7|0|1
+Rosemount Bar|AB25 2TJ|28|0|0
+Rowantree Bar|AB24 1SL|29|0|0
+Royal Northern & University Club|AB10 1YE|32|1|0
+Saltoun Arms||7|0|0
+Scotia Bar|AB24 5JB|18|0|0
+Scott's Bar||30|0|0
+Scottish Embassy||7|0|0
+Seafield Bowling Club|AB15 4UF|32|1|0
+Shape Shifters|AB11 6HU|7|0|0
+Siberia Bar|AB10 1JR|7|0|1
+Six by Nico Aberdeen|AB11 6BT|7|0|1
+SKYLARK Brasserie (Marcliffe)|AB15 9YA|25|0|1
+Slains Bar|AB10 1JH|7|0|1
+Smiddy||19|0|0
+Smoke and Soul at The Old Smiddy|AB23 8BD|3|0|1
+Snooty Fox|AB12 3HE|8|0|0
+Snuggery||7|0|0
+SOBR|AB10 1UY|7|0|1
+Soul|AB11 6BS|7|0|1
+Spider's Web|AB21 7BA|10|0|0
+Spin|AB10 1FF|7|0|0
+Spirit Level|AB11 6PH|7|0|0
+Spiritualist|AB11 6EN|7|0|1
+Sportsmans Club||7|1|0
+St Machar Bar|AB24 3EN|23|0|0
+Stag|AB11 6HB|7|0|1
+Staging Post|AB21 9DU|5|0|0
+SugarBird Wines in the Gardens|AB10 1NJ|7|0|1
+SugarBird Wines Union Grove||32|0|0
+Tarragon on Terrace||7|0|0
+The 1224 Club (Masonic Lodge)|AB14 0UD|24|1|0
+The Abbot|AB12 5BT|17|0|0
+The Atrium Restaurant & Bar|AB10 1SN|7|0|1
+The Braided Fig|AB10 1SB|7|0|1
+The Cape Horn||32|0|0
+The Country Club|AB22 8NS|3|1|0
+The Den at Cults Hotel|AB15 9SE|9|0|0
+The Exchange Pub & Restaurant|AB11 6PH|7|0|0
+The Old Workshop|AB11 5BY|7|0|1
+The Terrace Bar & Cafe|AB25 1GL|7|0|1
+The Tunnels||7|0|0
+The Under the Hammer|AB10 1RJ|7|0|1
+The White Cockade|AB11 8ER|31|0|0
+The Wild Boar|AB10 1JR|7|0|1
+Thistle Bar|AB25 3TB|7|0|0
+Three Lums|AB16 6TU|22|0|0
+Tilted Wig|AB11 5BA|6|0|1
+Tippling House|AB10 1JE|7|0|0
+Tipsy Cow|AB11 5PL|7|0|0
+Trinity Hall|AB10 6DA|32|1|0
+Triple Kirks|AB10 1JS|7|0|1
+UG2||7|0|0
+Union Brew|AB24 3TU|23|0|0
+Victoria Bar|AB11 9DS|31|0|0
+Village Hotel||19|0|0
+Vovem Bar|AB10 1TN|7|0|1
+Wagleys||7|0|0
+Wellington Hotel|AB12 3GH|1|0|0
+Whisky Situation|AB11 6ND|7|0|0
+White Horse|AB24 2DU|33|0|0
+Wild Goose||33|0|0
+Wilson's||7|0|0
+Woodend Bar|AB21 9JS|10|0|0
+Zee's Bar||7|0|1`.trim().split('\n').map((line,i)=>{const [name,postcode,area,club,verified]=line.split('|');return{id:String(i+1),name,postcode,area:AREAS[+area],club:club==='1',verified:verified==='1'}});
+let custom=[],visits={},settings={crawl:[],names:['Roscoe','Mate'],showClubs:false,showUnverified:true,excluded:{}},user=null,cid='',secret='',members=1,selected='',map=null,pins=[],coords={},stops=[],unsub=[];
+const message=(t,bad=false)=>{$('status').textContent=t;$('status').classList.toggle('error',bad)},he=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pubs=()=>VENUES.concat(custom),eligible=p=>settings.showClubs||!p.club,complete=id=>!!visits[id]?.done;
+function redraw(){const target=pubs().filter(eligible),done=target.filter(p=>complete(p.id)).length,pct=target.length?100*done/target.length:0;$('doneN').textContent=done;$('totalN').textContent=target.length;$('percent').textContent=pct.toFixed(1)+'%';$('fill').style.width=pct+'%';$('remaining').textContent=(target.length-done)+' left • '+pubs().length+' researched/added entries • private clubs '+(settings.showClubs?'included':'excluded');$('clubs').checked=settings.showClubs;drawList();drawRoute();drawPins()}
+function drawList(){const q=$('search').value.trim().toLowerCase(),a=$('area').value,f=$('filter').value;const found=pubs().filter(p=>eligible(p)&&(!a||p.area===a)&&(!q||(p.name+' '+p.postcode+' '+p.area).toLowerCase().includes(q))&&(f==='all'||(f==='done')===complete(p.id)));$('listStatus').textContent=found.length+' venues • '+'✅ completed pubs are green';$('pubList').innerHTML=found.map(p=>`<article class="pub ${complete(p.id)?'done':''}"><h3>${complete(p.id)?'✅ ':'🍺 '}${he(p.name)}</h3><small>${he(p.area)}${p.postcode?' • '+he(p.postcode):' • No postcode'}</small><span class="badge">${p.verified?'2026 source cited':'Trading status needs checking'}</span><div class="row"><button data-edit="${p.id}">${complete(p.id)?'Edit visit':'Tick off'}</button><button data-route="${p.id}">${settings.crawl.includes(p.id)?'✓ On crawl':'+ Crawl'}</button></div></article>`).join('');}
+function drawRoute(){let v=settings.crawl.map(id=>pubs().find(p=>p.id===id)).filter(Boolean);$('routeList').innerHTML=v.length?v.map((p,i)=>`<div class="route row"><strong>${i+1}. ${he(p.name)}</strong><button data-up="${i}" ${i===0?'disabled':''}>↑</button><button data-down="${i}" ${i===v.length-1?'disabled':''}>↓</button><button data-remove="${i}">×</button></div>`).join(''):'<p class="note">No pubs added yet. Add some from the Pubs tab.</p>'}
+async function saveSettings(patch){try{await updateDoc(doc(db,'challenges',cid,'settings','main'),patch)}catch(e){message('Saving route/settings failed: '+e.message,true)}}
+function id32(){return [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join('')}
+function parseInvite(s){const m=String(s||'').match(/(?:#join=)?([a-f0-9]{32})~([a-f0-9]{32})/i);return m?{id:m[1],key:m[2]}:null}
+function invite(){return location.origin+location.pathname+'#join='+cid+'~'+secret}
+function clearListeners(){for(const fn of unsub)fn();unsub=[]}
+function connected(){show('login',false);show('lobby',false);show('app',true);$('invite').value=invite();$('cloud').textContent='● Live';$('team').textContent='👥 '+members+'/2 joined • one shared tally';message('Connected to shared challenge ✓');redraw();if(!map)startMap()}
+async function connect(id){clearListeners();const root=doc(db,'challenges',id),info=await getDoc(root);if(!info.exists()||!info.data().members.includes(user.uid))throw Error('Challenge not accessible. Check invitation and rules.');cid=id;secret=info.data().inviteCode;members=info.data().members.length;connected();unsub.push(onSnapshot(root,s=>{if(s.exists()){members=s.data().members.length;$('team').textContent='👥 '+members+'/2 joined • one shared tally'}}));unsub.push(onSnapshot(collection(db,'challenges',id,'visits'),s=>{visits={};s.forEach(d=>visits[d.id]=d.data());redraw()},e=>message('Sync error: '+e.message,true)));unsub.push(onSnapshot(collection(db,'challenges',id,'custom'),s=>{custom=[];s.forEach(d=>custom.push(d.data()));redraw()},e=>message('Sync error: '+e.message,true)));unsub.push(onSnapshot(doc(db,'challenges',id,'settings','main'),s=>{if(s.exists())settings={...settings,...s.data()};redraw()},e=>message('Sync error: '+e.message,true)))}
+async function create(){if(!user)return;try{$('create').disabled=true;const id=id32(),key=id32(),root=doc(db,'challenges',id);await setDoc(root,{ownerUid:user.uid,members:[user.uid],inviteCode:key,createdAt:serverTimestamp()});await setDoc(doc(db,'challenges',id,'settings','main'),settings);await setDoc(doc(db,'userLinks',user.uid),{challengeId:id});await connect(id);message('Challenge created! Send the private invitation to your pal.')}catch(e){message('Create failed: '+e.message,true)}finally{$('create').disabled=false}}
+async function join(){const p=parseInvite($('join').value);if(!p){message('Paste a full private invitation link.',true);return}try{await updateDoc(doc(db,'challenges',p.id),{members:arrayUnion(user.uid),joinCodeProof:p.key});await setDoc(doc(db,'userLinks',user.uid),{challengeId:p.id});await connect(p.id)}catch(e){message('Joining failed: '+e.message,true)}}
+onAuthStateChanged(auth,async u=>{user=u;clearListeners();show('login',!u);show('app',false);show('lobby',!!u);$('cloud').textContent=u?'Signed in':'Offline';if(!u)return;const p=parseInvite(location.hash);if(p)$('join').value=location.href;try{const link=await getDoc(doc(db,'userLinks',u.uid));if(link.exists())await connect(link.data().challengeId)}catch(e){message('Sign-in succeeded; challenge not loaded: '+e.message,true)}});
+$('signIn').onclick=async()=>{try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('pass').value)}catch(e){message('Sign-in: '+e.message,true)}};
+$('signUp').onclick=async()=>{try{await createUserWithEmailAndPassword(auth,$('email').value.trim(),$('pass').value)}catch(e){message('Account: '+e.message,true)}};
+$('signOut').onclick=()=>signOut(auth);$('create').onclick=create;$('joinBtn').onclick=join;$('copyInvite').onclick=async()=>{try{await navigator.clipboard.writeText($('invite').value);message('Invite copied. Send privately to your pal.')}catch{$('invite').focus();$('invite').select();message('Invitation selected. Tap Copy.')}};
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));show('mapTab',b.dataset.tab==='map');show('pubsTab',b.dataset.tab==='pubs');show('routeTab',b.dataset.tab==='route');if(b.dataset.tab==='map')setTimeout(()=>map?.invalidateSize(),60)});
+$('search').oninput=drawList;$('area').onchange=drawList;$('filter').onchange=drawList;$('clubs').onchange=e=>saveSettings({showClubs:e.target.checked});
+for(const a of AREAS){const o=document.createElement('option');o.textContent=a;o.value=a;$('area').appendChild(o)}
+$('pubList').onclick=async e=>{const t=e.target,pid=t.dataset.edit||t.dataset.route;if(!pid)return;if(t.dataset.route){let c=[...settings.crawl];const index=c.indexOf(pid);if(index<0)c.push(pid);else c.splice(index,1);await saveSettings({crawl:c});return}selected=pid;const p=pubs().find(p=>p.id===pid),v=visits[pid]||{};$('dialogTitle').textContent=p.name;$('dialogPlace').textContent=p.area+' • '+p.postcode;$('visited').checked=!!v.done;$('date').value=v.date||'';$('rating').value=v.rating||'';$('notes').value=v.notes||'';$('dialogNote').textContent='Mark completed only if you both visited together.';$('editDialog').showModal()};
+$('closeDialog').onclick=()=>$('editDialog').close();$('visited').onchange=e=>{if(e.target.checked&&!$('date').value)$('date').value=new Date().toISOString().slice(0,10)};
+$('saveVisit').onclick=async()=>{try{$('saveVisit').disabled=true;await setDoc(doc(db,'challenges',cid,'visits',selected),{done:$('visited').checked,date:$('date').value||'',rating:$('rating').value,notes:$('notes').value.slice(0,1200),updated:new Date().toISOString()});$('editDialog').close();message('Saved ✓ Both phones will update.')}catch(e){$('dialogNote').textContent='Save failed: '+e.message}finally{$('saveVisit').disabled=false}};
+$('addPub').onclick=async()=>{const name=$('newName').value.trim(),postcode=$('newPost').value.trim().toUpperCase();if(name.length<2){message('Enter a pub name first.',true);return}if(pubs().some(p=>p.name.toLowerCase()===name.toLowerCase())){message('That name is already listed.',true);return}const id='custom-'+id32();try{await setDoc(doc(db,'challenges',cid,'custom',id),{id,name,postcode,street:'',area:'City centre',type:'Pub',evidence:'User-added — verify',url:'',note:''});$('newName').value='';$('newPost').value='';message('Added to both phones ✓')}catch(e){message('Could not add: '+e.message,true)}};
+$('routeList').onclick=e=>{const n=e.target.dataset.up??e.target.dataset.down??e.target.dataset.remove;if(n===undefined)return;const i=Number(n),c=[...settings.crawl];if(e.target.dataset.remove!==undefined)c.splice(i,1);else{let j=i+(e.target.dataset.up!==undefined?-1:1);if(j<0||j>=c.length)return;[c[i],c[j]]=[c[j],c[i]]}saveSettings({crawl:c})};
+$('clearRoute').onclick=()=>saveSettings({crawl:[]});$('directions').onclick=()=>{const p=settings.crawl.slice(0,9).map(id=>pubs().find(v=>v.id===id)).filter(Boolean);if(p.length<2){message('Add at least two pubs to plan a walking route.',true);return}const query=v=>encodeURIComponent(v.name+', '+v.postcode+', Aberdeen, Scotland');const url='https://www.google.com/maps/dir/?api=1&travelmode=walking&origin='+query(p[0])+'&destination='+query(p[p.length-1])+(p.length>2?'&waypoints='+p.slice(1,-1).map(query).join('%7C'):'');window.open(url,'_blank','noopener');if(settings.crawl.length>9)message('Google Maps opened the first nine stops; split larger crawls into sections.')};
+async function startMap(){if(!window.L){$('mapStatus').textContent='Map library blocked. Pub list and tracker still work.';return}map=L.map('map').setView([57.151,-2.12],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);const posts=[...new Set(pubs().map(p=>p.postcode.trim()).filter(Boolean))];let valid=0;for(let i=0;i<posts.length;i+=90){try{const r=await fetch('https://api.postcodes.io/postcodes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postcodes:posts.slice(i,i+90)})});if(!r.ok)throw Error('Geocoding unavailable');const j=await r.json();for(const x of j.result||[])if(x.result){coords[x.query]=[x.result.latitude,x.result.longitude];valid++}}catch(e){$('mapStatus').textContent='Could not load some postcode pins: '+e.message;}}drawPins();$('mapStatus').textContent=valid+' postcodes located approximately. Missing postcodes remain in the Pub list.'}
+function drawPins(){if(!map)return;for(const p of pins)map.removeLayer(p);pins=[];for(const p of pubs().filter(eligible)){const xy=coords[p.postcode];if(!xy)continue;const m=L.circleMarker(xy,{radius:6,color:complete(p.id)?'#176445':'#962d39',fillColor:complete(p.id)?'#3cce89':'#f18e85',fillOpacity:.85,weight:1}).addTo(map);const google='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name+', '+p.postcode+', Aberdeen');m.bindPopup(`<b>${he(p.name)}</b><br>${he(p.area)} • ${complete(p.id)?'✅ Visited':'Not yet visited'}<br><a target="_blank" rel="noopener" href="${google}">Find exact pub in Google Maps ↗</a>`);pins.push(m)}}
+message('Sign in to begin your shared challenge.');
+</script></body></html>
