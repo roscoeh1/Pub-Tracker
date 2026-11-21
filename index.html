@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#062736"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="One city, two mates, every pub. A shared Aberdeen pub-hunting challenge."><title>Aberdeen Pub Challenge • One city. Every pub.</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#062736"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="One city, two mates, every pub. A shared Aberdeen pub-hunting challenge."><title>Aberdeen Pub Challenge v4.2 • One city. Every pub.</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -224,7 +224,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   </div></div>
   <span id="cloud" class="cloud" role="status">Connecting…</span>
 </header>
-<section id="login" class="hidden"><div class="intro"><div class="logo">🍻</div><div class="eyebrow">THE ABERDEEN PUB CHALLENGE</div><h1>Two mates. Every pub.</h1><p>Your shared map, memories and milestones — all in one place.</p></div><div class="card auth-card"><h2 class="section-title">Welcome back</h2><div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password"></div><div class="two"><button class="btn primary" id="signIn">Sign in</button><button class="btn" id="signUp">Create account</button></div><p class="hint">Separate accounts for you and your pal. Never share passwords.</p></div></section>
+<section id="login" class="hidden"><div class="intro"><div class="logo">🍻</div><div class="eyebrow">THE ABERDEEN PUB CHALLENGE</div><h1>Two mates. Every pub.</h1><p>Your shared map, memories and milestones — all in one place.</p></div><div class="card auth-card"><h2 class="section-title">Welcome back</h2><div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password"></div><div class="two"><button class="btn primary" id="signIn">Sign in</button><button class="btn" id="signUp">Create account</button></div><p class="hint">This is a safe testing build. Guest mode lets you simulate Live Crawl and check-ins locally; nothing updates your shared Firebase challenge.</p><button class="btn amber wide" id="tryPreview" style="margin-top:14px">🧪 Try full crawl demo — no sign-in</button><p class="hint">Guest demo data exists only in this browser tab. No shared visits, routes or history are saved.</p></div></section>
 <section id="lobby" class="hidden"><div class="card auth-card"><h2 class="section-title">🤝 Your joint challenge</h2><p class="sub">Set it up once, then invite your pal using a private link.</p><button class="btn primary wide" id="create">Create our challenge</button><div class="field"><label for="join">Or join an existing challenge</label><input id="join" placeholder="Paste invitation link"></div><button class="btn soft wide" id="joinBtn">Join challenge</button></div></section>
 <section id="app" class="hidden">
 <section id="homeTab" class="tab">
@@ -261,11 +261,11 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   <button class="achievement-strip" data-more="badges"><span>🏆</span><div><strong>Your achievements</strong><small>Milestones unlocked together · View trophy cabinet</small></div><span class="action-chevron">›</span></button>
 </section>
 <section id="mapTab" class="tab hidden"><div class="screen-head"><h2>Discover Aberdeen</h2><p>Every pin is another pub to collect.</p></div><div class="card"><div class="row space" style="margin-bottom:11px"><strong style="font-size:13px">Show on map</strong><button class="btn sm soft" id="locate">⌾ Near me</button></div><div class="filters" id="mapFilters"><button class="chip active" data-mapfilter="all">All pubs</button><button class="chip" data-mapfilter="todo">Unvisited</button><button class="chip" data-mapfilter="done">Completed</button><button class="chip" data-mapfilter="planned">On my crawl</button></div><div id="map" class="map" role="region" aria-label="Aberdeen pub map"></div><div class="legend"><span><i class="dot green"></i>Completed</span><span><i class="dot red"></i>Unvisited</span><span><i class="dot gold"></i>On crawl</span></div><p id="mapStatus" class="map-status">Pins are placed at postcode centres (approximate). Check each venue's actual location before travelling.</p><div id="nearestList" class="hidden"></div><div id="mapLocationHelp" class="location-help hidden" role="status">Location access was blocked. In Safari open the page menu → Website Settings → Location → Ask or Allow. Or browse the map and search the pub list without location.</div></div></section>
-<section id="pubsTab" class="tab hidden"><div class="screen-head"><h2>The pub collection</h2><p>Find your next stop or record one you've conquered.</p></div><div class="card"><div class="field" style="margin-top:0"><label for="search">Search all pubs</label><input type="search" id="search" placeholder="Name, area, street or postcode"></div><div class="two"><div class="field"><label for="area">Area</label><select id="area"><option value="">All areas</option></select></div><div class="field"><label for="filter">Progress</label><select id="filter"><option value="all">All pubs</option><option value="todo">Unvisited</option><option value="done">Completed</option><option value="planned">On crawl</option></select></div></div><label class="row" style="font-size:13px;gap:7px;margin:12px 0 0"><input type="checkbox" id="clubs"> Include private clubs</label><p id="listStatus" class="status-line"></p></div><div class="pub-grid" id="pubList"></div><div class="center" style="margin:17px 0"><button id="morePubs" class="btn soft hidden">Show more pubs ↓</button></div><div class="card"><details><summary>＋ Add a missing pub</summary><p class="sub">New pubs added here appear for both of you.</p><div class="field"><label for="newName">Pub name</label><input id="newName" maxlength="100"></div><div class="two"><div class="field"><label for="newArea">Area</label><select id="newArea"></select></div><div class="field"><label for="newPost">Postcode (optional)</label><input id="newPost" maxlength="9"></div></div><div class="field"><label for="newStreet">Street/address (optional)</label><input id="newStreet" maxlength="130"></div><button class="btn primary" id="addPub">Add to our challenge</button></details></div></section>
-<section id="crawlTab" class="tab hidden"><div class="screen-head"><h2>Build your next adventure</h2><p>Smarter suggestions, one shared route and a live mode for the night itself.</p></div>
+<section id="pubsTab" class="tab hidden"><div class="screen-head"><h2>The pub collection</h2><p>148 provisional public pub/bar candidates; private and restricted venues are excluded. Vovem is restaurant-only, but 21 Crimes is included.</p></div><div class="card"><div class="field" style="margin-top:0"><label for="search">Search all pubs</label><input type="search" id="search" placeholder="Name, area, street or postcode"></div><div class="two"><div class="field"><label for="area">Area</label><select id="area"><option value="">All areas</option></select></div><div class="field"><label for="filter">Progress</label><select id="filter"><option value="all">All pubs</option><option value="todo">Unvisited</option><option value="done">Completed</option><option value="planned">On crawl</option></select></div></div><label class="row hidden" style="font-size:13px;gap:7px;margin:12px 0 0"><input type="checkbox" id="clubs"> Include private clubs (deferred)</label><p id="listStatus" class="status-line"></p></div><div class="pub-grid" id="pubList"></div><div class="center" style="margin:17px 0"><button id="morePubs" class="btn soft hidden">Show more pubs ↓</button></div><div class="card"><details><summary>＋ Add a missing pub</summary><p class="sub">New pubs added here appear for both of you.</p><div class="field"><label for="newName">Pub name</label><input id="newName" maxlength="100"></div><div class="two"><div class="field"><label for="newArea">Area</label><select id="newArea"></select></div><div class="field"><label for="newPost">Postcode (optional)</label><input id="newPost" maxlength="9"></div></div><div class="field"><label for="newStreet">Street/address (optional)</label><input id="newStreet" maxlength="130"></div><button class="btn primary" id="addPub">Add to our challenge</button></details></div></section>
+<section id="crawlTab" class="tab hidden"><div class="screen-head"><h2>Build your next adventure</h2><p>Plan a sensible walking route, then share Live Crawl Mode with your mate.</p></div>
 <div class="card smart-generator">
-  <div class="row space" style="margin-bottom:4px"><h2 class="section-title">Smart Crawl Planner 2.0</h2><span class="pill planned">1–15 stops</span></div>
-  <p class="sub">Choose how far to explore, where to start and where you'd like to end. Estimates are not walking directions.</p>
+  <div class="row space" style="margin-bottom:4px"><h2 class="section-title">Smart Crawl Planner 2.4</h2><span class="pill planned">1–15 stops</span></div>
+  <p class="sub">Choose your stops, starting point and walking limit. Plan, reorder and follow your crawl together. Mapped walking routes are used when available; otherwise distances are clearly marked approximate. Only a saved check-in counts as a visit.</p>
   <div class="two">
     <div class="field"><label for="crawlArea">Neighbourhood</label><select id="crawlArea"><option value="">Anywhere in central Aberdeen</option></select></div>
     <div class="field"><label for="crawlCount">Number of pubs</label><select id="crawlCount"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option></select></div>
@@ -275,13 +275,13 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   <div class="field hidden" id="crawlStartPubWrap"><label for="crawlStartPub">Starting pub (counts as first stop)</label><select id="crawlStartPub"></select></div>
   <div class="field hidden" id="crawlFinishPubWrap"><label for="crawlFinishPub">Finishing pub (counts as last stop)</label><select id="crawlFinishPub"></select></div>
   <div class="three smart-three">
-    <div class="field"><label for="crawlMaxWalk">Walk limit*</label><select id="crawlMaxWalk"><option value="1">~1 mile</option><option value="2">~2 miles</option><option value="3" selected>~3 miles</option><option value="4">~4 miles</option><option value="5">~5 miles</option><option value="0">No limit</option></select></div>
+    <div class="field"><label for="crawlMaxWalk">Total walking limit</label><select id="crawlMaxWalk"><option value="1">1 mile walking</option><option value="2">2 miles walking</option><option value="3" selected>3 miles walking</option><option value="4">4 miles walking</option><option value="5">5 miles walking</option><option value="0">No limit</option></select></div>
     <div class="field"><label for="crawlSelection">Pub choice</label><select id="crawlSelection"><option value="todo">Unvisited only</option><option value="all">All pubs</option></select></div>
     <div class="field"><label for="crawlStyle">Route style</label><select id="crawlStyle"><option value="shortest">Short &amp; simple</option><option value="explore">Explore new ground</option></select></div>
   </div>
   <div class="two"><button id="generate" class="btn primary">✨ Generate crawl</button><button id="regenerate" class="btn soft">↻ Try a different route</button></div>
   <button id="generateNear" class="btn slim-link" type="button">⌾ Use my location instead</button>
-  <p id="generatorStatus" class="hint" role="status">*The walking limit is an approximate estimate based on postcode points. Actual routes may be longer. Always check Google Maps.</p>
+  <p id="generatorStatus" class="hint" role="status">Uses mapped walking paths where available. If the route service is busy, a clearly labelled rough estimate keeps the planner usable. Any approximate route can be checked in Google Maps.</p>
   <div id="locationHelp" class="location-help hidden" role="status"><p id="locationHelpText">Safari could not access your location. You can still build a route from any Aberdeen area.</p><button type="button" class="btn sm" id="useAreaFallback">Generate from selected area ↗</button></div>
 </div>
 <section id="liveCrawl" class="card live-mode" aria-label="Live pub crawl">
@@ -297,7 +297,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   </div>
 </section>
 
-<div class="card"><div class="row space"><h2 class="section-title">Your shared route</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro">Straight lines · approximate positions</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div></div><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">The dashed map line is a schematic, not a real walking route. Tap Google Maps for turn-by-turn directions. Locations are approximate until the pub database is verified.</p></div></section>
+<div class="card"><div class="row space"><h2 class="section-title">Your planned pub crawl</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro">Walking route / rough backup</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div></div><p class="hint">Routing data © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map problem ↗</a></p><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">Solid line = mapped walking path; dashed line = approximate pub-to-pub order only, not navigable streets. Use Google Maps for turn-by-turn walking directions.</p></div></section>
 <section id="moreTab" class="tab hidden"><div class="screen-head"><h2>The collection</h2><p>Milestones, neighbourhoods, memories and your team.</p></div><div class="subtabs"><button class="active" data-moretab="stats">Statistics</button><button data-moretab="areas">Areas</button><button data-moretab="badges">Badges</button><button data-moretab="history">Crawl history</button><button data-moretab="team">Team</button></div>
 <div id="statsPane" class="more-pane"><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">VISITED</span><div class="stat-value" id="statsVisited">0</div></div><div class="stat-tile"><span class="eyebrow">THIS MONTH</span><div class="stat-value" id="statsMonth">0</div></div><div class="stat-tile"><span class="eyebrow">CRAWLS</span><div class="stat-value" id="statsCrawls">0</div></div></div><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">THIS YEAR</span><div class="stat-value" id="statsYear">0</div></div><div class="stat-tile"><span class="eyebrow">LONGEST CRAWL</span><div class="stat-value" id="statsLongest">0</div></div><div class="stat-tile"><span class="eyebrow">AREAS VISITED</span><div class="stat-value" id="statsAreaVisited">0</div></div></div><div class="card"><h2 class="section-title">Visits over time</h2><p class="sub">New pubs completed in the last six months.</p><div class="months" id="monthBars"></div></div><section class="card passport-card">
   <div class="row space"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">🛂 Your digital pub passport</h2></div><button id="passportToggle" class="btn sm amber">See all pubs ↗</button></div>
@@ -314,7 +314,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
 <div id="areasPane" class="more-pane hidden"><div class="card"><h2 class="section-title">Aberdeen by neighbourhood</h2><p class="sub">Complete every eligible pub in an area to earn a badge.</p><div id="areaGrid"></div></div></div>
 <div id="badgesPane" class="more-pane hidden"><div class="card trophies-card"><div class="eyebrow">THE HALL OF QUESTIONABLE GLORY</div><h2 class="section-title">🏆 Trophy cabinet</h2><p class="sub">A mix of classy medals, dodgy names and hard-earned progress. All awarded for visiting pubs — never how much you drink.</p><div id="trophyStats" class="trophy-stats"></div><div class="filters award-filters"><button type="button" class="chip active" data-awardfilter="all">All medals</button><button type="button" class="chip" data-awardfilter="earned">Unlocked</button><button type="button" class="chip" data-awardfilter="locked">In progress</button></div><div id="trophyGrid" class="trophy-grid"></div></div></div>
 <div id="historyPane" class="more-pane hidden"><div class="card"><h2 class="section-title">Your crawl history</h2><p class="sub">A scrapbook of your completed pub crawls. Dates are saved automatically.</p><div id="historyList"></div></div></div>
-<div id="teamPane" class="more-pane hidden"><div class="card"><h2 class="section-title">👥 Your shared challenge</h2><div id="team" class="pill">1 / 2 joined</div><div class="profile-box"><div class="eyebrow">PERSONALISE YOUR EXPERIENCE</div><h3 class="section-title" style="margin:7px 0">What should we call you?</h3><p class="sub">Each of you can set your own display name. The homepage greets whoever is signed in; the pub tally stays shared.</p><div class="field"><label for="profileName">Your display name</label><input id="profileName" type="text" maxlength="32" autocomplete="nickname" placeholder="Your first name"></div><button id="saveProfileName" class="btn primary">Save my name</button><div id="profileHint" class="hint" style="margin-top:8px">Your mate can enter their own name when they join.</div></div><div id="teamPeople" class="team-people"></div><p id="syncStatus" class="status-line">Connecting to Firestore…</p><div class="field"><label for="invite">Invite link (share privately)</label><input id="invite" readonly></div><button id="copyInvite" class="btn soft">Copy invitation</button><p class="hint" style="margin-top:12px">Your pub visits, ratings, crawl plans and achievements are shared between both accounts. Keep this link private.</p></div><div class="card"><h2 class="section-title">Settings</h2><label class="row" style="font-size:13px"><input type="checkbox" id="clubsSettings"> Include private clubs in the challenge</label><p class="hint">Club venues might require membership or advance permission. You can change this any time without losing visits.</p><button id="signOut" class="btn red">Sign out</button></div><div class="card"><h2 class="section-title">About the pub list</h2><p class="hint">The inventory now contains 234 venue leads (231 original plus Allegro, Mezzo and 60 Mile Bar), including 35 optional member-club leads; 1 confirmed-closed venue is excluded from the active target. This is a provisional challenge total, NOT a verified count of operating pubs. Particular venues (e.g. airside airport bars, private hire rooms, temporary closures) need an eligibility decision. Map pins may still use postcode centres, not door locations. Audit: 21 November 2026.</p><p class="hint">Photo uploads are still disabled to keep this project free. You can add them later if a suitable free option becomes available.</p></div></div></section>
+<div id="teamPane" class="more-pane hidden"><div class="card"><h2 class="section-title">👥 Your shared challenge</h2><div id="team" class="pill">1 / 2 joined</div><div class="profile-box"><div class="eyebrow">PERSONALISE YOUR EXPERIENCE</div><h3 class="section-title" style="margin:7px 0">What should we call you?</h3><p class="sub">Each of you can set your own display name. The homepage greets whoever is signed in; the pub tally stays shared.</p><div class="field"><label for="profileName">Your display name</label><input id="profileName" type="text" maxlength="32" autocomplete="nickname" placeholder="Your first name"></div><button id="saveProfileName" class="btn primary">Save my name</button><div id="profileHint" class="hint" style="margin-top:8px">Your mate can enter their own name when they join.</div></div><div id="teamPeople" class="team-people"></div><p id="syncStatus" class="status-line">Connecting to Firestore…</p><div class="field"><label for="invite">Invite link (share privately)</label><input id="invite" readonly></div><button id="copyInvite" class="btn soft">Copy invitation</button><p class="hint" style="margin-top:12px">Your pub visits, ratings, crawl plans and achievements are shared between both accounts. Keep this link private.</p></div><div class="card"><h2 class="section-title">Settings</h2><label class="row hidden" style="font-size:13px"><input type="checkbox" id="clubsSettings"> Include private clubs in the challenge</label><p class="hint">Private/exclusive and event-only venues are deferred while we verify the normal public-bar challenge. Historical check-ins remain saved.</p><button id="signOut" class="btn red">Sign out</button></div><div class="card"><h2 class="section-title">About the pub list</h2><p class="hint">The inventory now contains 234 venue leads (231 original plus Allegro, Mezzo and 60 Mile Bar), including 35 optional member-club leads; 1 confirmed-closed venue is excluded from the active target. This is a provisional challenge total, NOT a verified count of operating pubs. Particular venues (e.g. airside airport bars, private hire rooms, temporary closures) need an eligibility decision. Map pins may still use postcode centres, not door locations. Audit: 21 November 2026.</p><p class="hint">Photo uploads are still disabled to keep this project free. You can add them later if a suitable free option becomes available.</p></div></div></section>
 <nav class="nav" aria-label="App navigation"><div class="navin">
  <button class="active" data-tab="home"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-7H9v7H3z"/></svg></span>Home</button>
  <button data-tab="map"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"/></svg></span>Map</button>
@@ -322,7 +322,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
  <button data-tab="crawl"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="17" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M7 17h4c3 0 2-7 5-10M7 17h5c3 0 3 2 4 2"/></svg></span>Crawl</button>
  <button data-tab="more"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>More</button>
 </div></nav></section>
-<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.1 · 21 Nov 2026 venue accuracy pass · Provisional inventory · Please check opening times and access before travelling.</p></main>
+<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.2 · 148 public pub/bar candidates · Walking routes are estimates; verify venue opening times before heading out.</p></main>
 <dialog id="editDialog"><div class="row space"><h2 id="dialogTitle">Pub details</h2><span id="dialogState" class="pill todo">To visit</span></div><p id="dialogPlace" class="sub" style="margin:7px 0 12px"></p><div class="row" style="margin:11px 0"><label class="row" style="font-size:13px;font-weight:800"><input type="checkbox" id="visited"> Both visited together</label></div><div class="field"><label for="date">Visit date <span class="muted">· automatically set to today</span></label><input id="date" type="date"></div><div class="two"><div class="field"><label for="rating">Overall / 10</label><input id="rating" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 7.6"></div><div class="field"><label for="atmosphere">Atmosphere / 10</label><input id="atmosphere" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 8.5"></div></div><div class="field"><label for="review">Short review</label><textarea id="review" maxlength="800" placeholder="Best pint, vibe, service, anything worth remembering…"></textarea></div><div id="dialogNote" class="hint">Only tick a pub when you've both visited it.</div><div class="dialog-actions"><button id="saveVisit" class="btn primary">Save visit</button><button id="closeDialog" class="btn">Cancel</button></div><button id="goGoogle" class="btn soft wide" style="margin-top:9px">⌁ Find this pub in Google Maps ↗</button></dialog>
 <dialog id="finishDialog"><h2>Save this pub crawl</h2><p class="sub">We'll record the route, today's date and which stops you've already ticked off.</p><div class="field"><label for="crawlTitle">Name this night out</label><input id="crawlTitle" maxlength="80" placeholder="e.g. Belmont Street session"></div><div class="field"><label for="crawlMemo">A quick memory (optional)</label><textarea id="crawlMemo" maxlength="300" rows="2" placeholder="Best moment of the night…"></textarea></div><p id="finishNote" class="hint"></p><div class="dialog-actions"><button id="saveCrawlHistory" class="btn primary">Save to history</button><button id="cancelFinish" class="btn">Cancel</button></div></dialog>
 <script type="module">
@@ -572,7 +572,10 @@ const auditCorrections={
  "Brig O' Dee":{access:'Closed February 2026; reopening announced, current opening not confirmed'},
  'Flight Path at TECA':{access:'Open only for selected event nights'},
  'Old Kings Highway':{access:'Reopening announced after February closure; check before visiting'},
- 'The Braided Fig':{closed:true,access:'Closed 27 September 2026; removed from active challenge target (history preserved)'}
+ 'The Braided Fig':{closed:true,access:'Closed 27 September 2026; removed from active challenge target (history preserved)'},
+ 'Aberdeen Trades Council Social Club':{retired:true,access:'Excluded from active challenge at user request; prior activity preserved'},
+ 'Dee Swimming Club':{retired:true,access:'Excluded from active challenge at user request; prior activity preserved'},
+ 'Vovem Bar':{retired:true,access:'Restaurant, removed from main pub challenge at user request. Original venue ID and historical check-ins preserved; 21 Crimes is a separate eligible basement bar sharing its entrance.'}
 };
 for(const v of VENUES){const q=auditCorrections[v.name];if(q)Object.assign(v,q)}
 VENUES.push(
@@ -586,11 +589,20 @@ import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmai
 import {getFirestore,doc,collection,getDoc,setDoc,updateDoc,onSnapshot,serverTimestamp,arrayUnion,FieldPath} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
 const cfg={apiKey:'AIzaSyAcK-u6SXyUAvGwdrsxa5BAu1RpaKGlZ7Q',authDomain:'pub-tracker-ef1f9.firebaseapp.com',projectId:'pub-tracker-ef1f9',storageBucket:'pub-tracker-ef1f9.firebasestorage.app',messagingSenderId:'1077333857895',appId:'1:1077333857895:web:6696bc45e3212cf704e6c2'};
 const auth=getAuth(initializeApp(cfg));const db=getFirestore();
+// Production v4.2: existing Firebase project and unchanged visit document schema.
+// New shared crawl state is nested under the existing settings document.
 const $=id=>document.getElementById(id),show=(id,on)=>$(id).classList.toggle('hidden',!on);
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeDate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
-const allPubs=()=>VENUES.concat(custom),eligible=p=>!p.closed && (!!settings.showClubs||!p.club),done=id=>!!visits[id]?.done;
+// v4.2 eligible public venues. Historic/excluded IDs and visit records remain stored; never deleted.
+const CORE_PUB_IDS=new Set(["1","12","14","15","16","17","18","19","20","22","23","24","25","26","27","29","30","32","35","38","39","40","41","42","43","46","48","49","50","52","55","56","58","60","68","69","70","71","72","75","76","77","79","80","81","83","84","85","86","90","91","92","94","96","97","98","99","100","103","104","105","106","108","109","110","113","115","116","117","118","119","120","121","122","123","124","125","126","127","128","130","131","133","134","135","138","139","140","141","142","144","145","147","149","150","152","153","154","155","157","159","160","161","163","164","165","166","167","169","171","172","174","177","180","183","184","185","186","187","189","190","192","193","194","195","196","199","204","206","209","210","211","213","214","215","216","218","220","221","222","224","225","226","227","228","229","230","231"]);
+const allPubs=()=>VENUES.concat(custom),eligible=p=>!!p&&!p.closed&&!p.retired&&(CORE_PUB_IDS.has(String(p.id))||(String(p.id).startsWith('custom-')&&!p.club)),done=id=>!!visits[id]?.done;
 const getPub=id=>allPubs().find(x=>x.id===id);
+let qaDraftCrawl=null,qaLive=null;const isLocalDemo=()=>cid==='local-qa-preview';
+const activeRouteIds=()=>{
+ const ids=qaDraftCrawl!==null?qaDraftCrawl:settings.crawl;
+ return Array.isArray(ids)?ids.filter(id=>{const p=getPub(id);return p&&eligible(p)}):[];
+};
 const num=(x,def=0)=>{const n=Number(x);return Number.isFinite(n)?n:def};
 const displayNumber=n=>num(n).toFixed(1);
 const defaults=()=>({crawl:[],names:['Roscoe','Mate'],showClubs:false,showUnverified:true,excluded:{}});
@@ -631,12 +643,12 @@ const completeStats=()=>{const list=allPubs().filter(eligible),completed=list.fi
 function areaStats(){return [...new Set(allPubs().filter(eligible).map(p=>p.area).filter(Boolean))].map(a=>{const ps=allPubs().filter(p=>eligible(p)&&p.area===a);const n=ps.filter(p=>done(p.id)).length;return{area:a,n,total:ps.length,pct:ps.length?100*n/ps.length:0}}).sort((a,b)=>(b.pct-a.pct)||(a.total-b.total)||a.area.localeCompare(b.area))}
 function render(){if(!cid)return;const s=completeStats();$('heroCount').textContent=`${s.n} / ${s.total}`;$('heroPercent').textContent=`${s.pct.toFixed(1)}%`;$('heroCircle').style.setProperty('--pct',s.pct.toFixed(2));$('statRemaining').textContent=s.left;$('statAreas').textContent=s.cleared;$('statCrawls').textContent=s.crawls;$('statsVisited').textContent=s.n;$('statsCrawls').textContent=s.crawls;$('statsMonth').textContent=Object.values(visits).filter(v=>v.done&&String(v.date||'').startsWith(safeDate().slice(0,7))).length;$('statsYear').textContent=Object.values(visits).filter(v=>v.done&&String(v.date||'').startsWith(safeDate().slice(0,4))).length;$('statsLongest').textContent=Math.max(0,...historyEntries().map(x=>x.stops.length));$('statsAreaVisited').textContent=new Set(allPubs().filter(p=>eligible(p)&&done(p.id)).map(p=>p.area)).size;$('clubs').checked=!!settings.showClubs;$('clubsSettings').checked=!!settings.showClubs;renderProfiles();renderHome();renderList();renderRoute();renderAreas();renderBadges();renderHistory();renderStats();renderAdventure();drawPins();}
 function renderHome(){let near=areaStats().filter(x=>x.n>0&&x.n<x.total).slice(0,3);if(!near.length)near=areaStats().filter(x=>x.total>0).sort((a,b)=>b.total-a.total).slice(0,3);$('homeAreas').innerHTML=near.length?near.map(a=>`<div class="item"><div class="row space"><strong>${escapeHTML(a.area)}</strong><span class="pill ${a.n===a.total?'done':''}">${a.n}/${a.total}</span></div><div class="progress"><div style="width:${a.pct}%"></div></div></div>`).join(''):'<p class="sub">No areas loaded yet.</p>';
-const latest=allPubs().filter(p=>done(p.id)).sort((a,b)=>(visits[b.id]?.date||'').localeCompare(visits[a.id]?.date||'')).slice(0,4);
+const latest=allPubs().filter(p=>eligible(p)&&done(p.id)).sort((a,b)=>(visits[b.id]?.date||'').localeCompare(visits[a.id]?.date||'')).slice(0,4);
 $('homeRecent').innerHTML=latest.length?latest.map(p=>{const score=parsedReview(visits[p.id]).overall;return `<div class="activity-item"><span class="activity-icon">✓</span><div class="activity-main"><strong>${escapeHTML(p.name)}</strong><span>Visited · ${formatDate(visits[p.id].date)}</span></div>${score===null?'':`<span class="activity-score">★ ${displayNumber(score)}</span>`}<button class="activity-open" aria-label="View ${escapeHTML(p.name)}" data-edit="${escapeHTML(p.id)}">›</button></div>`}).join(''):'<div class="empty-state"><span>✦</span><strong>Your story starts here</strong><p>When you visit your first pub together, it will appear here.</p><button class="btn primary" data-jump="pubs">Find your first pub →</button></div>';
 }
-function foundPubs(){const q=$('search').value.toLocaleLowerCase().trim(),area=$('area').value,filter=$('filter').value;return allPubs().filter(p=>eligible(p)&&(!area||p.area===area)&&(!q||[p.name,p.street,p.postcode,p.area].join(' ').toLowerCase().includes(q))&&(filter==='all'||(filter==='done'&&done(p.id))||(filter==='todo'&&!done(p.id))||(filter==='planned'&&settings.crawl.includes(p.id))))}
+function foundPubs(){const q=$('search').value.toLocaleLowerCase().trim(),area=$('area').value,filter=$('filter').value;return allPubs().filter(p=>eligible(p)&&(!area||p.area===area)&&(!q||[p.name,p.street,p.postcode,p.area].join(' ').toLowerCase().includes(q))&&(filter==='all'||(filter==='done'&&done(p.id))||(filter==='todo'&&!done(p.id))||(filter==='planned'&&activeRouteIds().includes(p.id))))}
 function renderList(){const all=foundPubs();$('listStatus').textContent=`${all.length} pubs match your filters · ${all.filter(p=>done(p.id)).length} completed`;
-const cards=all.slice(0,visibleLimit).map(p=>{const v=visits[p.id],score=parsedReview(v).overall;return `<article class="pub-card ${done(p.id)?'visited':''}"><div class="pub-card-head"><span class="pub-illustration" aria-hidden="true">${done(p.id)?'✓':'🍺'}</span><div class="pub-card-heading"><h3>${escapeHTML(p.name)}</h3><div class="pub-meta">${escapeHTML(p.area||'Aberdeen')}${p.street?' · '+escapeHTML(p.street):''}${p.postcode?' · '+escapeHTML(p.postcode):''}</div></div></div><div class="row space"><span class="pill ${done(p.id)?'done':'todo'}">${done(p.id)?'✓ Visited':'○ Unvisited'}</span>${score!==null?`<span class="rating-chip">★ ${displayNumber(score)}/10</span>`:''}</div><div class="pub-actions"><button class="btn ${done(p.id)?'soft':'primary'}" data-edit="${escapeHTML(p.id)}">${done(p.id)?'View / edit':'View pub'}</button><button class="btn ${settings.crawl.includes(p.id)?'amber':''}" data-addroute="${escapeHTML(p.id)}">${settings.crawl.includes(p.id)?'✓ On route':'+ Crawl'}</button></div></article>`}).join('');$('pubList').innerHTML=cards||'<div class="card" style="grid-column:1/-1">No pubs match those filters. Try another search or area.</div>';show('morePubs',all.length>visibleLimit);$('morePubs').textContent=`Show more pubs (${all.length-visibleLimit} remaining) ↓`}
+const cards=all.slice(0,visibleLimit).map(p=>{const v=visits[p.id],score=parsedReview(v).overall;return `<article class="pub-card ${done(p.id)?'visited':''}"><div class="pub-card-head"><span class="pub-illustration" aria-hidden="true">${done(p.id)?'✓':'🍺'}</span><div class="pub-card-heading"><h3>${escapeHTML(p.name)}</h3><div class="pub-meta">${escapeHTML(p.area||'Aberdeen')}${p.street?' · '+escapeHTML(p.street):''}${p.postcode?' · '+escapeHTML(p.postcode):''}</div></div></div><div class="row space"><span class="pill ${done(p.id)?'done':'todo'}">${done(p.id)?'✓ Visited':'○ Unvisited'}</span>${score!==null?`<span class="rating-chip">★ ${displayNumber(score)}/10</span>`:''}</div><div class="pub-actions"><button class="btn ${done(p.id)?'soft':'primary'}" data-edit="${escapeHTML(p.id)}">${done(p.id)?'View / edit':'View pub'}</button><button class="btn ${activeRouteIds().includes(p.id)?'amber':''}" data-addroute="${escapeHTML(p.id)}">${activeRouteIds().includes(p.id)?'✓ On route':'+ Crawl'}</button></div></article>`}).join('');$('pubList').innerHTML=cards||'<div class="card" style="grid-column:1/-1">No pubs match those filters. Try another search or area.</div>';show('morePubs',all.length>visibleLimit);$('morePubs').textContent=`Show more pubs (${all.length-visibleLimit} remaining) ↓`}
 
 function renderAreas(){const rows=areaStats().sort((a,b)=>a.area.localeCompare(b.area));$('areaGrid').innerHTML=rows.map(x=>`<div class="area-row"><button data-openarea="${escapeHTML(x.area)}"><div class="row space"><span class="area-name">${escapeHTML(x.area)}</span><span class="pill ${x.n===x.total?'done':''}">${x.n===x.total?'✓ Complete':`${x.n}/${x.total} · ${Math.round(x.pct)}%`}</span></div><div class="progress"><div style="width:${x.pct}%"></div></div><span class="micro">${x.n===x.total?'Area conquered! Tap to view pubs.':'Tap to explore this neighbourhood ↗'}</span></button></div>`).join('')}
 function badgesData(){
@@ -687,8 +699,9 @@ unsubs.push(onSnapshot(collection(db,'challenges',id,'custom'),s=>{custom=[];s.f
 unsubs.push(onSnapshot(settingsRef(),s=>{if(s.exists())settings={...defaults(),...s.data()};render();ready('settings')},e=>fail('settings',e)))}
 async function create(){if(!user)return;try{$('create').disabled=true;const id=id32(),key=id32(),ref=doc(db,'challenges',id);await setDoc(ref,{ownerUid:user.uid,members:[user.uid],inviteCode:key,createdAt:serverTimestamp()});await setDoc(doc(db,'challenges',id,'settings','main'),settings);await setDoc(doc(db,'userLinks',user.uid),{challengeId:id});await connect(id)}catch(e){toast('Could not create challenge: '+e.message,true)}finally{$('create').disabled=false}}
 async function join(){const p=parseInvite($('join').value);if(!p)return toast('Paste the full private invitation link.',true);try{await updateDoc(doc(db,'challenges',p.id),{members:arrayUnion(user.uid),joinCodeProof:p.key});await setDoc(doc(db,'userLinks',user.uid),{challengeId:p.id});await connect(p.id)}catch(e){toast('Joining failed: '+e.message,true)}}
-onAuthStateChanged(auth,async u=>{user=u;clearListeners();cid='';memberUids=[];settings=defaults();custom=[];visits={};show('login',!u);show('app',false);show('lobby',!!u);$('cloud').textContent=u?'Signed in':'Sign in';if(!u)return;const code=parseInvite(location.hash);if(code)$('join').value=location.href;try{const link=await getDoc(doc(db,'userLinks',u.uid));if(link.exists())await connect(link.data().challengeId)}catch(e){toast('Signed in but could not load challenge: '+e.message,true)}});
+onAuthStateChanged(auth,async u=>{user=u;clearListeners();qaDraftCrawl=null;qaLive=null;cid='';memberUids=[];settings=defaults();custom=[];visits={};show('login',!u);show('app',false);show('lobby',!!u);$('cloud').textContent=u?'Signed in':'Sign in';if(!u)return;const code=parseInvite(location.hash);if(code)$('join').value=location.href;try{const link=await getDoc(doc(db,'userLinks',u.uid));if(link.exists())await connect(link.data().challengeId)}catch(e){toast('Signed in but could not load challenge: '+e.message,true)}});
 $('signIn').onclick=async()=>{try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('pass').value)}catch(e){toast('Sign-in failed: '+e.message,true)}};
+$('tryPreview').onclick=()=>{clearListeners();cid='local-qa-preview';memberUids=[];settings=defaults();visits={};custom=[];qaDraftCrawl=[];qaLive=null;walkDetails=null;lastPlannedAnchor=null;connected();showTab('crawl');toast('Guest demo: temporary, stored on this device only. Sign in for your shared challenge.');};
 $('signUp').onclick=async()=>{try{await createUserWithEmailAndPassword(auth,$('email').value.trim(),$('pass').value)}catch(e){toast('Registration failed: '+e.message,true)}};
 $('signOut').onclick=()=>signOut(auth);$('create').onclick=create;$('joinBtn').onclick=join;
 $('copyInvite').onclick=async()=>{try{await navigator.clipboard.writeText($('invite').value);toast('Invitation copied. Share privately.')}catch{$('invite').focus();$('invite').select();toast('Invitation selected. Tap Copy to share it.')}};
@@ -699,22 +712,39 @@ document.querySelectorAll('[data-moretab]').forEach(b=>b.addEventListener('click
 document.addEventListener('click',e=>{const jump=e.target.closest('[data-jump]');if(jump)showTab(jump.dataset.jump);const more=e.target.closest('[data-more]');if(more)showMore(more.dataset.more);const area=e.target.closest('[data-openarea]');if(area){$('area').value=area.dataset.openarea;$('filter').value='all';$('search').value='';visibleLimit=30;showTab('pubs');renderList()}const edit=e.target.closest('[data-edit]');if(edit)openEditor(edit.dataset.edit);const mapEdit=e.target.closest('[data-mapedit]');if(mapEdit){map?.closePopup();openEditor(mapEdit.dataset.mapedit)}const mapStart=e.target.closest('[data-mapstart]');if(mapStart){$('crawlStartMode').value='pub';$('crawlStartPub').value=mapStart.dataset.mapstart;updateCrawlControls();map?.closePopup();showTab('crawl')}const mapFinish=e.target.closest('[data-mapfinish]');if(mapFinish){$('crawlFinishMode').value='pub';$('crawlFinishPub').value=mapFinish.dataset.mapfinish;updateCrawlControls();map?.closePopup();showTab('crawl')}});
 for(const f of ['search','area','filter'])$(f).addEventListener(f==='search'?'input':'change',()=>{visibleLimit=30;renderList()});
 $('morePubs').onclick=()=>{visibleLimit+=30;renderList()};
-async function saveSettings(data){try{await updateDoc(settingsRef(),data);return true}catch(e){toast('Could not save shared settings: '+e.message,true);return false}}
+async function saveSettings(data){
+ if(isLocalDemo()){
+  Object.assign(settings,data);
+  if(Array.isArray(data?.crawl))qaDraftCrawl=data.crawl.slice();
+  render();return true;
+ }
+ try{await updateDoc(settingsRef(),data);return true}
+ catch(e){toast('Could not save shared settings: '+e.message,true);return false}
+}
 function toggleClubs(value){$('clubs').checked=value;$('clubsSettings').checked=value;saveSettings({showClubs:!!value})}
 $('clubs').onchange=e=>toggleClubs(e.target.checked);$('clubsSettings').onchange=e=>toggleClubs(e.target.checked);
 $('pubList').addEventListener('click',e=>{const b=e.target.closest('[data-addroute]');if(b)toggleRoute(b.dataset.addroute)});
-async function toggleRoute(id){if(currentLive())return toast('Finish your active live crawl before editing the route.',true);let c=Array.isArray(settings.crawl)?[...settings.crawl]:[];const i=c.indexOf(id);if(i>=0)c.splice(i,1);else{if(c.length>=15)return toast('Maximum of 15 planned stops. Remove one first.',true);c.push(id)}await saveSettings({crawl:c})}
+async function toggleRoute(id){if(currentLive())return toast('Finish your active live crawl before editing the route.',true);const p=getPub(id);if(!p||!eligible(p))return toast('This venue is excluded from the active pub challenge.',true);let c=activeRouteIds();const i=c.indexOf(id);if(i>=0)c.splice(i,1);else{if(c.length>=15)return toast('Maximum of 15 planned stops. Remove one first.',true);c.push(id)}await saveSettings({crawl:c})}
 $('addPub').onclick=async()=>{const name=$('newName').value.trim(),postcode=$('newPost').value.trim().toUpperCase(),street=$('newStreet').value.trim(),area=$('newArea').value;if(name.length<2)return toast('Enter a pub name first.',true);if(allPubs().some(p=>p.name.toLowerCase()===name.toLowerCase()))return toast('That pub name is already in the list.',true);const id='custom-'+id32();try{await setDoc(doc(db,'challenges',cid,'custom',id),{id,name,postcode,street,area,type:'Pub',evidence:'User-added',url:'',note:''});$('newName').value='';$('newPost').value='';$('newStreet').value='';toast('Added to both phones ✓');ensureCoordinates()}catch(e){toast('Could not add pub: '+e.message,true)}};
 function openEditor(id){selected=id;const p=getPub(id);if(!p)return;const v=visits[id]||{},x=parsedReview(v);$('dialogTitle').textContent=p.name;$('dialogState').textContent=done(id)?'✓ Conquered':'○ To visit';$('dialogState').className='pill '+(done(id)?'done':'todo');$('dialogPlace').textContent=[p.area,p.street,p.postcode].filter(Boolean).join(' · ');if(p.access)$('dialogPlace').textContent+=' · ⚠ '+p.access;$('visited').checked=!!v.done;$('date').value=v.date||(v.done?safeDate():'');$('rating').value=x.overall??'';$('atmosphere').value=x.atmosphere??'';$('review').value=x.text;$('dialogNote').textContent='Only tick a pub when you have both visited it.';$('editDialog').showModal()}
 $('visited').onchange=e=>{if(e.target.checked&&!$('date').value)$('date').value=safeDate()};
 $('closeDialog').onclick=()=>$('editDialog').close();
-function pubGoogleUrl(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent([p.name,p.street,p.postcode,'Aberdeen, Scotland'].filter(Boolean).join(', '))}
+function pubNavQuery(p){const corrected={'131':'The New Greentrees, 183 Victoria Street, Dyce, Aberdeen, AB21 7AA','213':'Three Lums, Lewis Road, Mastrick, Aberdeen, AB16 6TG'};return corrected[String(p.id)]||[p.name,p.street,p.postcode,'Aberdeen, Scotland'].filter(Boolean).join(', ')}
+function pubGoogleUrl(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(pubNavQuery(p))}
 $('goGoogle').onclick=()=>{const p=getPub(selected);if(p)window.open(pubGoogleUrl(p),'_blank','noopener')};
 $('saveVisit').onclick=async()=>{const overall=readScore('rating'),atmosphere=readScore('atmosphere');if(overall===false||atmosphere===false){$('dialogNote').textContent='Ratings must be between 0 and 10, in steps of 0.1.';return}
 const review=$('review').value.trim(),payload='APC2:'+JSON.stringify({text:review,overall,atmosphere});if(new TextEncoder().encode(payload).length>1150){$('dialogNote').textContent='Review too long. Please shorten it.';return}
-try{$('saveVisit').disabled=true;const value={done:$('visited').checked,date:$('visited').checked?($('date').value||safeDate()):($('date').value||''),rating:overall===null?'':String(Math.round(overall)),notes:payload,updated:new Date().toISOString()};await setDoc(doc(db,'challenges',cid,'visits',selected),value);const live=currentLive();if(value.done&&live&&!live.paused&&live.route[live.currentIndex]===selected){try{await saveLive({...live,currentIndex:Math.min(live.currentIndex+1,live.route.length-1)})}catch(e){toast('Visit saved, but live stop did not advance: '+e.message,true)}}$('editDialog').close();toast('Visit saved ✓ Both phones will update.')}catch(e){$('dialogNote').textContent='Save failed: '+e.message}finally{$('saveVisit').disabled=false}};
+try{$('saveVisit').disabled=true;const value={done:$('visited').checked,date:$('visited').checked?($('date').value||safeDate()):($('date').value||''),rating:overall===null?'':String(Math.round(overall)),notes:payload,updated:new Date().toISOString()};if(isLocalDemo()){visits[selected]=value;render()}else{await setDoc(doc(db,'challenges',cid,'visits',selected),value)}const live=currentLive();if(value.done&&live&&!live.paused&&live.route[live.currentIndex]===selected){try{await saveLive({...live,currentIndex:Math.min(live.currentIndex+1,live.route.length-1)})}catch(e){toast('Visit saved, but live stop did not advance: '+e.message,true)}}$('editDialog').close();toast(isLocalDemo()?'Demo visit recorded on this device only ✓':'Visit saved ✓ Both phones will update.');}catch(e){$('dialogNote').textContent='Save failed: '+e.message}finally{$('saveVisit').disabled=false}};
 function readScore(id){const raw=$(id).value.trim();if(!raw)return null;const x=Number(raw);if(!Number.isFinite(x)||x<0||x>10||!/^\d{1,2}(?:\.\d)?$/.test(raw))return false;return x}
 function haversine(a,b){if(!a||!b)return Infinity;const d=Math.PI/180,R=6371,p1=a[0]*d,p2=b[0]*d,dl=(b[1]-a[1])*d;const h=Math.sin((p2-p1)/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return R*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h))}
+// CRAWL ROUTING v4.2: stage 8 venue POIs; user-confirmed access context for 21 Crimes, Rileys, Rock Bottom and Zee's. Precise entrance GPS remains unsurveyed. Vovem excluded; stable IDs and visits retained. Pedestrian-network routing has a labelled approximate fallback.
+const STAGED_POI_BY_ID=Object.freeze({"12":[57.12989,-2.11739],"14":[57.13939,-2.11362],"15":[57.14514,-2.09818],"18":[57.14639,-2.10009],"19":[57.14815,-2.09381],"20":[57.14724,-2.13647],"22":[57.1494051,-2.1010829],"23":[57.18334,-2.18015],"24":[57.14412,-2.10118],"25":[57.14251,-2.11092],"26":[57.14668,-2.10558],"27":[57.1125,-2.19715],"35":[57.14756,-2.09448],"38":[57.12438,-2.12092],"39":[57.17342,-2.09345],"48":[57.14604,-2.09762],"52":[57.15054,-2.15016],"55":[57.1426888,-2.1125882],"56":[57.14755,-2.10524],"58":[57.09923,-2.0775],"60":[57.14552,-2.09606],"68":[57.146303,-2.100931],"71":[57.14215,-2.12924],"75":[57.14625,-2.10461],"77":[57.14308,-2.10731],"79":[57.14744,-2.09457],"81":[57.1454,-2.08053],"83":[57.14187,-2.11233],"84":[57.17018,-2.12287],"86":[57.18013,-2.18492],"90":[57.14211,-2.11212],"91":[57.14673,-2.10601],"97":[57.15629,-2.16132],"98":[57.1368,-2.12058],"99":[57.1449,-2.1043],"103":[57.1376622,-2.114182],"104":[57.1438845,-2.1077972],"105":[57.14624,-2.09522],"106":[57.14311,-2.10942],"108":[57.1489454,-2.0982162],"110":[57.145851,-2.094875],"113":[57.1442,-2.10122],"116":[57.1470533,-2.1004217],"117":[57.18853,-2.11968],"118":[57.14612,-2.09539],"119":[57.144,-2.11308],"120":[57.14597,-2.0978],"124":[57.15139,-2.10231],"125":[57.14461,-2.10644],"126":[57.1436,-2.10627],"128":[57.1436,-2.10736],"131":[57.21001,-2.18848],"133":[57.14652,-2.1],"134":[57.147843,-2.108122],"135":[57.15243,-2.1044],"139":[57.14231,-2.11145],"141":[57.1468159,-2.1001109],"142":[57.14452,-2.10244],"144":[57.1477976,-2.0932231],"145":[57.14584,-2.09941],"147":[57.1469695,-2.1008838],"149":[57.13341,-2.14596],"150":[57.143588,-2.1056972],"153":[57.21385,-2.19619],"154":[57.15493,-2.09513],"155":[57.09781,-2.2561],"157":[57.1485261,-2.092582],"159":[57.1470599,-2.0983713],"160":[57.1435148,-2.1066753],"161":[57.14986,-2.11668],"164":[57.14641,-2.09203],"165":[57.1468486,-2.1015218],"171":[57.1501549,-2.0908378],"174":[57.1452,-2.09805],"177":[57.14649,-2.10122],"180":[57.14668,-2.10086],"183":[57.10327,-2.08574],"184":[57.1464902,-2.0968085],"186":[57.14398,-2.10677],"189":[57.1455191,-2.0969832],"190":[57.14272,-2.10794],"192":[57.16653,-2.10259],"193":[57.1446609,-2.1039515],"194":[57.17775,-2.17039],"199":[57.12023,-2.10264],"204":[57.11904,-2.17378],"206":[57.14628,-2.09543],"209":[57.14659,-2.10589],"210":[57.13559,-2.08606],"211":[57.1466156,-2.1015968],"213":[57.15489,-2.17895],"214":[57.147574,-2.093893],"215":[57.14636,-2.1005],"216":[57.1457807,-2.0963546],"218":[57.1476337,-2.1023748],"225":[57.11566,-2.08982],"226":[57.14584,-2.09753],"230":[57.19089,-2.18],"17":[57.1488849,-2.0976176],"42":[57.1481875,-2.0919375],"43":[57.1473125,-2.1013125],"70":[57.1431843,-2.1072429],"96":[57.143952,-2.111804],"100":[57.1456613,-2.1045946],"140":[57.1443524,-2.1030855],"185":[57.1438922,-2.1120775],"195":[57.1465174,-2.1034624],"223":[57.1441631,-2.1080206],"224":[57.1453679,-2.0964211],"228":[57.1459504,-2.1025575],"229":[57.1464222,-2.0966725]});
+function poiPoint(pub){if(!pub)return null;
+ // User confirmed 21 Crimes shares Vovem's public entrance. This named building POI
+ // is only a preliminary navigation reference, NOT a surveyed customer-door GPS fix.
+ if(String(pub.id)==='1')return STAGED_POI_BY_ID['223']||null;
+ return STAGED_POI_BY_ID[String(pub.id)]||null;}
+function mapPoint(pub){return poiPoint(pub)||(pub?.postcode?coords[String(pub.postcode).toUpperCase().trim()]||null:null)}
 async function ensureCoordinates(){if(geoWork)return geoWork;geoWork=(async()=>{const missing=[...new Set(allPubs().map(p=>p.postcode?.toUpperCase().trim()).filter(p=>p&&!coords[p]))];for(let i=0;i<missing.length;i+=90){const batch=missing.slice(i,i+90);try{const res=await fetch('https://api.postcodes.io/postcodes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postcodes:batch})});if(!res.ok)throw Error(`HTTP ${res.status}`);const json=await res.json();for(const r of json.result||[])if(r.result)coords[r.query]=[r.result.latitude,r.result.longitude]}catch(e){$('mapStatus').textContent='Some postcodes could not be located. '+e.message}}drawPins();return Object.keys(coords).length})();try{return await geoWork}finally{geoWork=null}}
 async function getLocation(){
  if(!navigator.geolocation)throw Error('This browser does not support location access.');
@@ -724,86 +754,324 @@ async function getLocation(){
  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000}));
 }
 async function startMap(){if(map)return;if(!window.L){$('mapStatus').textContent='Map library unavailable. Your pub list still works.';return}map=L.map('map',{scrollWheelZoom:false}).setView([57.149,-2.108],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);await ensureCoordinates();drawPins()}
-function drawPins(){if(!map)return;for(const marker of pins)map.removeLayer(marker);pins=[];if(routeLine)map.removeLayer(routeLine);routeLine=null;for(const p of allPubs().filter(eligible)){if(!p.postcode||!coords[p.postcode])continue;const planned=settings.crawl.includes(p.id),isDone=done(p.id);if(mapFilter==='todo'&&isDone||mapFilter==='done'&&!isDone||mapFilter==='planned'&&!planned)continue;const st=planned?'planned':isDone?'done':'todo';const icon=L.divIcon({className:'',html:`<div class="marker ${st}"></div>`,iconSize:[23,23],iconAnchor:[12,12]});const m=L.marker(coords[p.postcode],{icon,keyboard:true,title:p.name}).addTo(map);m.bindPopup(`<strong>${escapeHTML(p.name)}</strong><br><small>${escapeHTML(p.area)}</small><br>${isDone?'✓ Already visited':'○ Still to visit'}<br><button class="btn sm primary" data-mapedit="${escapeHTML(p.id)}">View pub / tick off</button><br><button class="btn sm" data-mapstart="${escapeHTML(p.id)}">Start a crawl here</button><br><button class="btn sm" data-mapfinish="${escapeHTML(p.id)}">Finish a crawl here</button><br><a href="${pubGoogleUrl(p)}" target="_blank" rel="noopener noreferrer">Exact location in Google Maps ↗</a>`);m.on('popupopen',evt=>{const box=evt.popup.getElement();box?.querySelector('[data-mapedit]')?.addEventListener('click',()=>{map?.closePopup();openEditor(p.id)});box?.querySelector('[data-mapstart]')?.addEventListener('click',()=>{$('crawlStartMode').value='pub';$('crawlStartPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')});box?.querySelector('[data-mapfinish]')?.addEventListener('click',()=>{$('crawlFinishMode').value='pub';$('crawlFinishPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')})});pins.push(m)}if(settings.crawl.length>=2){const line=settings.crawl.map(id=>getPub(id)).filter(Boolean).map(p=>coords[p.postcode]).filter(Boolean);if(line.length>1)routeLine=L.polyline(line,{color:'#d4a354',weight:3,opacity:.8,dashArray:'7 7'}).addTo(map)}$('mapStatus').textContent=`${pins.length} approximate pub pins · ${allPubs().filter(eligible).length} pubs in the challenge. Pins use postcode centres.`}
-function nearList(){if(!userLatLng)return;const nearest=allPubs().filter(p=>eligible(p)&&!done(p.id)&&coords[p.postcode]).map(p=>({p,dist:haversine(userLatLng,coords[p.postcode])})).sort((a,b)=>a.dist-b.dist).slice(0,5);show('nearestList',true);$('nearestList').innerHTML=`<h3 class="section-title" style="margin-top:17px">Closest unvisited pubs</h3><p class="sub">Straight-line distance from your phone, not walking distance.</p>${nearest.map(({p,dist})=>`<div class="item"><div class="row"><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${dist.toFixed(1)} km away · ${escapeHTML(p.area)}</div></div><button class="btn sm" data-edit="${escapeHTML(p.id)}">View ↗</button></div></div>`).join('')||'<p class="sub">No nearby unvisited pubs with known postcodes.</p>'}`}
+function drawPins(){if(!map)return;for(const marker of pins)map.removeLayer(marker);pins=[];if(routeLine)map.removeLayer(routeLine);routeLine=null;for(const p of allPubs().filter(eligible)){const xy=mapPoint(p);if(!xy)continue;const qualityLabel=poiPoint(p)?'Venue POI (door not verified)':'Postcode-centre estimate (not suitable for auto crawl)';const planned=activeRouteIds().includes(p.id),isDone=done(p.id);if(mapFilter==='todo'&&isDone||mapFilter==='done'&&!isDone||mapFilter==='planned'&&!planned)continue;const st=planned?'planned':isDone?'done':'todo';const icon=L.divIcon({className:'',html:`<div class="marker ${st}"></div>`,iconSize:[23,23],iconAnchor:[12,12]});const m=L.marker(xy,{icon,keyboard:true,title:p.name}).addTo(map);m.bindPopup(`<strong>${escapeHTML(p.name)}</strong><br><small>${escapeHTML(p.area)}</small><br>${isDone?'✓ Already visited':'○ Still to visit'}<br><small>${escapeHTML(qualityLabel)}</small><br><button class="btn sm primary" data-mapedit="${escapeHTML(p.id)}">View pub / tick off</button><br><button class="btn sm" data-mapstart="${escapeHTML(p.id)}">Start a crawl here</button><br><button class="btn sm" data-mapfinish="${escapeHTML(p.id)}">Finish a crawl here</button><br><a href="${pubGoogleUrl(p)}" target="_blank" rel="noopener noreferrer">Exact location in Google Maps ↗</a>`);m.on('popupopen',evt=>{const box=evt.popup.getElement();box?.querySelector('[data-mapedit]')?.addEventListener('click',()=>{map?.closePopup();openEditor(p.id)});box?.querySelector('[data-mapstart]')?.addEventListener('click',()=>{$('crawlStartMode').value='pub';$('crawlStartPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')});box?.querySelector('[data-mapfinish]')?.addEventListener('click',()=>{$('crawlFinishMode').value='pub';$('crawlFinishPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')})});pins.push(m)}if(walkDetails?.key===walkKey(routePubs())){const ps=routePubs().map(mapPoint).filter(Boolean);if(walkDetails.line.length>1)routeLine=L.polyline(walkDetails.line,{color:'#d4a354',weight:4,opacity:.9}).addTo(map);else if(walkDetails.estimate&&ps.length>1)routeLine=L.polyline(ps,{color:'#9aaab6',weight:3,opacity:.9,dashArray:'6,8'}).addTo(map)}$('mapStatus').textContent=`${pins.length} visible pins · ${Object.keys(STAGED_POI_BY_ID).length} preliminary venue/building points for the crawl generator · other pins are postcode estimates. Venue locations are preliminary; user-confirmed entrances are not surveyed GPS points.`}
+function nearList(){if(!userLatLng)return;const nearest=allPubs().filter(p=>eligible(p)&&!done(p.id)&&mapPoint(p)).map(p=>({p,dist:haversine(userLatLng,mapPoint(p))})).sort((a,b)=>a.dist-b.dist).slice(0,5);show('nearestList',true);$('nearestList').innerHTML=`<h3 class="section-title" style="margin-top:17px">Closest unvisited pubs</h3><p class="sub">Straight-line distance from your phone, not walking distance.</p>${nearest.map(({p,dist})=>`<div class="item"><div class="row"><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${dist.toFixed(1)} km away · ${escapeHTML(p.area)}</div></div><button class="btn sm" data-edit="${escapeHTML(p.id)}">View ↗</button></div></div>`).join('')||'<p class="sub">No nearby unvisited pubs with known postcodes.</p>'}`}
 $('locate').onclick=async()=>{try{$('locate').disabled=true;await startMap();const xy=await getLocation();map.setView(xy,15);if(userPin)map.removeLayer(userPin);userPin=L.marker(xy,{icon:L.divIcon({className:'',html:'<div class="marker user"></div>',iconSize:[23,23]})}).addTo(map).bindPopup('Your approximate location');nearList();show('mapLocationHelp',false);toast('Showing unvisited pubs near your location.')}catch(e){show('mapLocationHelp',true);toast('Could not find your location: '+e.message,true)}finally{$('locate').disabled=false}};
 $('mapFilters').onclick=e=>{const b=e.target.closest('[data-mapfilter]');if(!b)return;mapFilter=b.dataset.mapfilter;document.querySelectorAll('[data-mapfilter]').forEach(x=>x.classList.toggle('active',x===b));drawPins()};
-function routePubs(){return(settings.crawl||[]).map(getPub).filter(Boolean)}
-function renderRoute(){const a=routePubs();$('routeCount').textContent=`${a.length} stops`;$('finishCrawl').disabled=a.length<1;$('clearRoute').disabled=a.length===0;$('routeList').innerHTML=a.length?a.map((p,i)=>`<div class="route-stop"><span class="number">${i+1}</span><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${escapeHTML(p.area)} · ${done(p.id)?'✓ Conquered':'Not visited yet'}</div></div><div class="mini-actions"><button title="Move up" aria-label="Move ${escapeHTML(p.name)} up" data-up="${i}" ${i===0?'disabled':''}>↑</button><button title="Move down" aria-label="Move ${escapeHTML(p.name)} down" data-down="${i}" ${i===a.length-1?'disabled':''}>↓</button><button title="Remove stop" aria-label="Remove ${escapeHTML(p.name)}" data-remove="${i}">×</button></div></div>`).join(''):'<p class="sub">No route yet. Generate one above or add pubs from the Pub list.</p>';
-const xy=a.map(p=>coords[p.postcode]).filter(Boolean);let distance=0;for(let i=1;i<xy.length;i++)distance+=haversine(xy[i-1],xy[i]);show('routeDistance',xy.length>=2);$('routeDistance').textContent=`About ${distance.toFixed(1)} km between mapped stops in straight lines. Actual walking distance and time will be longer.`;
-const chunks=[];let start=0;while(start<a.length-1){let end=Math.min(a.length,start+5);if(end-start<2)break;chunks.push(a.slice(start,end));if(end===a.length)break;start=end-1} $('directionButtons').innerHTML=(a.length===1?'<button class="btn primary" data-directions="0">↗ Find this pub in Google Maps</button>':chunks.map((part,i)=>`<button class="btn ${i?'soft':'primary'}" data-directions="${i}">↗ Google Maps ${chunks.length>1?` · part ${i+1}`:''}</button>`).join(''));
-$('startLiveCrawl').disabled=a.length===0||!!currentLive();$('finishCrawl').disabled=a.length===0||!!currentLive();$('clearRoute').disabled=a.length===0||!!currentLive();drawCrawlPreviewSoon();}
-$('routeList').onclick=e=>{const b=e.target.closest('[data-up],[data-down],[data-remove]');if(!b)return;if(currentLive())return toast('Finish the live crawl before changing its stops.',true);const i=Number(b.dataset.up??b.dataset.down??b.dataset.remove),list=[...settings.crawl];if(b.dataset.remove!==undefined)list.splice(i,1);else{const j=i+(b.dataset.up!==undefined?-1:1);if(j<0||j>=list.length)return;[list[i],list[j]]=[list[j],list[i]]}saveSettings({crawl:list})};
+function routePubs(){return activeRouteIds().map(getPub).filter(Boolean)}
+function renderRoute(){
+ const a=routePubs(),key=walkKey(a);
+ $('routeCount').textContent=`${a.length} stops`;
+ $('finishCrawl').disabled=a.length<1;$('clearRoute').disabled=a.length===0;
+ $('routeList').innerHTML=a.length?a.map((p,i)=>`<div class="route-stop"><span class="number">${i+1}</span><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${escapeHTML(p.area)} · ${done(p.id)?'✓ Conquered':'Not visited yet'}${String(p.id)==='1'?' · shared building entrance':''}${!poiPoint(p)?' · precise venue point pending':''}</div>${walkDetails?.key===key&&walkLegForStop(walkDetails,i)?`<div class="detail" style="color:#eac27c;margin-top:5px">🚶 ${walkDetails.fromHere&&i===0?'From your position':`From stop ${i}`} · ${legText(walkLegForStop(walkDetails,i))}</div>`:''}</div><div class="mini-actions"><button title="Move up" aria-label="Move ${escapeHTML(p.name)} up" data-up="${i}" ${i===0||currentLive()?'disabled':''}>↑</button><button title="Move down" aria-label="Move ${escapeHTML(p.name)} down" data-down="${i}" ${i===a.length-1||currentLive()?'disabled':''}>↓</button><button title="Remove stop" aria-label="Remove ${escapeHTML(p.name)}" data-remove="${i}" ${currentLive()?'disabled':''}>×</button></div></div>`).join(''):'<p class="sub">No route yet. Generate one above or add pubs from the Pub list.</p>';
+ show('routeDistance',a.length>0);
+ if(!a.length){$('routeDistance').textContent='';walkRefreshKey='';walkDetails=null;}
+ else if(walkDetails?.key===key){$('routeDistance').textContent=walkSummary(walkDetails);}
+ else if(a.some(p=>!poiPoint(p))){$('routeDistance').textContent='Some stops lack a researched venue point. Mileage cannot be verified until those stop locations are mapped; use Google Maps walking to check the trip.';}
+ else if(a.length===1){$('routeDistance').textContent='One pub selected — no walking between pubs.';}
+ else {$('routeDistance').textContent='Checking walking paths (rough estimate available if service is busy)…';scheduleFootRefresh(a);}
+ const chunks=[];let start=0;while(start<a.length-1){let end=Math.min(a.length,start+5);if(end-start<2)break;chunks.push(a.slice(start,end));if(end===a.length)break;start=end-1}
+ $('directionButtons').innerHTML=(a.length===1?'<button class="btn primary" data-directions="0">↗ Find this pub in Google Maps</button>':chunks.map((part,i)=>`<button class="btn ${i?'soft':'primary'}" data-directions="${i}">↗ Google Maps walking ${chunks.length>1?` · part ${i+1}`:''}</button>`).join(''));
+ $('startLiveCrawl').disabled=a.length===0||!!currentLive();$('finishCrawl').disabled=a.length===0||!!currentLive();$('clearRoute').disabled=a.length===0||!!currentLive();drawCrawlPreviewSoon();
+}
+$('routeList').onclick=e=>{const b=e.target.closest('[data-up],[data-down],[data-remove]');if(!b)return;if(currentLive())return toast('Finish the live crawl before changing its stops.',true);const i=Number(b.dataset.up??b.dataset.down??b.dataset.remove),list=activeRouteIds();if(b.dataset.remove!==undefined)list.splice(i,1);else{const j=i+(b.dataset.up!==undefined?-1:1);if(j<0||j>=list.length)return;[list[i],list[j]]=[list[j],list[i]]}saveSettings({crawl:list})};
 $('clearRoute').onclick=()=>{if(currentLive())return toast('Finish your live crawl first.',true);if(confirm('Clear the planned route?'))saveSettings({crawl:[]})};
-function mapsDirections(part){if(part.length===1){window.open(pubGoogleUrl(part[0]),'_blank','noopener,noreferrer');return}if(part.length<2)return;const addr=p=>encodeURIComponent([p.name,p.street,p.postcode,'Aberdeen, Scotland'].filter(Boolean).join(', '));const url='https://www.google.com/maps/dir/?api=1&travelmode=walking&origin='+addr(part[0])+'&destination='+addr(part[part.length-1])+(part.length>2?'&waypoints='+part.slice(1,-1).map(addr).join('%7C'):'');window.open(url,'_blank','noopener,noreferrer')}
+function mapsDirections(part){if(part.length===1){window.open(pubGoogleUrl(part[0]),'_blank','noopener,noreferrer');return}if(part.length<2)return;const addr=p=>encodeURIComponent(pubNavQuery(p));const url='https://www.google.com/maps/dir/?api=1&travelmode=walking&origin='+addr(part[0])+'&destination='+addr(part[part.length-1])+(part.length>2?'&waypoints='+part.slice(1,-1).map(addr).join('%7C'):'');window.open(url,'_blank','noopener,noreferrer')}
 $('directionButtons').onclick=e=>{const b=e.target.closest('[data-directions]');if(!b)return;const part=Number(b.dataset.directions),a=routePubs(),start=part*4;mapsDirections(a.slice(start,Math.min(start+5,a.length)))};
-function routeAnchor(p,rest,near){if(near)return near;if(p){let loc=rest.map(v=>coords[v.postcode]).filter(Boolean);if(loc.length)return [loc.reduce((sum,v)=>sum+v[0],0)/loc.length,loc.reduce((sum,v)=>sum+v[1],0)/loc.length]}return [57.145,-2.109]}
-// SMART CRAWL PLANNER 2.0 — coordinates are postcode centres, NOT verified entrances.
+
+// SMART CRAWL 2.4 — walking route (community OSRM foot profile) with a
+// clearly labelled approximate backup. Public endpoint is best-effort and may throttle.
+// Never claim precise customer-door coordinates.
 let routeSeed=0,miniMap=null,miniMarkers=[],miniLine=null,miniMapScheduled=false;
 let lastPlannedAnchor=null,adventureArea='';
+let walkDetails=null,walkRefreshKey='',walkRefreshTimer=0,walkNetQueue=Promise.resolve(),lastFootRequest=0;
+const WALK_FOOT_BASE='https://routing.openstreetmap.de/routed-foot';
+const FOOT_CACHE=new Map();
+// Deliberately a *rough* backup, not a claim to know pedestrian paths.
+// The additional 40m per distinct leg covers a little of the travel between
+// a POI/building centroid and a public entrance. No path polyline is fabricated.
+const APPROX_WALK_FACTOR=1.40;
+function approxLeg(a,b){
+ const direct=haversine(a,b)*1000;
+ const metres=direct<12?0:Math.round(direct*APPROX_WALK_FACTOR+40);
+ return {metres,seconds:Math.round(metres/1.25)};
+}
+function approxMatrix(points){return points.map(a=>points.map(b=>approxLeg(a,b).metres))}
+function approxRoute(points,reason=''){const legs=points.slice(1).map((b,i)=>approxLeg(points[i],b));
+ const metres=legs.reduce((n,x)=>n+x.metres,0),seconds=legs.reduce((n,x)=>n+x.seconds,0);
+ return {metres,seconds,legs,line:[],snapWarning:false,estimate:true,reason};
+}
+function routePoints(route,fromHere=false){return [...(fromHere&&lastPlannedAnchor?[lastPlannedAnchor]:[]),...route.map(poiPoint)]}
+
 function milesFromKm(d){return d/1.609344}
-function roughWalkingMiles(points){let km=0;for(let i=1;i<points.length;i++){if(points[i]&&points[i-1])km+=haversine(points[i-1],points[i])}return milesFromKm(km*1.4)}
+function walkKey(pubs){return pubs.map(p=>String(p.id)).join('|')}
+function walkSummary(detail){
+ const miles=(detail.metres/1609.344).toFixed(2),mins=Math.max(0,Math.round(detail.seconds/60));
+ const origin=detail.fromHere?'Including the walk from your phone position':'Between pub stops';
+ const warning=detail.snapWarning?' · ⚠ A venue pin is some distance from the mapped footpath; double-check entry.':'';
+ if(detail.estimate)return `⚠️ ~${miles} miles · roughly ${mins} min walking · ${origin}. Approximate route (straight-line locations adjusted for typical street detours, NOT measured paths). Tap Google Maps for directions.`;
+ return `🚶 ${miles} miles · about ${mins} min walking · ${origin} · Mapped footpaths, not door-surveyed${warning}`;
+}
 function updateCrawlControls(){show('crawlStartPubWrap',$('crawlStartMode').value==='pub');show('crawlFinishPubWrap',$('crawlFinishMode').value==='pub')}
-for(const p of VENUES){for(const id of ['crawlStartPub','crawlFinishPub']){const op=document.createElement('option');op.value=p.id;op.textContent=p.name;$(id).appendChild(op)}}
+for(const p of VENUES.filter(eligible))for(const id of ['crawlStartPub','crawlFinishPub']){
+ const op=document.createElement('option');op.value=p.id;op.disabled=!poiPoint(p);
+ op.textContent=p.name+(op.disabled?' · venue point pending':'');$(id).appendChild(op)
+}
 $('crawlStartMode').onchange=updateCrawlControls;$('crawlFinishMode').onchange=updateCrawlControls;
-function refreshPubStartOptions(){for(const p of custom){for(const id of ['crawlStartPub','crawlFinishPub']){if(Array.from($(id).options).some(x=>x.value===p.id))continue;const op=document.createElement('option');op.value=p.id;op.textContent=p.name;$(id).appendChild(op)}}}
-function chooseNext(pool,from,milesSpent,maxMiles,finishPoint,routeStyle,step){
- const rows=pool.map((p,i)=>{const xy=coords[p.postcode],hop=haversine(from,xy),reserve=finishPoint?haversine(xy,finishPoint):0;
-  const projected=milesFromKm((milesSpent+hop+reserve)*1.4);
-  const bias=routeStyle==='explore'?(-Math.min(haversine([57.148,-2.11],xy),2.8)*.12):0;
-  return{p,i,xy,hop,projected,score:hop+bias};
- }).filter(x=>!maxMiles||x.projected<=maxMiles+0.001);
- rows.sort((a,b)=>a.score-b.score||a.p.name.localeCompare(b.p.name));
- if(!rows.length)return null;
- const top=Math.min(routeStyle==='explore'?5:3,rows.length);
- const slot=step===0?(routeSeed%top):((routeSeed+step*3)%Math.min(2,rows.length));
- return rows[slot];
+function refreshPubStartOptions(){for(const p of custom)for(const id of ['crawlStartPub','crawlFinishPub']){
+ if(Array.from($(id).options).some(x=>x.value===p.id))continue;
+ const op=document.createElement('option');op.value=p.id;op.disabled=!poiPoint(p);
+ op.textContent=p.name+(op.disabled?' · venue point pending':'');$(id).appendChild(op)
+}}
+function footCoords(points){return points.map(pt=>`${pt[1].toFixed(6)},${pt[0].toFixed(6)}`).join(';')}
+async function footRequest(url){
+ // One external request per second, sequentially. Avoid hammering the public demo.
+ const task=walkNetQueue.then(async()=>{
+  const wait=Math.max(0,1050-(Date.now()-lastFootRequest));if(wait)await new Promise(r=>setTimeout(r,wait));
+  lastFootRequest=Date.now();
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),11000);
+  try{
+   const res=await fetch(url,{mode:'cors',signal:controller.signal});
+   if(!res.ok)throw Error(`walking service HTTP ${res.status}`);
+   const body=await res.json();if(body.code!=='Ok')throw Error(`walking service ${body.message||body.code||'unavailable'}`);
+   return body;
+  }finally{clearTimeout(timer)}
+ });
+ walkNetQueue=task.catch(()=>{});return task;
+}
+async function footMatrix(points){
+ const url=`${WALK_FOOT_BASE}/table/v1/driving/${footCoords(points)}?annotations=distance,duration`;
+ const res=await footRequest(url);
+ if(!Array.isArray(res.distances)||res.distances.length!==points.length||
+    !res.distances.every(row=>Array.isArray(row)&&row.length===points.length))
+    throw Error('Pedestrian distance matrix was incomplete. No route has been saved.');
+ const m=res.distances.map(row=>row.map(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:Infinity));
+ // A badly-snapped *candidate* should not ruin the entire crawl. Simply
+ // exclude it from the network search; fixed endpoints still have to be walkable.
+ const snaps=res.sources||res.waypoints||[];
+ snaps.forEach((p,i)=>{if(Number.isFinite(p?.distance)&&p.distance>150){
+   for(let j=0;j<m.length;j++){if(i!==j){m[i][j]=Infinity;m[j][i]=Infinity}}
+ }});
+ return m;
+}
+async function footRoute(points){
+ if(points.length<2)return{metres:0,seconds:0,line:[],legs:[],snapWarning:false};
+ const key=footCoords(points),cached=FOOT_CACHE.get(key);if(cached)return cached;
+ const url=`${WALK_FOOT_BASE}/route/v1/driving/${key}?overview=full&geometries=geojson&steps=false&continue_straight=false`;
+ const res=await footRequest(url),route=res.routes?.[0],shape=route?.geometry?.coordinates;
+ if(!route||!Array.isArray(shape)||shape.length<2||!Number.isFinite(route.distance)||!Number.isFinite(route.duration))
+    throw Error('No complete walking path could be retrieved between these pubs.');
+ if(!shape.every(pair=>Array.isArray(pair)&&pair.length>=2&&pair.every(Number.isFinite)))
+    throw Error('The walking service returned invalid map geometry.');
+ if(!Array.isArray(route.legs)||route.legs.length!==points.length-1||!route.legs.every(leg=>
+    Number.isFinite(leg.distance)&&leg.distance>=0&&Number.isFinite(leg.duration)&&leg.duration>=0))
+    throw Error('The walking service did not supply every route leg.');
+ if((res.waypoints||[]).some(x=>Number.isFinite(x?.distance)&&x.distance>120))
+    throw Error('A stop snapped more than 120m from a mapped footpath. This route has not been accepted.');
+ const legs=route.legs.map(x=>({metres:x.distance,seconds:x.duration}));
+ const totalLegMetres=legs.reduce((sum,x)=>sum+x.metres,0);
+ if(Math.abs(totalLegMetres-route.distance)>Math.max(5,route.distance*.025))
+    throw Error('The walking service supplied inconsistent segment distances.');
+ const detail={metres:route.distance,seconds:route.duration,legs,
+    line:shape.map(([lon,lat])=>[lat,lon]),
+    snapWarning:(res.waypoints||[]).some(x=>Number.isFinite(x?.distance)&&x.distance>55)};
+ FOOT_CACHE.set(key,detail);if(FOOT_CACHE.size>25)FOOT_CACHE.delete(FOOT_CACHE.keys().next().value);
+ return detail;
+}
+function walkLegForStop(detail,idx){
+ if(!detail?.legs?.length)return null;
+ const index=detail.fromHere?idx:idx-1;
+ return index>=0&&index<detail.legs.length?detail.legs[index]:null;
+}
+function legText(leg){return leg?`${leg.metres<1000?Math.round(leg.metres)+' m':(leg.metres/1000).toFixed(2)+' km'} · ${Math.max(1,Math.round(leg.seconds/60))} min`:''}
+// Pedestrian all-pairs matrix drives ordering. Matrix costs are meters along real
+// walkable streets/paths, not haversine multiplied by an arbitrary factor.
+function networkCost(order,m,startIndex=null,finishIndex=null,fromHere=false){
+ if(!order.length)return 0;let d=0;
+ if(fromHere)d+=m[0][order[0]];
+ for(let k=1;k<order.length;k++)d+=m[order[k-1]][order[k]];
+ return d;
+}
+function optimizeWalkOrder(order,m,{lockedStart=false,lockedFinish=false,fromHere=false}={}){
+ if(order.length<3)return order;
+ let best=order.slice(),bestD=networkCost(best,m,null,null,fromHere),lo=lockedStart?1:0,hi=best.length-(lockedFinish?1:0);
+ for(let iter=0;iter<4;iter++){
+  let changed=false;
+  for(let i=lo;i<hi-1;i++)for(let j=i+1;j<hi;j++){
+   const probe=best.slice();probe.splice(i,j-i+1,...best.slice(i,j+1).reverse());
+   const d=networkCost(probe,m,null,null,fromHere);
+   if(d+0.5<bestD){best=probe;bestD=d;changed=true}
+  }
+  if(!changed)break;
+ }
+ return best;
+}
+function chooseNetworkStops(pool,m,{count,maxMetres,startPubIndex,finishPubIndex,fromHere,routeStyle,seed}){
+ const fixedStart=startPubIndex!==null,fixedFinish=finishPubIndex!==null;
+ const finish=fixedFinish&&finishPubIndex!==startPubIndex?finishPubIndex:null;
+ const initial=fixedStart?[startPubIndex]:[];
+ const middleCount=count-initial.length-(finish!==null?1:0);
+ if(middleCount<0)throw Error('Increase the stop count to accommodate both fixed pubs.');
+ const candidates=pool.filter(i=>!initial.includes(i)&&i!==finish);
+ // Each beam state is a candidate walking sequence, measured entirely on the
+ // foot-route matrix. This tests multiple starting directions and shortcuts.
+ let beam=[{order:initial,d:0,score:0}],best=initial.concat(finish===null?[]:[finish]);
+ const stylesExplore=routeStyle==='explore',seedIndex=Math.abs(seed)%17;
+ for(let step=0;step<middleCount;step++){
+  const expanded=[];
+  for(const state of beam){
+   const used=new Set(state.order);
+   for(const index of candidates){
+    if(used.has(index))continue;
+    const last=state.order.length?state.order[state.order.length-1]:null;
+    const hop=last!==null?m[last][index]:fromHere?m[0][index]:0;
+    if(!Number.isFinite(hop))continue;
+    const d=state.d+hop,returnCost=finish!==null?m[index][finish]:0;
+    if(!Number.isFinite(returnCost)||maxMetres&&d+returnCost>maxMetres+1)continue;
+    // Explore mode rewards geographical spread, but never exceeds a fixed
+    // walking budget; regenerate rotates small scoring penalties for diversity.
+    const spread=stylesExplore?Math.min(700,m[0][index]||0)*.14:0;
+    const variety=stylesExplore?((index*37+seedIndex*11)%19)*3:0;
+    const score=d+(finish!==null?returnCost*.75:0)-spread-variety;
+    expanded.push({order:state.order.concat(index),d,score});
+   }
+  }
+  if(!expanded.length)break;
+  expanded.sort((a,b)=>a.score-b.score||a.d-b.d);
+  // Deduplicate paths visiting the same set with the same last node, otherwise
+  // a tight cluster can crowd all other viable paths out of the search beam.
+  const seen=new Set(),next=[];
+  for(const candidate of expanded){
+   const signature=candidate.order.slice(fixedStart?1:0).slice().sort((a,b)=>a-b).join(',')+'|'+candidate.order[candidate.order.length-1];
+   if(seen.has(signature))continue;
+   seen.add(signature);next.push(candidate);
+   if(next.length>=64)break;
+  }
+  beam=next;
+  if(!beam.length)break;
+  const alternatives=beam.map(x=>{
+   const order=x.order.concat(finish===null?[]:[finish]);
+   const optimized=optimizeWalkOrder(order,m,{lockedStart:fixedStart,lockedFinish:finish!==null,fromHere});
+   return{order:optimized,d:networkCost(optimized,m,null,null,fromHere)};
+  }).filter(x=>Number.isFinite(x.d)&&(!maxMetres||x.d<=maxMetres+1));
+  // Longer feasible crawls trump a shorter partial solution.
+  if(alternatives.length){
+   alternatives.sort((a,b)=>a.d-b.d);
+   const chosen=stylesExplore?alternatives[Math.min(alternatives.length-1,seedIndex%Math.min(8,alternatives.length))]:alternatives[0];
+   if(chosen.order.length>best.length||chosen.order.length===best.length&&
+      networkCost(chosen.order,m,null,null,fromHere)<networkCost(best,m,null,null,fromHere))best=chosen.order;
+  }
+ }
+ // If no middle stop fitted, the fixed endpoints may still form a valid route.
+ if(!best.length)return[];
+ const final=optimizeWalkOrder(best,m,{lockedStart:fixedStart,lockedFinish:finish!==null,fromHere});
+ if(!Number.isFinite(networkCost(final,m,null,null,fromHere))||
+    maxMetres&&networkCost(final,m,null,null,fromHere)>maxMetres+1)return[];
+ return final;
+}
+function routeAnchor(area,rest,near){if(near)return near;
+ if(rest.length){const pts=rest.map(poiPoint).filter(Boolean);if(pts.length)return[pts.reduce((v,p)=>v+p[0],0)/pts.length,pts.reduce((v,p)=>v+p[1],0)/pts.length]}
+ return [57.145,-2.109];
+}
+function shortlistByDistance(pool,anchor,count,seed=0){
+ const ranked=pool.map(p=>({p,d:haversine(poiPoint(p),anchor)})).sort((a,b)=>a.d-b.d||String(a.p.id).localeCompare(String(b.p.id)));
+ // Rotating the fringe lets 'try a different route' explore the wider area,
+ // without ever stuffing the matrix with all 149 venues.
+ const base=Math.min(ranked.length,Math.max(14,Math.min(25,count+10)));
+ if(ranked.length<=base)return ranked.map(x=>x.p);
+ const core=Math.min(ranked.length,Math.max(count,Math.floor(base*.7)));
+ const extra=ranked.slice(core),tail=ranked.slice(0,core);
+ for(let i=0;i<base-core;i++)tail.push(extra[(i+(seed%5)*3)%extra.length]);
+ return tail.map(x=>x.p);
+}
+let walkRefreshNonce=0;
+function scheduleFootRefresh(route){
+ const key=walkKey(route);if(walkRefreshKey===key)return;walkRefreshKey=key;
+ clearTimeout(walkRefreshTimer);const epoch=++walkRefreshNonce;
+ walkRefreshTimer=setTimeout(async()=>{
+  const points=route.map(poiPoint);
+  let detail;
+  try{detail=await footRoute(points)}
+  catch(e){detail=approxRoute(points,e.message)}
+  if(epoch!==walkRefreshNonce||walkKey(routePubs())!==key)return;
+  walkDetails={...detail,key,fromHere:false};$('routeDistance').textContent=walkSummary(walkDetails);
+  renderRoute();drawCrawlPreviewSoon();drawPins();
+ },650);
 }
 async function generateRoute(near=false){
  const button=near?$('generateNear'):$('generate');
  try{
   if(currentLive())throw Error('Finish or archive your active Live Crawl before generating another route.');
   button.disabled=true;show('locationHelp',false);
-  $('generatorStatus').textContent='Locating pub pins and finding a sensible route…';
+  $('generatorStatus').textContent='Finding a sensible walking order for nearby pubs…';
   const startMode=near?'here':$('crawlStartMode').value;
   let startPoint=null,selectedStart=null,selectedFinish=null;
   if(startMode==='here'){
-   try{startPoint=await getLocation()}catch(e){show('locationHelp',true);$('locationHelpText').textContent='Location access was denied or unavailable. In Safari, open the page menu → Website Settings → Location → Ask or Allow. Or plan from an Aberdeen area instead.';$('generatorStatus').textContent='Location unavailable. Your existing route is unchanged.';return}
-   if(haversine(startPoint,[57.149,-2.108])>30){show('locationHelp',true);$('locationHelpText').textContent='Your phone is currently too far from Aberdeen for a nearby pub crawl. Choose an Aberdeen area or a starting pub instead.';$('generatorStatus').textContent='You are outside Aberdeen — choose an area instead.';return}
+   try{startPoint=await getLocation()}catch(e){show('locationHelp',true);$('locationHelpText').textContent='Location access was denied or unavailable. In Safari, open Website Settings → Location → Ask or Allow, or plan from an area.';$('generatorStatus').textContent='Location unavailable. Existing route unchanged.';return}
+   if(haversine(startPoint,[57.149,-2.108])>30){show('locationHelp',true);$('locationHelpText').textContent='Your phone is too far from Aberdeen to start a nearby crawl. Choose a starting pub or area instead.';$('generatorStatus').textContent='You are outside Aberdeen — choose an area.';return}
   }
-  await ensureCoordinates();refreshPubStartOptions();
   const area=$('crawlArea').value,n=Math.min(15,Math.max(1,Math.round(num($('crawlCount').value,5))));
-  const maxMiles=num($('crawlMaxWalk').value),selection=$('crawlSelection').value,routeStyle=$('crawlStyle').value;
-  if(startMode==='pub'){selectedStart=getPub($('crawlStartPub').value);if(!selectedStart||!eligible(selectedStart)||!coords[selectedStart.postcode])throw Error('The starting pub has no usable mapped postcode. Select another pub.');startPoint=coords[selectedStart.postcode]}
-  if($('crawlFinishMode').value==='pub'){selectedFinish=getPub($('crawlFinishPub').value);if(!selectedFinish||!eligible(selectedFinish)||!coords[selectedFinish.postcode])throw Error('The finishing pub has no usable mapped postcode. Choose another.');}
-  if(selectedStart&&selectedFinish&&selectedStart.id===selectedFinish.id&&n>1)throw Error('Choose a different finishing pub from the starting pub.');
-  if(selectedStart&&selectedFinish&&selectedStart.id!==selectedFinish.id&&n===1)throw Error('Choose 2 or more stops when starting and finishing at different pubs.');
-  const all=allPubs().filter(p=>eligible(p)&&coords[p.postcode]);
+  const maxMiles=num($('crawlMaxWalk').value),maxMetres=maxMiles*1609.344;
+  const selection=$('crawlSelection').value,routeStyle=$('crawlStyle').value;
+  if(startMode==='pub'){
+   selectedStart=getPub($('crawlStartPub').value);
+   if(!selectedStart||!eligible(selectedStart)||!poiPoint(selectedStart))throw Error('Starting pub has no useable venue map point. Choose another pub.');
+   startPoint=poiPoint(selectedStart);
+  }
+  if($('crawlFinishMode').value==='pub'){
+   selectedFinish=getPub($('crawlFinishPub').value);
+   if(!selectedFinish||!eligible(selectedFinish)||!poiPoint(selectedFinish))throw Error('Finishing pub needs a venue map point. Choose another pub.');
+  }
+  if(selectedStart&&selectedFinish&&selectedStart.id===selectedFinish.id&&n!==1)throw Error('Choose a different finishing pub, or select one pub.');
+  if(selectedStart&&selectedFinish&&selectedStart.id!==selectedFinish.id&&n===1)throw Error('Select at least two pubs for different start/finish venues.');
+  const all=allPubs().filter(p=>eligible(p)&&poiPoint(p));
   let candidates=all.filter(p=>(selection==='all'||!done(p.id))&&(!area||p.area===area));
-  const anchor=startPoint||routeAnchor(area,candidates.length?candidates:all,null);
-  if(!startPoint&&area&&candidates.length===0)throw Error('No pub coordinates are available for that area. Choose somewhere else.');
-  if(!candidates.length&&!selectedStart&&!selectedFinish)throw Error('No eligible mapped pubs were found. Check your filters.');
+  if(!candidates.length&&!selectedStart&&!selectedFinish)throw Error('No eligible, mapped pubs match these filters.');
   const reserved=new Set([selectedStart?.id,selectedFinish?.id].filter(Boolean));
   candidates=candidates.filter(p=>!reserved.has(p.id));
-  const stops=selectedStart?[selectedStart]:[],finishDistinct=selectedFinish&&!stops.some(p=>p.id===selectedFinish.id);
-  let toPick=n-stops.length-(finishDistinct?1:0),from=startPoint||anchor,kmSpent=0;
-  const finishPoint=finishDistinct?coords[selectedFinish.postcode]:null;
-  if(toPick<0)throw Error('Choose more pubs, or reduce the number of fixed stops.');
-  const maxKm=maxMiles?maxMiles*1.609344/1.4:0;
-  for(let i=0;i<toPick;i++){
-   const next=chooseNext(candidates,from,kmSpent,maxMiles,finishPoint,routeStyle,i);
-   if(!next)break;
-   kmSpent+=next.hop;stops.push(next.p);from=next.xy;candidates.splice(next.i,1);
+  let anchor=startPoint||routeAnchor(area,candidates.length?candidates:all,null);
+  if(!startPoint&&selectedFinish&&candidates.length){const p=poiPoint(selectedFinish);anchor=[(anchor[0]+p[0])/2,(anchor[1]+p[1])/2]}
+  const shortlist=shortlistByDistance(candidates,anchor,n,routeSeed);
+  const nodes=[{id:'__origin',xy:anchor,p:null},
+   ...(selectedStart?[{id:String(selectedStart.id),xy:poiPoint(selectedStart),p:selectedStart}]:[]),
+   ...shortlist.map(p=>({id:String(p.id),xy:poiPoint(p),p})),
+   ...(selectedFinish&&selectedFinish.id!==selectedStart?.id?[{id:String(selectedFinish.id),xy:poiPoint(selectedFinish),p:selectedFinish}]:[])];
+  // For fixed-start routes, the first origin node is a duplicate coordinate (free
+  // zero-length approach). For 'area' mode, it is only a search anchor and never
+  // appears in the displayed walking route or the mileage.
+  let m,usingApprox=false,approxReason='';
+  try{m=await footMatrix(nodes.map(x=>x.xy))}
+  catch(e){usingApprox=true;approxReason=e.message;m=approxMatrix(nodes.map(x=>x.xy))}
+  const startIndex=selectedStart?nodes.findIndex(x=>x.id===String(selectedStart.id)):null;
+  const finishIndex=selectedFinish?nodes.findIndex(x=>x.id===String(selectedFinish.id)):null;
+  const fromHere=startMode==='here';
+  const pool=nodes.map((x,i)=>i).filter(i=>i>0&&i!==startIndex&&i!==finishIndex);
+  let best=[],bestDist=Infinity;
+  for(let variant=0;variant<6;variant++){
+   const chosen=chooseNetworkStops(pool,m,{count:n,maxMetres,startPubIndex:startIndex,finishPubIndex:finishIndex,
+      fromHere,routeStyle,seed:routeSeed+variant});
+   const d=networkCost(chosen,m,null,null,fromHere);
+   if(chosen.length>best.length||(chosen.length===best.length&&((routeStyle==='explore'&&variant===(routeSeed%6))||d<bestDist))){best=chosen;bestDist=d}
   }
-  if(finishDistinct){const finishHop=haversine(from,finishPoint);if(maxKm&&kmSpent+finishHop>maxKm+.001)throw Error('Your chosen finish is too far away for the walking limit. Raise the limit or change the finish.');stops.push(selectedFinish)}
-  if(!stops.length)throw Error('No pubs fit this walking limit. Try a wider distance or another area.');
-  const points=[startPoint||anchor,...stops.map(p=>coords[p.postcode])],approx=roughWalkingMiles(points);
-  if(maxMiles&&approx>maxMiles+.15)throw Error('The suggested route is too long. Increase your walking limit.');
-  const ids=stops.map(p=>p.id);
-  await updateDoc(settingsRef(),{crawl:ids});lastPlannedAnchor=startPoint||anchor;
-  $('generatorStatus').textContent=`✓ Suggested ${stops.length} pub${stops.length===1?'':'s'} · about ${approx.toFixed(1)} miles estimated on foot${stops.length<n?' · fewer stops fit your limit than requested':''}. This is a postcode-based estimate, not a verified route. Open Google Maps before walking.`;
-  toast('Fresh pub crawl generated ✓');
- }catch(e){$('generatorStatus').textContent='Could not generate a route: '+e.message;toast(e.message,true)}
+  if(!best.length)throw Error('No walkable pub route fits this limit. Try fewer stops or a longer walk.');
+  const stops=best.map(i=>nodes[i].p).filter(Boolean),ids=stops.map(p=>p.id);
+  if(stops.length<1)throw Error('No mapped pubs found for this route.');
+  const points=[...(fromHere?[anchor]:[]),...stops.map(poiPoint)];
+  $('generatorStatus').textContent=usingApprox?'Preparing your approximate route…':'Checking the pedestrian walking path…';
+  let detail;
+  if(usingApprox){detail=approxRoute(points,approxReason)}
+  else{try{detail=await footRoute(points)}catch(e){detail=approxRoute(points,e.message)}}
+  const key=walkKey(stops);
+  if(maxMetres&&detail.metres>maxMetres+(detail.estimate?180:10))
+    throw Error(`This route looks about ${(detail.metres/1609.344).toFixed(2)} miles, above your ${maxMiles}-mile preference. Select fewer pubs or increase the limit.`);
+  // Never replace a saved Firebase route if the provider returns an error or the
+  // full route exceeds the requested limit. IDs and check-ins remain unchanged.
+  walkDetails={...detail,key,fromHere};walkRefreshKey=key;clearTimeout(walkRefreshTimer);++walkRefreshNonce;
+  lastPlannedAnchor=fromHere?anchor:null;
+  if(!await saveSettings({crawl:ids}))throw Error('Could not save the planned route to your shared challenge.');
+  $('generatorStatus').textContent=`✓ ${stops.length} pubs · ${detail.estimate?'roughly':'mapped'} ${(detail.metres/1609.344).toFixed(2)} miles · approximately ${Math.round(detail.seconds/60)} min walking${stops.length<n?' · fewer stops fit than requested':''}. ${detail.estimate?'Approximate backup, not street-level directions. ':''}Google Maps walking is available for each section.`;
+  drawCrawlPreviewSoon();toast(detail.estimate?'Rough crawl ready ✓ Google Maps has walking directions.':'Walking crawl ready ✓ Check the map.');
+ }catch(e){$('generatorStatus').textContent='Could not generate a walking-verified crawl: '+e.message+' Your saved route was not replaced.';toast(e.message,true)}
  finally{$('generate').disabled=false;$('generateNear').disabled=false}
 }
 $('generate').onclick=()=>generateRoute(false);
@@ -816,37 +1084,50 @@ function drawCrawlPreview(){
  if(!miniMap){miniMap=L.map('crawlPreviewMap',{scrollWheelZoom:false,zoomControl:true}).setView([57.148,-2.108],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(miniMap)}
  setTimeout(()=>miniMap?.invalidateSize(),80);
  for(const m of miniMarkers)miniMap.removeLayer(m);miniMarkers=[];if(miniLine){miniMap.removeLayer(miniLine);miniLine=null}
- const line=planned.map(p=>coords[p.postcode]).filter(Boolean);if(!line.length)return;
+ const line=planned.map(mapPoint).filter(Boolean);if(!line.length)return;
  const live=currentLive();for(let i=0;i<planned.length;i++){
-  const p=planned[i],xy=coords[p.postcode];if(!xy)continue;const st=live?.route?.[live.currentIndex]===p.id?'current':done(p.id)?'done':'';
+  const p=planned[i],xy=mapPoint(p);if(!xy)continue;const st=live?.route?.[live.currentIndex]===p.id?'current':done(p.id)?'done':'';
   const icon=L.divIcon({className:'',html:`<span class="crawl-marker ${st}">${i+1}</span>`,iconSize:[30,30],iconAnchor:[15,15]});miniMarkers.push(L.marker(xy,{icon,title:p.name}).addTo(miniMap).bindPopup(`<strong>${escapeHTML(p.name)}</strong><br>${escapeHTML(p.area)}`));
  }
- if(line.length>1)miniLine=L.polyline(line,{color:'#eab15e',weight:4,opacity:.85,dashArray:'7 8'}).addTo(miniMap);
- if(line.length===1)miniMap.setView(line[0],14);else miniMap.fitBounds(line,{padding:[29,29],maxZoom:15});
+ if(walkDetails?.key===walkKey(planned)){
+  if(walkDetails.line.length>1){
+   miniLine=L.polyline(walkDetails.line,{color:'#eab15e',weight:5,opacity:.91}).addTo(miniMap);
+  }else if(walkDetails.estimate&&line.length>1){
+   miniLine=L.polyline(line,{color:'#9aaab6',weight:3,opacity:.9,dashArray:'6,8'}).addTo(miniMap);
+  }
+ }
+ if(line.length===1)miniMap.setView(line[0],14);
+ else miniMap.fitBounds(miniLine?miniLine.getBounds():L.latLngBounds(line),{padding:[29,29],maxZoom:15});
 }
 let archiveMode='plan';
-function openArchive(live=false){const route=live?(currentLive()?.route||[]):(settings.crawl||[]);if(!route.length)return toast('Select a route first.',true);
+function openArchive(live=false){const route=live?(currentLive()?.route||[]):activeRouteIds();if(!route.length)return toast('Select a route first.',true);
  archiveMode=live?'live':'plan';$('crawlTitle').value=`${live?'Live crawl':'Pub crawl'} · ${formatDate(safeDate())}`;$('crawlMemo').value='';
- const count=route.filter(id=>done(id)).length;$('finishNote').textContent=`${route.length} stops · ${count} pubs confirmed visited together. Saving this will ${live?'end live mode and ':''}add the night to your shared history. Unvisited stops are never automatically completed.`;
+ const count=route.filter(id=>done(id)).length;$('finishNote').textContent=`${route.length} stops · ${count} pubs confirmed visited together. ${isLocalDemo()?'This will save a temporary local archive only.':`Saving will ${live?'end live mode and ':''}add the night to your shared history.`} Unvisited stops are never automatically completed.`;
  $('finishDialog').showModal();}
 $('finishCrawl').onclick=()=>openArchive(false);$('cancelFinish').onclick=()=>$('finishDialog').close();
 $('saveCrawlHistory').onclick=async()=>{
- const live=currentLive(),route=(archiveMode==='live'&&live)?live.route:(settings.crawl||[]),pubs=route.map(getPub).filter(Boolean),title=$('crawlTitle').value.trim();
+ const live=currentLive(),route=(archiveMode==='live'&&live)?live.route:activeRouteIds(),pubs=route.map(getPub).filter(Boolean),title=$('crawlTitle').value.trim();
  if(!pubs.length||!title)return toast('Select some pubs and give this crawl a name.',true);
  const id='crawl-'+id32(),rec={title:title.slice(0,80),date:safeDate(),stops:pubs.map(p=>p.id),completed:pubs.filter(p=>done(p.id)).map(p=>p.id),memo:$('crawlMemo').value.trim().slice(0,300),created:new Date().toISOString(),startedAt:archiveMode==='live'?live?.startedAt||'':'',live:archiveMode==='live'};
  try{$('saveCrawlHistory').disabled=true;
-  await updateDoc(settingsRef(),new FieldPath('excluded','_history',id),rec);
-  if(archiveMode==='live')await updateDoc(settingsRef(),new FieldPath('excluded','_live'),{});
-  await saveSettings({crawl:[]});$('finishDialog').close();toast('Night saved to your shared history ✓');showMore('history');
+  if(isLocalDemo()){
+   settings.excluded={...settings.excluded,_history:{...(settings.excluded?._history||{}),[id]:rec}};
+   if(archiveMode==='live')qaLive=null;
+   await saveSettings({crawl:[]});$('finishDialog').close();toast('Demo night archived locally ✓ Nothing uploaded.');showMore('history');
+  }else{
+   await updateDoc(settingsRef(),new FieldPath('excluded','_history',id),rec);
+   if(archiveMode==='live')await updateDoc(settingsRef(),new FieldPath('excluded','_live'),{});
+   await saveSettings({crawl:[]});$('finishDialog').close();toast('Night saved to your shared history ✓');showMore('history');
+  }
  }catch(e){toast('Failed to save crawl history: '+e.message,true)}finally{$('saveCrawlHistory').disabled=false}
 };
-$('historyList').onclick=e=>{const restore=e.target.closest('[data-restore]'),details=e.target.closest('[data-historydetails]');if(restore){const rec=historyEntries().find(x=>x.id===restore.dataset.restore);if(rec&&confirm('Restore this route? Your current shared crawl route will be replaced.')){saveSettings({crawl:rec.stops});showTab('crawl')}}if(details){const rec=historyEntries().find(x=>x.id===details.dataset.historydetails);if(rec){const names=rec.stops.map(id=>getPub(id)?.name||'Unknown pub');alert(`${rec.title}\n${formatDate(rec.date)}\n\n${names.map((x,i)=>`${i+1}. ${x}`).join('\n')}${rec.memo?'\n\n'+rec.memo:''}`)}}};
+$('historyList').onclick=e=>{const restore=e.target.closest('[data-restore]'),details=e.target.closest('[data-historydetails]');if(restore){const rec=historyEntries().find(x=>x.id===restore.dataset.restore);if(rec){if(currentLive())return toast('Archive or finish your current Live Crawl before restoring another route.',true);if(confirm(isLocalDemo()?'Restore this local demo route?':'Restore this route? Your current shared crawl route will be replaced.')){saveSettings({crawl:rec.stops});showTab('crawl')}}}if(details){const rec=historyEntries().find(x=>x.id===details.dataset.historydetails);if(rec){const names=rec.stops.map(id=>getPub(id)?.name||'Unknown pub');alert(`${rec.title}\n${formatDate(rec.date)}\n\n${names.map((x,i)=>`${i+1}. ${x}`).join('\n')}${rec.memo?'\n\n'+rec.memo:''}`)}}};
 
 // Persistent adventure features use the existing rules-compatible settings.excluded map.
 // These do not change the visit document fields or require a paid Firebase service.
 let passportExpanded=false,passportLimit=24,timelineExpanded=false,battlePair=[],duelIndex=0,battleAll=false;
-function currentLive(){const v=settings.excluded?._live;return v&&Array.isArray(v.route)&&v.route.length?v:null}
-async function saveLive(value){await updateDoc(settingsRef(),new FieldPath('excluded','_live'),value)}
+function currentLive(){const v=isLocalDemo()?qaLive:settings.excluded?._live;return v&&Array.isArray(v.route)&&v.route.length?v:null}
+async function saveLive(value){if(isLocalDemo()){qaLive=value;render();return}await updateDoc(settingsRef(),new FieldPath('excluded','_live'),value)}
 function renderAdventure(){refreshPubStartOptions();renderCompanion();renderPassport();renderBattles();renderTimeline();renderLiveMode()}
 function renderCompanion(){const s=completeStats(),areas=areaStats().filter(a=>a.n<a.total);let part=areas.filter(a=>a.n>0).sort((a,b)=>a.total-a.n-(b.total-b.n))[0];
  if(!part)part=areas.find(a=>a.area==='City centre')||areas.sort((a,b)=>b.total-a.total)[0];
@@ -920,9 +1201,9 @@ $('timelineToggle').onclick=()=>{timelineExpanded=!timelineExpanded;renderTimeli
 $('trophyGrid').setAttribute('aria-live','polite');
 document.querySelectorAll('[data-awardfilter]').forEach(b=>b.addEventListener('click',()=>{awardFilter=b.dataset.awardfilter;document.querySelectorAll('[data-awardfilter]').forEach(x=>x.classList.toggle('active',x===b));renderBadges()}));
 function renderLiveMode(){const live=currentLive(),route=routePubs();show('liveControls',!!live);$('startLiveCrawl').disabled=route.length===0||!!live;
- if(!live){$('liveBadge').textContent='Ready when you are';$('liveCrawlBody').innerHTML=`<p class="sub">Your shared route can become a live stop-by-stop guide. Check in at each pub as you go, then archive the night.</p><p class="hint">${route.length?`${route.length} pubs in your planned route · press Start live crawl below.`:'Generate a crawl first. No pubs are ever marked visited automatically.'}</p>`;return}
+ if(!live){$('liveBadge').textContent='Ready when you are';$('liveCrawlBody').innerHTML=`<p class="sub">Follow your pub crawl stop by stop. With your shared account, both phones show the same progress; the guest demo stays on this device only.</p><p class="hint">${route.length?`${route.length} pubs in your planned route · press Start live crawl below.`:'Generate a crawl first. No pubs are ever marked visited automatically. In guest mode, this is a local demo only.'}</p>`;return}
  const routeIds=live.route,idx=Math.max(0,Math.min(routeIds.length-1,Number(live.currentIndex)||0)),id=routeIds[idx],p=getPub(id),completed=routeIds.filter(id=>done(id)).length;
- $('liveBadge').textContent=live.paused?'⏸ Paused':'● Live · both phones';
+ $('liveBadge').textContent=live.paused?'⏸ Paused':isLocalDemo()?'● Live · local demo':'● Live · both phones';
  $('liveCrawlBody').innerHTML=`<div class="live-mini">STOP ${idx+1} OF ${routeIds.length} · ${completed} CONFIRMED VISITED</div><div class="live-stop-name">${escapeHTML(p?.name||'Unknown pub')}</div><p class="live-mini">${escapeHTML(p?.area||'Aberdeen')} · ${live.paused?'Crawl paused — resume to continue.':done(id)?'✓ Already ticked off together.':'Ready to check in together?'}</p><div class="live-meter"><span style="width:${100*completed/routeIds.length}%"></span></div><p class="hint">Moving between stops never ticks them off. Only a saved visit counts towards progress.</p>`;
  $('liveBack').disabled=idx===0||!!live.paused;$('liveNext').disabled=idx>=routeIds.length-1||!!live.paused;
  $('liveCheck').disabled=!!live.paused||!p;$('liveCheck').textContent=done(id)?'★ Edit review':'✓ Check in here';
@@ -930,7 +1211,7 @@ function renderLiveMode(){const live=currentLive(),route=routePubs();show('liveC
 }
 $('startLiveCrawl').onclick=async()=>{if(currentLive())return toast('A live crawl is already active.',true);const route=routePubs();if(!route.length)return toast('Generate a crawl first.',true);
  const value={id:'live-'+id32(),route:route.map(p=>p.id),startedAt:new Date().toISOString(),date:safeDate(),currentIndex:0,paused:false};
- try{await saveLive(value);toast('Live Crawl is on! Both phones now share the same stops.');renderLiveMode()}catch(e){toast('Could not start live crawl: '+e.message,true)}
+ try{await saveLive(value);toast(isLocalDemo()?'Local Live Crawl Demo started ✓ No shared data changed.':'Live Crawl is on! Both phones now share the same stops.');renderLiveMode()}catch(e){toast('Could not start live crawl: '+e.message,true)}
 };
 async function liveMove(delta){const live=currentLive();if(!live||live.paused)return;const idx=Math.max(0,Math.min(live.route.length-1,(Number(live.currentIndex)||0)+delta));if(idx===live.currentIndex)return;try{await saveLive({...live,currentIndex:idx})}catch(e){toast('Could not change live stop: '+e.message,true)}}
 $('liveBack').onclick=()=>liveMove(-1);$('liveNext').onclick=()=>liveMove(1);
