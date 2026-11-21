@@ -204,6 +204,46 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
 #crawlMapRouteStatus{font-size:11px;white-space:normal;text-align:right;max-width:56%;line-height:1.3}
 .crawl-marker{position:relative;z-index:2}
 .crawl-route-warning{background:#fff5dd;border:1px solid #ead3a0;color:#654b20;border-radius:12px;padding:9px 11px;font-size:12px;line-height:1.45;margin-top:9px}
+
+/* PUB CRAWLER · v4.2.2: dedicated immersive live experience and safe destructive actions */
+.live-resume-banner{border:1px solid #dfae54;border-radius:18px;background:linear-gradient(120deg,#123e4c,#364723);padding:16px;display:flex;gap:12px;align-items:center;justify-content:space-between;margin:0 0 15px;box-shadow:0 7px 24px #071d2877}
+.live-resume-banner strong{display:block;color:#ffe3a5;font-size:15px}.live-resume-banner small{display:block;color:#cde1db;font-size:12px;margin-top:3px}.live-resume-banner button{flex-shrink:0}
+.live-experience{margin-top:-10px;animation:fade .22s ease-out;isolation:isolate}
+.in-live-screen .top.masthead{display:none}.in-live-screen .wrap{padding-top:0}.in-live-screen .nav button[data-tab="crawl"]{background:#2f583d;color:#ffd787}
+.live-topbar{background:linear-gradient(140deg,#062835,#105359);border:1px solid #2b777a;border-radius:0 0 23px 23px;padding:19px 16px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 -17px 15px;box-shadow:0 10px 27px #000a1588}
+.live-brand{display:flex;align-items:center;gap:13px}.live-light{width:13px;height:13px;background:#ff6c5e;border-radius:50%;box-shadow:0 0 0 6px #f4603c26,0 0 18px #ed765c;flex-shrink:0;animation:liveGlow 2s infinite}
+@keyframes liveGlow{50%{box-shadow:0 0 0 9px #f4603c0a,0 0 20px #ed765c}}
+.live-brand .eyebrow{color:#fed089;font-size:10px}.live-brand h1{margin:0;color:#fff;letter-spacing:.10em;font-size:clamp(22px,6vw,31px);line-height:1.15}
+.live-topbar .btn{white-space:nowrap}
+.live-stage{border:1px solid #bd9855;border-radius:22px;padding:20px 18px 18px;background:radial-gradient(circle at 87% 0,rgba(251,191,99,.12),transparent 43%),linear-gradient(152deg,#124b50,#0b3845 70%,#082a39);box-shadow:0 12px 30px #000e1b75;margin-bottom:16px}
+.live-onair{font-size:11px;font-weight:900;letter-spacing:.13em;background:#9a353a;color:#fff;border:1px solid #e27b76;border-radius:99px;padding:6px 11px}.live-onair.paused{background:#625132;border-color:#9e875d}
+.live-date{font-size:11px;color:#b6d8d9}.live-step-overline{display:flex;justify-content:space-between;gap:8px;color:#f4c985;font-size:12px;font-weight:800;letter-spacing:.055em;margin-top:25px}
+.live-stop-name{font-size:clamp(28px,8vw,42px);line-height:1.06;letter-spacing:-.045em;color:#fff;margin:11px 0 12px;overflow-wrap:anywhere}
+.live-stage-area{font-size:13px;color:#c7e3e0;margin:0 0 15px}.live-walk-next{font-size:12px;color:#f3d79b;margin:10px 0}
+.live-meter{height:12px;background:#082835;border:1px solid #34636d;overflow:hidden;border-radius:100px;margin:14px 0 7px}.live-meter>span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,#35b899,#f5c268);transition:width .3s}
+.live-progress-note{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#aecbd1;margin:6px 0 16px}
+.live-quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.live-quick-actions .btn{min-height:50px;padding:10px 9px;font-weight:800}
+.live-action-check,.live-action-directions{grid-column:span 1}.live-next-preview{background:#0d3642;border:1px solid #3d6874;border-radius:14px;margin-top:14px;padding:13px 14px;color:#c8e0e2;font-size:12px}
+.live-next-preview strong{font-size:13px;color:#ffd991}
+.live-map-panel,.live-itinerary-panel,.live-settings-panel{background:linear-gradient(145deg,#0b3645,#072e40);border:1px solid #2d5968;border-radius:19px;padding:16px;margin-bottom:16px}
+.live-map-panel #liveMapDock .route-preview{margin:12px 0 0}.live-map-panel #liveMapDock .crawl-preview-map{height:clamp(300px,45vh,470px)}
+.live-map-panel #liveMapDock .route-preview .row{align-items:center}
+.live-experience .live-map-panel .hint{font-size:11px;margin:8px 0 0}
+.live-itinerary-panel .sub{margin-top:8px;margin-bottom:12px}
+.live-itinerary-row{width:100%;color:#dae9e8;background:#123e4b;border:1px solid #305f68;display:grid;grid-template-columns:37px minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;border-radius:13px;padding:12px;margin-bottom:8px;min-height:60px}
+.live-itinerary-row.current{background:linear-gradient(110deg,#5b512f,#274d49);border-color:#ceab5d;box-shadow:inset 0 0 0 1px #b5894966}
+.live-itinerary-row.done{border-color:#2a947e}.live-itinerary-row:disabled{cursor:default;opacity:.65}
+.live-itinerary-number{width:35px;height:35px;display:grid;place-items:center;border:1px solid #5c8290;border-radius:11px;font-size:13px;font-weight:850;color:#f4e3af}
+.live-itinerary-row.current .live-itinerary-number{background:#f0c36b;color:#163947;border-color:#e2af4b}
+.live-itinerary-row .stop-main{min-width:0}.live-itinerary-row .stop-main strong{font-size:13px;color:#f5fbf9;display:block;overflow-wrap:anywhere}.live-itinerary-row .stop-main small{display:block;color:#b3cbcf;font-size:11px;margin-top:4px}
+.live-itinerary-row .stop-status{font-size:10px;font-weight:900;color:#ffd18a;text-align:right}.live-itinerary-row.done .stop-status{color:#87e6b7}
+.live-management-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.live-management-actions .btn{min-height:48px}.live-management-actions #liveCancel{grid-column:1/-1;background:#432d38;border-color:#975969;color:#ffd7d9}
+.history-delete{border-color:#a6636b;color:#ffdad9;background:#462e3a}
+.destructive-dialog{max-width:min(430px,calc(100vw - 28px));border:1px solid #a7656a;border-radius:21px;background:#0a2d3b;color:#fff;padding:24px;box-shadow:0 30px 75px #000c1a99}
+.destructive-dialog::backdrop{background:rgba(0,8,16,.79)}.destructive-dialog .danger-icon{font-size:35px}.destructive-dialog h2{font-size:23px;color:#fff;margin:9px 0}.destructive-dialog .sub{color:#d5e5e8}.destructive-dialog .dialog-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.destructive-dialog .dialog-actions .btn{flex:1 1 135px}
+@media(max-width:430px){.live-resume-banner{flex-direction:column;align-items:stretch}.live-resume-banner .btn{width:100%}.live-topbar{margin-left:-14px;margin-right:-14px;padding:18px 13px}.live-stage{padding:16px 13px}.live-quick-actions .btn{font-size:12px}.live-itinerary-panel,.live-settings-panel,.live-map-panel{padding:13px}}
+@media(max-width:335px){.live-quick-actions{grid-template-columns:1fr}.live-quick-actions .btn{grid-column:1/-1}}
+
 </style></head><body><main class="wrap"><header class="top masthead">
   <svg class="skyline-art" aria-hidden="true" viewBox="0 0 960 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -228,7 +268,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   </div></div>
   <span id="cloud" class="cloud" role="status">Connecting…</span>
 </header>
-<section id="login" class="hidden"><div class="intro"><div class="logo">🍻</div><div class="eyebrow">THE ABERDEEN PUB CHALLENGE</div><h1>Two mates. Every pub.</h1><p>Your shared map, memories and milestones — all in one place.</p></div><div class="card auth-card"><h2 class="section-title">Welcome back</h2><div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password"></div><div class="two"><button class="btn primary" id="signIn">Sign in</button><button class="btn" id="signUp">Create account</button></div><p class="hint">This is a safe testing build. Guest mode lets you simulate Live Crawl and check-ins locally; nothing updates your shared Firebase challenge.</p><button class="btn amber wide" id="tryPreview" style="margin-top:14px">🧪 Try full crawl demo — no sign-in</button><p class="hint">Guest demo data exists only in this browser tab. No shared visits, routes or history are saved.</p></div></section>
+<section id="login" class="hidden"><div class="intro"><div class="logo">🍻</div><div class="eyebrow">THE ABERDEEN PUB CHALLENGE</div><h1>Two mates. Every pub.</h1><p>Your shared map, memories and milestones — all in one place.</p></div><div class="card auth-card"><h2 class="section-title">Welcome back</h2><div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password"></div><div class="two"><button class="btn primary" id="signIn">Sign in</button><button class="btn" id="signUp">Create account</button></div><p class="hint">Sign in to your shared challenge. You can also try the local demo without changing any shared data.</p><button class="btn amber wide" id="tryPreview" style="margin-top:14px">🧪 Try full crawl demo — no sign-in</button><p class="hint">Guest demo data exists only in this browser tab. No shared visits, routes or history are saved.</p></div></section>
 <section id="lobby" class="hidden"><div class="card auth-card"><h2 class="section-title">🤝 Your joint challenge</h2><p class="sub">Set it up once, then invite your pal using a private link.</p><button class="btn primary wide" id="create">Create our challenge</button><div class="field"><label for="join">Or join an existing challenge</label><input id="join" placeholder="Paste invitation link"></div><button class="btn soft wide" id="joinBtn">Join challenge</button></div></section>
 <section id="app" class="hidden">
 <section id="homeTab" class="tab">
@@ -266,9 +306,10 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
 </section>
 <section id="mapTab" class="tab hidden"><div class="screen-head"><h2>Discover Aberdeen</h2><p>Every pin is another pub to collect.</p></div><div class="card"><div class="row space" style="margin-bottom:11px"><strong style="font-size:13px">Show on map</strong><button class="btn sm soft" id="locate">⌾ Near me</button></div><div class="filters" id="mapFilters"><button class="chip active" data-mapfilter="all">All pubs</button><button class="chip" data-mapfilter="todo">Unvisited</button><button class="chip" data-mapfilter="done">Completed</button><button class="chip" data-mapfilter="planned">On my crawl</button></div><div id="map" class="map" role="region" aria-label="Aberdeen pub map"></div><div class="legend"><span><i class="dot green"></i>Completed</span><span><i class="dot red"></i>Unvisited</span><span><i class="dot gold"></i>On crawl</span></div><p id="mapStatus" class="map-status">Pins are placed at postcode centres (approximate). Check each venue's actual location before travelling.</p><div id="nearestList" class="hidden"></div><div id="mapLocationHelp" class="location-help hidden" role="status">Location access was blocked. In Safari open the page menu → Website Settings → Location → Ask or Allow. Or browse the map and search the pub list without location.</div></div></section>
 <section id="pubsTab" class="tab hidden"><div class="screen-head"><h2>The pub collection</h2><p>148 provisional public pub/bar candidates; private and restricted venues are excluded. Vovem is restaurant-only, but 21 Crimes is included.</p></div><div class="card"><div class="field" style="margin-top:0"><label for="search">Search all pubs</label><input type="search" id="search" placeholder="Name, area, street or postcode"></div><div class="two"><div class="field"><label for="area">Area</label><select id="area"><option value="">All areas</option></select></div><div class="field"><label for="filter">Progress</label><select id="filter"><option value="all">All pubs</option><option value="todo">Unvisited</option><option value="done">Completed</option><option value="planned">On crawl</option></select></div></div><label class="row hidden" style="font-size:13px;gap:7px;margin:12px 0 0"><input type="checkbox" id="clubs"> Include private clubs (deferred)</label><p id="listStatus" class="status-line"></p></div><div class="pub-grid" id="pubList"></div><div class="center" style="margin:17px 0"><button id="morePubs" class="btn soft hidden">Show more pubs ↓</button></div><div class="card"><details><summary>＋ Add a missing pub</summary><p class="sub">New pubs added here appear for both of you.</p><div class="field"><label for="newName">Pub name</label><input id="newName" maxlength="100"></div><div class="two"><div class="field"><label for="newArea">Area</label><select id="newArea"></select></div><div class="field"><label for="newPost">Postcode (optional)</label><input id="newPost" maxlength="9"></div></div><div class="field"><label for="newStreet">Street/address (optional)</label><input id="newStreet" maxlength="130"></div><button class="btn primary" id="addPub">Add to our challenge</button></details></div></section>
-<section id="crawlTab" class="tab hidden"><div class="screen-head"><h2>Build your next adventure</h2><p>Plan a sensible walking route, then share Live Crawl Mode with your mate.</p></div>
+<section id="crawlTab" class="tab hidden"><div class="screen-head"><h2>🍻 Pub Crawler</h2><p>Pick a route, then jump into your live adventure.</p></div>
+<div id="activeLiveBanner" class="live-resume-banner hidden" role="status"><div><strong>🔴 Your crawl is live!</strong><small>Pick up exactly where you left off. Both phones stay in sync.</small></div><button id="resumeLiveCrawl" type="button" class="btn primary">▶ Open Live Crawl</button></div>
 <div class="card smart-generator">
-  <div class="row space" style="margin-bottom:4px"><h2 class="section-title">Smart Crawl Planner 2.4</h2><span class="pill planned">1–15 stops</span></div>
+  <div class="row space" style="margin-bottom:4px"><h2 class="section-title">Pub Crawler</h2><span class="pill planned">1–15 stops</span></div>
   <p class="sub">Choose your stops, starting point and walking limit. Plan, reorder and follow your crawl together. Mapped walking routes are used when available; otherwise distances are clearly marked approximate. Only a saved check-in counts as a visit.</p>
   <div class="two">
     <div class="field"><label for="crawlArea">Neighbourhood</label><select id="crawlArea"><option value="">Anywhere in central Aberdeen</option></select></div>
@@ -288,20 +329,31 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   <p id="generatorStatus" class="hint" role="status">Uses mapped walking paths where available. If the route service is busy, a clearly labelled rough estimate keeps the planner usable. Any approximate route can be checked in Google Maps.</p>
   <div id="locationHelp" class="location-help hidden" role="status"><p id="locationHelpText">Safari could not access your location. You can still build a route from any Aberdeen area.</p><button type="button" class="btn sm" id="useAreaFallback">Generate from selected area ↗</button></div>
 </div>
-<section id="liveCrawl" class="card live-mode" aria-label="Live pub crawl">
-  <div class="row space"><h2 class="section-title">🍻 Live Crawl Mode</h2><span id="liveBadge" class="pill">Ready to go</span></div>
-  <div id="liveCrawlBody"><p class="sub">Generate your route, then press Start Crawl for an easy stop-by-stop view on the night. Both phones stay in sync.</p></div>
-  <div id="liveControls" class="live-actions hidden">
-    <button type="button" id="liveBack" class="btn">← Previous</button>
-    <button type="button" id="liveCheck" class="btn primary">✓ Check in</button>
-    <button type="button" id="liveNext" class="btn">Next →</button>
-    <button type="button" id="liveDirections" class="btn soft">↗ Directions</button>
-    <button type="button" id="livePause" class="btn">Pause</button>
-    <button type="button" id="liveFinish" class="btn amber">Finish &amp; archive</button>
-  </div>
-</section>
 
-<div class="card"><div class="row space"><h2 class="section-title">Your planned pub crawl</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro" id="crawlMapRouteStatus">Checking walking paths…</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div><p id="crawlMapLocationWarning" class="hint hidden" role="status"></p><div class="row" style="margin-top:10px"><button type="button" class="btn soft sm" id="retryCrawlFootPath">↻ Retry street route</button><button type="button" class="btn soft sm" id="openCrawlMapDirections">↗ Walking directions</button></div></div><p class="hint">Routing data © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map problem ↗</a></p><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">Gold line = a real mapped pedestrian path. If no gold line is available, only numbered pub locations are shown: open Google Maps for street-by-street walking directions. Numbered stops follow the exact order above.</p></div></section>
+
+<div class="card"><div class="row space"><h2 class="section-title">Your planned pub crawl</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routeMapDock"><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro" id="crawlMapRouteStatus">Checking walking paths…</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div><p id="crawlMapLocationWarning" class="hint hidden" role="status"></p><div class="row" style="margin-top:10px"><button type="button" class="btn soft sm" id="retryCrawlFootPath">↻ Retry street route</button><button type="button" class="btn soft sm" id="openCrawlMapDirections">↗ Walking directions</button></div></div></div><p class="hint">Routing data © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map problem ↗</a></p><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">Gold line = a real mapped pedestrian path. If no gold line is available, only numbered pub locations are shown: open Google Maps for street-by-street walking directions. Numbered stops follow the exact order above.</p></div></section>
+
+<section id="liveTab" class="tab hidden live-experience" aria-label="Live Pub Crawler">
+  <div class="live-topbar"><div class="live-brand"><span class="live-light" aria-hidden="true"></span><div><div class="eyebrow">PUB CRAWLER</div><h1>LIVE CRAWL</h1></div></div><button id="liveToPlanner" type="button" class="btn sm soft">← Planner</button></div>
+  <section id="liveCrawl" class="live-stage" aria-label="Your active pub crawl">
+    <div class="row space live-stage-top"><span id="liveBadge" class="live-onair">● LIVE</span><span id="liveDate" class="live-date"></span></div>
+    <div id="liveCrawlBody" aria-live="polite"></div>
+    <div class="live-quick-actions" id="liveControls">
+      <button type="button" id="liveCheck" class="btn primary live-action-check">✓ Check in here</button>
+      <button type="button" id="liveDirections" class="btn soft live-action-directions">↗ Walk to next pub</button>
+      <button type="button" id="liveBack" class="btn">← Previous stop</button>
+      <button type="button" id="liveNext" class="btn">Next stop →</button>
+    </div>
+    <div id="liveNextPreview" class="live-next-preview"></div>
+  </section>
+  <section class="live-map-panel" aria-label="Your walking route">
+    <div class="row space"><div><div class="eyebrow">FOLLOW THE ROUTE</div><h2 class="section-title">Your crawl on the map</h2></div><button id="liveRefocus" class="btn sm soft" type="button">⌖ Fit route</button></div>
+    <div id="liveMapDock"></div>
+    <p class="hint">Gold line = mapped walking path. If unavailable, use Google Maps for turn-by-turn directions.</p>
+  </section>
+  <section class="live-itinerary-panel"><div class="row space"><h2 class="section-title">🗺️ Tonight's stops</h2><span id="liveItineraryCount" class="pill planned">0 stops</span></div><p class="sub">Tap a stop to jump to it. Nothing is checked in automatically.</p><div id="liveStopsList"></div></section>
+  <section class="live-settings-panel"><h2 class="section-title">Crawl controls</h2><p class="sub">Pause the night, save it to history, or discard this crawl. Your existing pub check-ins are always kept.</p><div class="live-management-actions"><button type="button" id="livePause" class="btn soft">⏸ Pause crawl</button><button type="button" id="liveFinish" class="btn amber">🏆 Finish &amp; archive</button><button type="button" id="liveCancel" class="btn red">🗑 Cancel crawl</button></div></section>
+</section>
 <section id="moreTab" class="tab hidden"><div class="screen-head"><h2>The collection</h2><p>Milestones, neighbourhoods, memories and your team.</p></div><div class="subtabs"><button class="active" data-moretab="stats">Statistics</button><button data-moretab="areas">Areas</button><button data-moretab="badges">Badges</button><button data-moretab="history">Crawl history</button><button data-moretab="team">Team</button></div>
 <div id="statsPane" class="more-pane"><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">VISITED</span><div class="stat-value" id="statsVisited">0</div></div><div class="stat-tile"><span class="eyebrow">THIS MONTH</span><div class="stat-value" id="statsMonth">0</div></div><div class="stat-tile"><span class="eyebrow">CRAWLS</span><div class="stat-value" id="statsCrawls">0</div></div></div><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">THIS YEAR</span><div class="stat-value" id="statsYear">0</div></div><div class="stat-tile"><span class="eyebrow">LONGEST CRAWL</span><div class="stat-value" id="statsLongest">0</div></div><div class="stat-tile"><span class="eyebrow">AREAS VISITED</span><div class="stat-value" id="statsAreaVisited">0</div></div></div><div class="card"><h2 class="section-title">Visits over time</h2><p class="sub">New pubs completed in the last six months.</p><div class="months" id="monthBars"></div></div><section class="card passport-card">
   <div class="row space"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">🛂 Your digital pub passport</h2></div><button id="passportToggle" class="btn sm amber">See all pubs ↗</button></div>
@@ -323,12 +375,19 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
  <button class="active" data-tab="home"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-7H9v7H3z"/></svg></span>Home</button>
  <button data-tab="map"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"/></svg></span>Map</button>
  <button data-tab="pubs"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4h10v13a5 5 0 0 1-10 0V4Zm10 2h2a3 3 0 0 1 0 6h-2M4 21h14M6 8h10"/></svg></span>Pubs</button>
- <button data-tab="crawl"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="17" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M7 17h4c3 0 2-7 5-10M7 17h5c3 0 3 2 4 2"/></svg></span>Crawl</button>
+ <button data-tab="crawl"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="17" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M7 17h4c3 0 2-7 5-10M7 17h5c3 0 3 2 4 2"/></svg></span><span id="crawlNavLabel">Crawl</span></button>
  <button data-tab="more"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>More</button>
 </div></nav></section>
-<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.2.1 · walking map fix · 148 public pub/bar candidates · Walking routes are estimates; verify venue opening times before heading out.</p></main>
+<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.2.2 · Pub Crawler upgrade · 148 public pub/bar candidates · Walking routes are estimates; verify venue opening times before heading out.</p></main>
 <dialog id="editDialog"><div class="row space"><h2 id="dialogTitle">Pub details</h2><span id="dialogState" class="pill todo">To visit</span></div><p id="dialogPlace" class="sub" style="margin:7px 0 12px"></p><div class="row" style="margin:11px 0"><label class="row" style="font-size:13px;font-weight:800"><input type="checkbox" id="visited"> Both visited together</label></div><div class="field"><label for="date">Visit date <span class="muted">· automatically set to today</span></label><input id="date" type="date"></div><div class="two"><div class="field"><label for="rating">Overall / 10</label><input id="rating" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 7.6"></div><div class="field"><label for="atmosphere">Atmosphere / 10</label><input id="atmosphere" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 8.5"></div></div><div class="field"><label for="review">Short review</label><textarea id="review" maxlength="800" placeholder="Best pint, vibe, service, anything worth remembering…"></textarea></div><div id="dialogNote" class="hint">Only tick a pub when you've both visited it.</div><div class="dialog-actions"><button id="saveVisit" class="btn primary">Save visit</button><button id="closeDialog" class="btn">Cancel</button></div><button id="goGoogle" class="btn soft wide" style="margin-top:9px">⌁ Find this pub in Google Maps ↗</button></dialog>
 <dialog id="finishDialog"><h2>Save this pub crawl</h2><p class="sub">We'll record the route, today's date and which stops you've already ticked off.</p><div class="field"><label for="crawlTitle">Name this night out</label><input id="crawlTitle" maxlength="80" placeholder="e.g. Belmont Street session"></div><div class="field"><label for="crawlMemo">A quick memory (optional)</label><textarea id="crawlMemo" maxlength="300" rows="2" placeholder="Best moment of the night…"></textarea></div><p id="finishNote" class="hint"></p><div class="dialog-actions"><button id="saveCrawlHistory" class="btn primary">Save to history</button><button id="cancelFinish" class="btn">Cancel</button></div></dialog>
+<dialog id="deleteDialog" class="destructive-dialog" aria-labelledby="deleteDialogTitle" aria-describedby="deleteDialogText">
+  <div class="danger-icon" aria-hidden="true">🗑️</div>
+  <h2 id="deleteDialogTitle">Delete this crawl?</h2>
+  <p id="deleteDialogText" class="sub">Are you sure? This action can't be undone.</p>
+  <div id="deleteDialogNote" class="hint">Saved pub visits will not be deleted.</div>
+  <div class="dialog-actions"><button type="button" id="confirmDelete" class="btn red">Yes, delete crawl</button><button type="button" id="keepCrawl" class="btn soft">Keep crawl</button></div>
+</dialog>
 <script type="module">
 const AREAS=`Aberdeen Beach|Altens|Bieldside|Bridge of Don|Bridge of Don / Links|Bucksburn|Castlegate|City centre|Cove Bay|Cults|Dyce|Ferryhill|Footdee|Garthdee|George Street|Hazlehead|Holburn|Kincorth|King Street / Pittodrie|Kingswells|Kittybrewster|Mannofield|Mastrick|Old Aberdeen|Peterculter|Pitfodels|Pittodrie|Quayside|Rosemount|Seaton|Summerhill|Torry|West End|Woodside`.split('|');
 const VENUES=`21 Crimes|AB10 1TN|7|0|1
@@ -590,7 +649,7 @@ VENUES.push(
 
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js';
 import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js';
-import {getFirestore,doc,collection,getDoc,setDoc,updateDoc,onSnapshot,serverTimestamp,arrayUnion,FieldPath} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
+import {getFirestore,doc,collection,getDoc,setDoc,updateDoc,onSnapshot,serverTimestamp,arrayUnion,FieldPath,deleteField} from 'https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js';
 const cfg={apiKey:'AIzaSyAcK-u6SXyUAvGwdrsxa5BAu1RpaKGlZ7Q',authDomain:'pub-tracker-ef1f9.firebaseapp.com',projectId:'pub-tracker-ef1f9',storageBucket:'pub-tracker-ef1f9.firebasestorage.app',messagingSenderId:'1077333857895',appId:'1:1077333857895:web:6696bc45e3212cf704e6c2'};
 const auth=getAuth(initializeApp(cfg));const db=getFirestore();
 // Production v4.2: existing Firebase project and unchanged visit document schema.
@@ -691,10 +750,26 @@ function renderBadges(){const data=badgesData(),earned=data.filter(b=>b.earned).
  const list=data.filter(b=>awardFilter==='all'||(awardFilter==='earned'&&b.earned)||(awardFilter==='locked'&&!b.earned));
  $('trophyGrid').innerHTML=list.length?list.map(b=>`<div class="trophy-card ${b.earned?'unlocked':'locked'}"><div class="trophy-medallion">${b.earned?b.ico:'🔒'}</div><h3>${escapeHTML(b.name)}</h3><p>${escapeHTML(b.desc)}</p><div class="mini-progress"><span style="width:${b.pct}%"></span></div><span class="badge-date">${b.earned?(b.date?'Unlocked '+formatDate(b.date):'✓ Unlocked'):`${Math.min(b.current,b.target)} / ${b.target}`}</span></div>`).join(''):'<p class="sub">Nothing in this category yet. Your next badge is waiting.</p>';
 }
-function renderHistory(){const rows=historyEntries();$('historyList').innerHTML=rows.length?rows.map(x=>`<div class="history"><div class="row space"><h3>${escapeHTML(x.title||'Pub crawl')}</h3><span class="pill done">${x.stops.length} stops</span></div><div class="sub" style="margin:5px 0">${formatDate(x.date)} · ${num(x.completed?.length)} pubs ticked off by the end</div>${x.memo?`<div class="hint">${escapeHTML(x.memo)}</div>`:''}<div class="row" style="margin-top:10px"><button class="btn sm soft" data-restore="${escapeHTML(x.id)}">Restore route ↗</button><button class="btn sm" data-historydetails="${escapeHTML(x.id)}">See stops</button></div></div>`).join(''):'<p class="sub">No crawl history yet. When a night out is finished, save your route from the Crawl tab.</p>'}
+function renderHistory(){const rows=historyEntries();$('historyList').innerHTML=rows.length?rows.map(x=>`<div class="history"><div class="row space"><h3>${escapeHTML(x.title||'Pub crawl')}</h3><span class="pill done">${x.stops.length} stops</span></div><div class="sub" style="margin:5px 0">${formatDate(x.date)} · ${num(x.completed?.length)} pubs ticked off by the end</div>${x.memo?`<div class="hint">${escapeHTML(x.memo)}</div>`:''}<div class="row" style="margin-top:10px"><button class="btn sm soft" data-restore="${escapeHTML(x.id)}">Restore route ↗</button><button class="btn sm" data-historydetails="${escapeHTML(x.id)}">See stops</button><button class="btn sm red history-delete" type="button" data-deletehistory="${escapeHTML(x.id)}">🗑 Delete</button></div></div>`).join(''):'<p class="sub">No crawl history yet. When a night out is finished, save your route from the Crawl tab.</p>'}
 function renderStats(){const today=new Date();let keys=[];for(let i=5;i>=0;i--){const d=new Date(today.getFullYear(),today.getMonth()-i,1);keys.push({key:[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0')].join('-'),label:d.toLocaleDateString('en-GB',{month:'short'})})}const counts=keys.map(({key})=>allPubs().filter(p=>eligible(p)&&done(p.id)&&String(visits[p.id]?.date||'').startsWith(key)).length),max=Math.max(1,...counts);$('monthBars').innerHTML=keys.map((x,i)=>`<div class="month"><b>${counts[i]}</b><i style="height:${Math.max(5,85*counts[i]/max)}px"></i><span>${x.label}</span></div>`).join('');
 const rated=allPubs().filter(p=>eligible(p)&&done(p.id)).map(p=>({p,score:parsedReview(visits[p.id]).overall})).filter(x=>x.score!==null).sort((a,b)=>b.score-a.score);$('topRated').innerHTML=rated.length?`<div class="row space"><div><strong>${escapeHTML(rated[0].p.name)}</strong><div class="detail">${escapeHTML(rated[0].p.area)}</div></div><span class="rating-chip">★ ${displayNumber(rated[0].score)}/10</span></div>`:'<p class="sub">Once you rate a completed pub, your favourite will appear here.</p>';const bottom=rated.at(-1);$('lowestRated').innerHTML=bottom?`<div class="row space"><div><strong>${escapeHTML(bottom.p.name)}</strong><div class="detail">${escapeHTML(bottom.p.area)}</div></div><span class="rating-chip">★ ${displayNumber(bottom.score)}/10</span></div>`:'<p class="sub">Once you rate a pub, its score will appear here.</p>'}
-function showTab(tab){activeTab=tab;for(const t of ['home','map','pubs','crawl','more'])show(t+'Tab',t===tab);document.querySelectorAll('[data-tab]').forEach(x=>{const active=x.dataset.tab===tab;x.classList.toggle('active',active);if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});if(tab==='map'){startMap();setTimeout(()=>map?.invalidateSize(),100)}if(tab==='crawl'){ensureCoordinates();setTimeout(drawCrawlPreviewSoon,120)}window.scrollTo({top:0,behavior:'instant'})}
+function showTab(tab,forcePlanner=false){
+ if(tab==='crawl'&&currentLive()&&!forcePlanner)tab='live';
+ if(tab==='live'&&!currentLive())tab='crawl';
+ activeTab=tab;
+ for(const t of ['home','map','pubs','crawl','live','more'])show(t+'Tab',t===tab);
+ const navTab=tab==='live'?'crawl':tab;
+ document.body.classList.toggle('in-live-screen',tab==='live');
+ $('crawlNavLabel').textContent=currentLive()?'Live':'Crawl';
+ document.querySelectorAll('[data-tab]').forEach(x=>{const active=x.dataset.tab===navTab;x.classList.toggle('active',active);if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
+ // One Leaflet map, physically docked in the selected view. Its markers, footpath
+ // geometry and source-of-truth stop order are identical in planner and live mode.
+ const dock=$(tab==='live'?'liveMapDock':'routeMapDock');
+ if(dock&&$('routePreviewWrap').parentElement!==dock)dock.appendChild($('routePreviewWrap'));
+ if(tab==='map'){startMap();setTimeout(()=>map?.invalidateSize(),100)}
+ if(tab==='crawl'||tab==='live'){ensureCoordinates();setTimeout(drawCrawlPreviewSoon,120);setTimeout(()=>miniMap?.invalidateSize(),220)}
+ window.scrollTo({top:0,behavior:'instant'});
+}
 function showMore(tab){activeMore=tab;showTab('more');document.querySelectorAll('[data-moretab]').forEach(x=>x.classList.toggle('active',x.dataset.moretab===tab));for(const t of ['stats','areas','badges','history','team'])show(t+'Pane',t===tab)}
 function statusSync(){const ready=syncReady.size;const error=syncErrors.size;if(error)$('syncStatus').textContent='⚠️ Some data is not syncing. Check connection.';else $('syncStatus').textContent=ready>=3?'✓ Connected to Firestore · both phones sync in real time':`Synchronising ${ready}/3 collections…`;if(error){$('cloud').textContent='⚠ Sync issue';$('cloud').style.color='#a24136'}else if(ready>=3){$('cloud').textContent='● Live';$('cloud').style.color='var(--teal-deep)'}else $('cloud').textContent='Syncing…'}
 function connected(){show('login',false);show('lobby',false);show('app',true);$('invite').value=invite();$('team').textContent=`👥 ${members}/2 joined · one shared tally`;render();showTab('home');toast('Challenge loaded ✓');}
@@ -826,7 +901,7 @@ $('routeList').addEventListener('click',e=>{
 });
 $('openCrawlMapDirections').onclick=()=>{const pubs=routePubs();if(pubs.length)mapsDirections(mapsRouteSections(pubs)[0]||pubs)};
 
-// SMART CRAWL 2.4 — walking route (community OSRM foot profile) with a
+// PUB CRAWLER — walking route (community OSRM foot profile) with a
 // clearly labelled approximate backup. Public endpoint is best-effort and may throttle.
 // Never claim precise customer-door coordinates.
 let routeSeed=0,miniMap=null,miniMarkers=[],miniLine=null,miniMapScheduled=false;
@@ -1129,7 +1204,7 @@ function drawCrawlPreviewSoon(){if(miniMapScheduled)return;miniMapScheduled=true
 function drawCrawlPreview(){
  const planned=routePubs();
  show('routePreviewWrap',planned.length>0);
- if(activeTab!=='crawl'||!planned.length||!window.L)return;
+ if(!['crawl','live'].includes(activeTab)||!planned.length||!window.L)return;
  if(!miniMap){
   miniMap=L.map('crawlPreviewMap',{scrollWheelZoom:false,zoomControl:true}).setView([57.148,-2.108],13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(miniMap);
@@ -1212,7 +1287,55 @@ $('saveCrawlHistory').onclick=async()=>{
   }
  }catch(e){toast('Failed to save crawl history: '+e.message,true)}finally{$('saveCrawlHistory').disabled=false}
 };
-$('historyList').onclick=e=>{const restore=e.target.closest('[data-restore]'),details=e.target.closest('[data-historydetails]');if(restore){const rec=historyEntries().find(x=>x.id===restore.dataset.restore);if(rec){if(currentLive())return toast('Archive or finish your current Live Crawl before restoring another route.',true);if(confirm(isLocalDemo()?'Restore this local demo route?':'Restore this route? Your current shared crawl route will be replaced.')){saveSettings({crawl:rec.stops});showTab('crawl')}}}if(details){const rec=historyEntries().find(x=>x.id===details.dataset.historydetails);if(rec){const names=rec.stops.map(id=>getPub(id)?.name||'Unknown pub');alert(`${rec.title}\n${formatDate(rec.date)}\n\n${names.map((x,i)=>`${i+1}. ${x}`).join('\n')}${rec.memo?'\n\n'+rec.memo:''}`)}}};
+// One explicit, accessible confirmation for both destructive actions.
+let pendingDeletion=null;
+function requestDeletion(kind,id){
+ if(kind==='live'){
+  const live=currentLive();if(!live||live.id!==id)return toast('That live crawl is no longer active.',true);
+  pendingDeletion={kind,id};
+  $('deleteDialogTitle').textContent='Cancel this live crawl?';
+  $('deleteDialogText').textContent='This ends the live session for both phones and clears this planned route. It will NOT be saved to crawl history.';
+  $('deleteDialogNote').textContent='Existing pub check-ins, reviews and earlier crawl history will stay exactly as they are.';
+  $('confirmDelete').textContent='Yes, cancel crawl';
+ }else if(kind==='history'){
+  const rec=historyEntries().find(x=>x.id===id);if(!rec)return toast('That saved crawl was already removed.',true);
+  pendingDeletion={kind,id};
+  $('deleteDialogTitle').textContent='Delete this saved crawl?';
+  $('deleteDialogText').textContent=`Delete “${rec.title||'Pub crawl'}” from both phones’ crawl history? This cannot be undone.`;
+  $('deleteDialogNote').textContent='This removes the crawl history entry only. Individual pub check-ins and ratings are NOT deleted.';
+  $('confirmDelete').textContent='Yes, delete from history';
+ }else{return}
+ $('deleteDialog').showModal();
+}
+$('keepCrawl').onclick=()=>{$('deleteDialog').close();pendingDeletion=null};
+$('deleteDialog').addEventListener('close',()=>{pendingDeletion=null});
+$('confirmDelete').onclick=async()=>{
+ const task=pendingDeletion;if(!task)return;
+ const btn=$('confirmDelete');btn.disabled=true;
+ try{
+  if(task.kind==='live'){
+   if(currentLive()?.id!==task.id)throw Error('This live crawl has already changed on another device.');
+   if(isLocalDemo()){
+    qaLive=null;qaDraftCrawl=[];settings.crawl=[];render();
+   }else{
+    // One atomic Firestore write: remove live state and planned route together.
+    // Does not modify visit documents or historical crawl records.
+    await updateDoc(settingsRef(),new FieldPath('excluded','_live'),{},'crawl',[]);
+   }
+   $('deleteDialog').close();showTab('crawl',true);toast('Live crawl cancelled. Your existing pub check-ins are safe.');
+  }else if(task.kind==='history'){
+   if(!historyEntries().some(x=>x.id===task.id))throw Error('This saved crawl has already been removed.');
+   if(isLocalDemo()){
+    delete settings.excluded._history[task.id];render();
+   }else{
+    // Delete only this exact nested history field, never the entire excluded map.
+    await updateDoc(settingsRef(),new FieldPath('excluded','_history',task.id),deleteField());
+   }
+   $('deleteDialog').close();toast('Saved crawl deleted. Pub visits and reviews were kept.');
+  }
+ }catch(e){toast('Could not delete crawl: '+e.message,true)}finally{btn.disabled=false}
+};
+$('historyList').onclick=e=>{const deletion=e.target.closest('[data-deletehistory]');if(deletion){requestDeletion('history',deletion.dataset.deletehistory);return}const restore=e.target.closest('[data-restore]'),details=e.target.closest('[data-historydetails]');if(restore){const rec=historyEntries().find(x=>x.id===restore.dataset.restore);if(rec){if(currentLive())return toast('Archive or finish your current Live Crawl before restoring another route.',true);if(confirm(isLocalDemo()?'Restore this local demo route?':'Restore this route? Your current shared crawl route will be replaced.')){saveSettings({crawl:rec.stops});showTab('crawl')}}}if(details){const rec=historyEntries().find(x=>x.id===details.dataset.historydetails);if(rec){const names=rec.stops.map(id=>getPub(id)?.name||'Unknown pub');alert(`${rec.title}\n${formatDate(rec.date)}\n\n${names.map((x,i)=>`${i+1}. ${x}`).join('\n')}${rec.memo?'\n\n'+rec.memo:''}`)}}};
 
 // Persistent adventure features use the existing rules-compatible settings.excluded map.
 // These do not change the visit document fields or require a paid Firebase service.
@@ -1291,18 +1414,51 @@ function renderTimeline(){const ev=timelineEvents(),rows=timelineExpanded?ev:ev.
 $('timelineToggle').onclick=()=>{timelineExpanded=!timelineExpanded;renderTimeline()};
 $('trophyGrid').setAttribute('aria-live','polite');
 document.querySelectorAll('[data-awardfilter]').forEach(b=>b.addEventListener('click',()=>{awardFilter=b.dataset.awardfilter;document.querySelectorAll('[data-awardfilter]').forEach(x=>x.classList.toggle('active',x===b));renderBadges()}));
-function renderLiveMode(){const live=currentLive(),route=routePubs();show('liveControls',!!live);$('startLiveCrawl').disabled=route.length===0||!!live;
- if(!live){$('liveBadge').textContent='Ready when you are';$('liveCrawlBody').innerHTML=`<p class="sub">Follow your pub crawl stop by stop. With your shared account, both phones show the same progress; the guest demo stays on this device only.</p><p class="hint">${route.length?`${route.length} pubs in your planned route · press Start live crawl below.`:'Generate a crawl first. No pubs are ever marked visited automatically. In guest mode, this is a local demo only.'}</p>`;return}
- const routeIds=live.route,idx=Math.max(0,Math.min(routeIds.length-1,Number(live.currentIndex)||0)),id=routeIds[idx],p=getPub(id),completed=routeIds.filter(id=>done(id)).length;
- $('liveBadge').textContent=live.paused?'⏸ Paused':isLocalDemo()?'● Live · local demo':'● Live · both phones';
- $('liveCrawlBody').innerHTML=`<div class="live-mini">STOP ${idx+1} OF ${routeIds.length} · ${completed} CONFIRMED VISITED</div><div class="live-stop-name">${escapeHTML(p?.name||'Unknown pub')}</div><p class="live-mini">${escapeHTML(p?.area||'Aberdeen')} · ${live.paused?'Crawl paused — resume to continue.':done(id)?'✓ Already ticked off together.':'Ready to check in together?'}</p><div class="live-meter"><span style="width:${100*completed/routeIds.length}%"></span></div><p class="hint">Moving between stops never ticks them off. Only a saved visit counts towards progress.</p>`;
- $('liveBack').disabled=idx===0||!!live.paused;$('liveNext').disabled=idx>=routeIds.length-1||!!live.paused;
- $('liveCheck').disabled=!!live.paused||!p;$('liveCheck').textContent=done(id)?'★ Edit review':'✓ Check in here';
- $('livePause').textContent=live.paused?'▶ Resume':'⏸ Pause';
+function renderLiveMode(){
+ const live=currentLive(),route=routePubs();
+ show('activeLiveBanner',!!live);
+ $('crawlNavLabel').textContent=live?'Live':'Crawl';
+ $('startLiveCrawl').disabled=route.length===0||!!live;
+ if(!live){
+  $('liveCrawlBody').innerHTML='';$('liveStopsList').innerHTML='';
+  if(activeTab==='live')showTab('crawl',true);
+  return;
+ }
+ const ids=live.route.map(String);
+ const idx=Math.max(0,Math.min(ids.length-1,Number(live.currentIndex)||0));
+ const id=ids[idx],p=getPub(id),next=getPub(ids[idx+1]);
+ const completed=ids.filter(id=>done(id)).length;
+ const date=live.date||safeDate();
+ $('liveDate').textContent=formatDate(date);
+ $('liveBadge').classList.toggle('paused',!!live.paused);
+ $('liveBadge').textContent=live.paused?'⏸ PAUSED':isLocalDemo()?'● LIVE DEMO':'● LIVE · SYNCED';
+ const path=walkDetails?.key===walkKey(route)?walkDetails:null;
+ const leg=idx<ids.length-1?(path?.legs?.[idx+(path.fromHere?1:0)]||null):null;
+ const legToNext=leg?legText(leg):p&&next&&poiPoint(p)&&poiPoint(next)?'Approx. '+legText(approxLeg(poiPoint(p),poiPoint(next))):'Open Google Maps for walking directions';
+ $('liveCrawlBody').innerHTML=`<div class="live-step-overline"><span>STOP ${idx+1} / ${ids.length}</span><span>${completed} VISITED</span></div>
+  <div class="live-stop-name">${escapeHTML(p?.name||'Unknown pub')}</div>
+  <p class="live-stage-area">📍 ${escapeHTML(p?.area||'Aberdeen')}${done(id)?' · ✅ Checked in':''}</p>
+  <div class="live-meter" role="progressbar" aria-label="Pubs visited on this crawl" aria-valuenow="${completed}" aria-valuemin="0" aria-valuemax="${ids.length}"><span style="width:${Math.round(100*completed/ids.length)}%"></span></div>
+  <div class="live-progress-note"><span>${completed} of ${ids.length} stops visited</span><span>${Math.round(100*completed/ids.length)}% complete</span></div>
+  <p class="live-walk-next">${live.paused?'⏸ Crawl paused — resume to continue':done(id)?'✓ This pub is already checked in':'Ready when you are — check in after you’ve both visited'}</p>`;
+ $('liveNextPreview').innerHTML=next?`<span class="eyebrow">UP NEXT · STOP ${idx+2}</span><br><strong>${escapeHTML(next.name)}</strong><br>🚶 ${escapeHTML(legToNext)}`:'🏁 Final stop! When you’re finished, archive the crawl to keep the memory.';
+ $('liveBack').disabled=idx===0||!!live.paused;
+ $('liveNext').disabled=idx>=ids.length-1||!!live.paused;
+ $('liveCheck').disabled=!!live.paused||!p;
+ $('liveCheck').textContent=done(id)?'★ Edit review':'✓ Check in here';
+ $('liveDirections').disabled=!p;
+ $('liveDirections').textContent=next?'↗ Walk to next pub':'↗ Pub in Maps';
+ $('livePause').textContent=live.paused?'▶ Resume crawl':'⏸ Pause crawl';
+ $('liveItineraryCount').textContent=`${ids.length} stops`;
+ $('liveStopsList').innerHTML=ids.map((venueId,i)=>{
+  const stop=getPub(venueId),checked=done(venueId),active=i===idx;
+  const status=active?'CURRENT':checked?'✓ VISITED':'GO →';
+  return `<button type="button" data-gotostop="${i}" class="live-itinerary-row ${active?'current':''} ${checked?'done':''}" ${live.paused?'disabled':''} aria-current="${active?'step':'false'}"><span class="live-itinerary-number">${i+1}</span><span class="stop-main"><strong>${escapeHTML(stop?.name||'Unknown pub')}</strong><small>${escapeHTML(stop?.area||'Aberdeen')} ${checked?' · Checked in':''}</small></span><span class="stop-status">${status}</span></button>`
+ }).join('');
 }
 $('startLiveCrawl').onclick=async()=>{if(currentLive())return toast('A live crawl is already active.',true);const route=routePubs();if(!route.length)return toast('Generate a crawl first.',true);
  const value={id:'live-'+id32(),route:route.map(p=>p.id),startedAt:new Date().toISOString(),date:safeDate(),currentIndex:0,paused:false};
- try{await saveLive(value);toast(isLocalDemo()?'Local Live Crawl Demo started ✓ No shared data changed.':'Live Crawl is on! Both phones now share the same stops.');render();drawCrawlPreviewSoon()}catch(e){toast('Could not start live crawl: '+e.message,true)}
+ try{await saveLive(value);render();showTab('live');toast(isLocalDemo()?'Local Live Crawl Demo started ✓ No shared data changed.':'Live Crawl is on! Both phones now share the same stops.');drawCrawlPreviewSoon()}catch(e){toast('Could not start live crawl: '+e.message,true)}
 };
 async function liveMove(delta){const live=currentLive();if(!live||live.paused)return;const idx=Math.max(0,Math.min(live.route.length-1,(Number(live.currentIndex)||0)+delta));if(idx===live.currentIndex)return;try{await saveLive({...live,currentIndex:idx})}catch(e){toast('Could not change live stop: '+e.message,true)}}
 $('liveBack').onclick=()=>liveMove(-1);$('liveNext').onclick=()=>liveMove(1);
@@ -1316,6 +1472,14 @@ $('liveDirections').onclick=()=>{
 };
 $('livePause').onclick=async()=>{const live=currentLive();if(!live)return;try{await saveLive({...live,paused:!live.paused})}catch(e){toast('Could not update live crawl: '+e.message,true)}};
 $('liveFinish').onclick=()=>openArchive(true);
+$('liveCancel').onclick=()=>{const live=currentLive();if(live)requestDeletion('live',live.id)};
+$('resumeLiveCrawl').onclick=()=>showTab('live');
+$('liveToPlanner').onclick=()=>showTab('crawl',true);
+$('liveRefocus').onclick=()=>{if(miniMap){miniMap.invalidateSize();drawCrawlPreviewSoon()}};
+$('liveStopsList').onclick=async e=>{const button=e.target.closest('[data-gotostop]');if(!button)return;const live=currentLive();if(!live||live.paused)return;
+ const idx=Number(button.dataset.gotostop);if(!Number.isInteger(idx)||idx<0||idx>=live.route.length||idx===live.currentIndex)return;
+ try{await saveLive({...live,currentIndex:idx})}catch(err){toast('Could not change live stop: '+err.message,true)}
+};
 
 messageIdle();function messageIdle(){toast('Sign in to your shared challenge.')}
 
