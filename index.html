@@ -200,6 +200,10 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
 .trophy-stats{display:flex;gap:10px;align-items:center;padding:15px;border-radius:15px;background:#123f4c;border:1px solid #5b7a69;margin:15px 0}.trophy-stats b{font-size:29px;line-height:1;color:#ffcc72;white-space:nowrap;flex-shrink:0}.trophy-stats span{color:#bfdae0;font-size:12px}.award-filters{margin:14px 0}.trophy-card{border:1px solid #3b6674;border-radius:17px;background:#10394a;padding:15px 9px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;min-height:212px;color:#fff}.trophy-card.unlocked{background:radial-gradient(circle at 50% 0,#35604a,#123f4c 62%);border:1px solid #b78b4c;box-shadow:inset 0 1px #b8af7070}.trophy-medallion{width:69px;height:69px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 33% 24%,#f7db92,#b57a36);border:4px double #fff0b9;box-shadow:0 4px 10px #061c2990;font-size:30px;filter:saturate(.9)}.trophy-card.locked .trophy-medallion{background:#214353;border-color:#456674;color:#88a2ac;filter:grayscale(1);box-shadow:none}.trophy-card h3{font-size:13px;line-height:1.25;margin:0;letter-spacing:-.01em}.trophy-card p{margin:0;color:#b6ccd2;font-size:10px;line-height:1.4;flex:1}.trophy-card .badge-date{font-size:10px;color:#f4cf88}.trophy-card .mini-progress{width:100%;height:6px;background:#092a38;border-radius:99px;overflow:hidden}.trophy-card .mini-progress span{display:block;height:100%;background:#f3bf67}.trophy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
 @media(max-width:530px){.passport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trophy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.smart-three{grid-template-columns:repeat(2,minmax(0,1fr))}.smart-three .field:last-child{grid-column:span 2}.route-preview .row{align-items:flex-start}.route-preview .micro{max-width:155px;text-align:right}}
 @media(max-width:340px){.duel-versus{grid-template-columns:minmax(0,1fr) 23px minmax(0,1fr)}.duel-pub{padding:8px 5px}.duel-pub strong{font-size:12px}.passport-stamp{padding:11px 8px}.live-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.live-actions #liveCheck,.live-actions #liveDirections,.live-actions #liveFinish{grid-column:span 2}}
+
+#crawlMapRouteStatus{font-size:11px;white-space:normal;text-align:right;max-width:56%;line-height:1.3}
+.crawl-marker{position:relative;z-index:2}
+.crawl-route-warning{background:#fff5dd;border:1px solid #ead3a0;color:#654b20;border-radius:12px;padding:9px 11px;font-size:12px;line-height:1.45;margin-top:9px}
 </style></head><body><main class="wrap"><header class="top masthead">
   <svg class="skyline-art" aria-hidden="true" viewBox="0 0 960 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -297,7 +301,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
   </div>
 </section>
 
-<div class="card"><div class="row space"><h2 class="section-title">Your planned pub crawl</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro">Walking route / rough backup</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div></div><p class="hint">Routing data © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map problem ↗</a></p><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">Solid line = mapped walking path; dashed line = approximate pub-to-pub order only, not navigable streets. Use Google Maps for turn-by-turn walking directions.</p></div></section>
+<div class="card"><div class="row space"><h2 class="section-title">Your planned pub crawl</h2><span id="routeCount" class="pill planned">0 stops</span></div><div id="routePreviewWrap" class="route-preview hidden"><div class="row space"><strong>🗺️ Your crawl on the map</strong><span class="micro" id="crawlMapRouteStatus">Checking walking paths…</span></div><div id="crawlPreviewMap" class="crawl-preview-map" role="region" aria-label="Pub crawl route preview"></div><p id="crawlMapLocationWarning" class="hint hidden" role="status"></p><div class="row" style="margin-top:10px"><button type="button" class="btn soft sm" id="retryCrawlFootPath">↻ Retry street route</button><button type="button" class="btn soft sm" id="openCrawlMapDirections">↗ Walking directions</button></div></div><p class="hint">Routing data © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Report a map problem ↗</a></p><div id="routeList"><p class="sub">No pubs selected yet. Generate a route or add pubs from their cards.</p></div><div class="notice hidden" id="routeDistance"></div><div id="directionButtons" class="row" style="margin:13px 0"></div><div class="row route-footer"><button id="startLiveCrawl" class="btn primary">▶ Start live crawl</button><button id="finishCrawl" class="btn soft">Archive route</button><button id="clearRoute" class="btn red">Clear</button></div><p class="hint">Gold line = a real mapped pedestrian path. If no gold line is available, only numbered pub locations are shown: open Google Maps for street-by-street walking directions. Numbered stops follow the exact order above.</p></div></section>
 <section id="moreTab" class="tab hidden"><div class="screen-head"><h2>The collection</h2><p>Milestones, neighbourhoods, memories and your team.</p></div><div class="subtabs"><button class="active" data-moretab="stats">Statistics</button><button data-moretab="areas">Areas</button><button data-moretab="badges">Badges</button><button data-moretab="history">Crawl history</button><button data-moretab="team">Team</button></div>
 <div id="statsPane" class="more-pane"><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">VISITED</span><div class="stat-value" id="statsVisited">0</div></div><div class="stat-tile"><span class="eyebrow">THIS MONTH</span><div class="stat-value" id="statsMonth">0</div></div><div class="stat-tile"><span class="eyebrow">CRAWLS</span><div class="stat-value" id="statsCrawls">0</div></div></div><div class="three" style="margin-bottom:15px"><div class="stat-tile"><span class="eyebrow">THIS YEAR</span><div class="stat-value" id="statsYear">0</div></div><div class="stat-tile"><span class="eyebrow">LONGEST CRAWL</span><div class="stat-value" id="statsLongest">0</div></div><div class="stat-tile"><span class="eyebrow">AREAS VISITED</span><div class="stat-value" id="statsAreaVisited">0</div></div></div><div class="card"><h2 class="section-title">Visits over time</h2><p class="sub">New pubs completed in the last six months.</p><div class="months" id="monthBars"></div></div><section class="card passport-card">
   <div class="row space"><div><div class="eyebrow">THE COLLECTION</div><h2 class="section-title">🛂 Your digital pub passport</h2></div><button id="passportToggle" class="btn sm amber">See all pubs ↗</button></div>
@@ -322,7 +326,7 @@ dialog::backdrop{background:rgba(1,11,18,.78)}dialog h2{color:#fff}dialog .dialo
  <button data-tab="crawl"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="5" cy="17" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M7 17h4c3 0 2-7 5-10M7 17h5c3 0 3 2 4 2"/></svg></span>Crawl</button>
  <button data-tab="more"><span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>More</button>
 </div></nav></section>
-<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.2 · 148 public pub/bar candidates · Walking routes are estimates; verify venue opening times before heading out.</p></main>
+<p id="status" role="status" aria-live="polite"></p><p class="footer-note">Pub Challenge v4.2.1 · walking map fix · 148 public pub/bar candidates · Walking routes are estimates; verify venue opening times before heading out.</p></main>
 <dialog id="editDialog"><div class="row space"><h2 id="dialogTitle">Pub details</h2><span id="dialogState" class="pill todo">To visit</span></div><p id="dialogPlace" class="sub" style="margin:7px 0 12px"></p><div class="row" style="margin:11px 0"><label class="row" style="font-size:13px;font-weight:800"><input type="checkbox" id="visited"> Both visited together</label></div><div class="field"><label for="date">Visit date <span class="muted">· automatically set to today</span></label><input id="date" type="date"></div><div class="two"><div class="field"><label for="rating">Overall / 10</label><input id="rating" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 7.6"></div><div class="field"><label for="atmosphere">Atmosphere / 10</label><input id="atmosphere" type="number" inputmode="decimal" min="0" max="10" step="0.1" placeholder="e.g. 8.5"></div></div><div class="field"><label for="review">Short review</label><textarea id="review" maxlength="800" placeholder="Best pint, vibe, service, anything worth remembering…"></textarea></div><div id="dialogNote" class="hint">Only tick a pub when you've both visited it.</div><div class="dialog-actions"><button id="saveVisit" class="btn primary">Save visit</button><button id="closeDialog" class="btn">Cancel</button></div><button id="goGoogle" class="btn soft wide" style="margin-top:9px">⌁ Find this pub in Google Maps ↗</button></dialog>
 <dialog id="finishDialog"><h2>Save this pub crawl</h2><p class="sub">We'll record the route, today's date and which stops you've already ticked off.</p><div class="field"><label for="crawlTitle">Name this night out</label><input id="crawlTitle" maxlength="80" placeholder="e.g. Belmont Street session"></div><div class="field"><label for="crawlMemo">A quick memory (optional)</label><textarea id="crawlMemo" maxlength="300" rows="2" placeholder="Best moment of the night…"></textarea></div><p id="finishNote" class="hint"></p><div class="dialog-actions"><button id="saveCrawlHistory" class="btn primary">Save to history</button><button id="cancelFinish" class="btn">Cancel</button></div></dialog>
 <script type="module">
@@ -597,11 +601,13 @@ const safeDate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth
 // v4.2 eligible public venues. Historic/excluded IDs and visit records remain stored; never deleted.
 const CORE_PUB_IDS=new Set(["1","12","14","15","16","17","18","19","20","22","23","24","25","26","27","29","30","32","35","38","39","40","41","42","43","46","48","49","50","52","55","56","58","60","68","69","70","71","72","75","76","77","79","80","81","83","84","85","86","90","91","92","94","96","97","98","99","100","103","104","105","106","108","109","110","113","115","116","117","118","119","120","121","122","123","124","125","126","127","128","130","131","133","134","135","138","139","140","141","142","144","145","147","149","150","152","153","154","155","157","159","160","161","163","164","165","166","167","169","171","172","174","177","180","183","184","185","186","187","189","190","192","193","194","195","196","199","204","206","209","210","211","213","214","215","216","218","220","221","222","224","225","226","227","228","229","230","231"]);
 const allPubs=()=>VENUES.concat(custom),eligible=p=>!!p&&!p.closed&&!p.retired&&(CORE_PUB_IDS.has(String(p.id))||(String(p.id).startsWith('custom-')&&!p.club)),done=id=>!!visits[id]?.done;
-const getPub=id=>allPubs().find(x=>x.id===id);
+const getPub=id=>allPubs().find(x=>String(x.id)===String(id));
 let qaDraftCrawl=null,qaLive=null;const isLocalDemo=()=>cid==='local-qa-preview';
 const activeRouteIds=()=>{
- const ids=qaDraftCrawl!==null?qaDraftCrawl:settings.crawl;
- return Array.isArray(ids)?ids.filter(id=>{const p=getPub(id);return p&&eligible(p)}):[];
+ // Once a Live Crawl starts, its saved ordered stops are the source of truth,
+ // even if a stale planned route still exists on the other phone.
+ const ids=currentLive()?.route||(qaDraftCrawl!==null?qaDraftCrawl:settings.crawl);
+ return Array.isArray(ids)?ids.filter((id,i)=>{const p=getPub(id);return p&&eligible(p)&&ids.findIndex(x=>String(x)===String(id))===i}).map(String):[];
 };
 const num=(x,def=0)=>{const n=Number(x);return Number.isFinite(n)?n:def};
 const displayNumber=n=>num(n).toFixed(1);
@@ -745,7 +751,7 @@ function poiPoint(pub){if(!pub)return null;
  if(String(pub.id)==='1')return STAGED_POI_BY_ID['223']||null;
  return STAGED_POI_BY_ID[String(pub.id)]||null;}
 function mapPoint(pub){return poiPoint(pub)||(pub?.postcode?coords[String(pub.postcode).toUpperCase().trim()]||null:null)}
-async function ensureCoordinates(){if(geoWork)return geoWork;geoWork=(async()=>{const missing=[...new Set(allPubs().map(p=>p.postcode?.toUpperCase().trim()).filter(p=>p&&!coords[p]))];for(let i=0;i<missing.length;i+=90){const batch=missing.slice(i,i+90);try{const res=await fetch('https://api.postcodes.io/postcodes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postcodes:batch})});if(!res.ok)throw Error(`HTTP ${res.status}`);const json=await res.json();for(const r of json.result||[])if(r.result)coords[r.query]=[r.result.latitude,r.result.longitude]}catch(e){$('mapStatus').textContent='Some postcodes could not be located. '+e.message}}drawPins();return Object.keys(coords).length})();try{return await geoWork}finally{geoWork=null}}
+async function ensureCoordinates(){if(geoWork)return geoWork;geoWork=(async()=>{const missing=[...new Set(allPubs().map(p=>p.postcode?.toUpperCase().trim()).filter(p=>p&&!coords[p]))];for(let i=0;i<missing.length;i+=90){const batch=missing.slice(i,i+90);try{const res=await fetch('https://api.postcodes.io/postcodes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({postcodes:batch})});if(!res.ok)throw Error(`HTTP ${res.status}`);const json=await res.json();for(const r of json.result||[])if(r.result)coords[r.query]=[r.result.latitude,r.result.longitude]}catch(e){$('mapStatus').textContent='Some postcodes could not be located. '+e.message}}drawPins();drawCrawlPreviewSoon();return Object.keys(coords).length})();try{return await geoWork}finally{geoWork=null}}
 async function getLocation(){
  if(!navigator.geolocation)throw Error('This browser does not support location access.');
  return new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(p=>{userLatLng=[p.coords.latitude,p.coords.longitude];res(userLatLng)},e=>{
@@ -754,7 +760,7 @@ async function getLocation(){
  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000}));
 }
 async function startMap(){if(map)return;if(!window.L){$('mapStatus').textContent='Map library unavailable. Your pub list still works.';return}map=L.map('map',{scrollWheelZoom:false}).setView([57.149,-2.108],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);await ensureCoordinates();drawPins()}
-function drawPins(){if(!map)return;for(const marker of pins)map.removeLayer(marker);pins=[];if(routeLine)map.removeLayer(routeLine);routeLine=null;for(const p of allPubs().filter(eligible)){const xy=mapPoint(p);if(!xy)continue;const qualityLabel=poiPoint(p)?'Venue POI (door not verified)':'Postcode-centre estimate (not suitable for auto crawl)';const planned=activeRouteIds().includes(p.id),isDone=done(p.id);if(mapFilter==='todo'&&isDone||mapFilter==='done'&&!isDone||mapFilter==='planned'&&!planned)continue;const st=planned?'planned':isDone?'done':'todo';const icon=L.divIcon({className:'',html:`<div class="marker ${st}"></div>`,iconSize:[23,23],iconAnchor:[12,12]});const m=L.marker(xy,{icon,keyboard:true,title:p.name}).addTo(map);m.bindPopup(`<strong>${escapeHTML(p.name)}</strong><br><small>${escapeHTML(p.area)}</small><br>${isDone?'✓ Already visited':'○ Still to visit'}<br><small>${escapeHTML(qualityLabel)}</small><br><button class="btn sm primary" data-mapedit="${escapeHTML(p.id)}">View pub / tick off</button><br><button class="btn sm" data-mapstart="${escapeHTML(p.id)}">Start a crawl here</button><br><button class="btn sm" data-mapfinish="${escapeHTML(p.id)}">Finish a crawl here</button><br><a href="${pubGoogleUrl(p)}" target="_blank" rel="noopener noreferrer">Exact location in Google Maps ↗</a>`);m.on('popupopen',evt=>{const box=evt.popup.getElement();box?.querySelector('[data-mapedit]')?.addEventListener('click',()=>{map?.closePopup();openEditor(p.id)});box?.querySelector('[data-mapstart]')?.addEventListener('click',()=>{$('crawlStartMode').value='pub';$('crawlStartPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')});box?.querySelector('[data-mapfinish]')?.addEventListener('click',()=>{$('crawlFinishMode').value='pub';$('crawlFinishPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')})});pins.push(m)}if(walkDetails?.key===walkKey(routePubs())){const ps=routePubs().map(mapPoint).filter(Boolean);if(walkDetails.line.length>1)routeLine=L.polyline(walkDetails.line,{color:'#d4a354',weight:4,opacity:.9}).addTo(map);else if(walkDetails.estimate&&ps.length>1)routeLine=L.polyline(ps,{color:'#9aaab6',weight:3,opacity:.9,dashArray:'6,8'}).addTo(map)}$('mapStatus').textContent=`${pins.length} visible pins · ${Object.keys(STAGED_POI_BY_ID).length} preliminary venue/building points for the crawl generator · other pins are postcode estimates. Venue locations are preliminary; user-confirmed entrances are not surveyed GPS points.`}
+function drawPins(){if(!map)return;for(const marker of pins)map.removeLayer(marker);pins=[];if(routeLine)map.removeLayer(routeLine);routeLine=null;for(const p of allPubs().filter(eligible)){const xy=mapPoint(p);if(!xy)continue;const qualityLabel=poiPoint(p)?'Venue POI (door not verified)':'Postcode-centre estimate (not suitable for auto crawl)';const planned=activeRouteIds().includes(p.id),isDone=done(p.id);if(mapFilter==='todo'&&isDone||mapFilter==='done'&&!isDone||mapFilter==='planned'&&!planned)continue;const st=planned?'planned':isDone?'done':'todo';const icon=L.divIcon({className:'',html:`<div class="marker ${st}"></div>`,iconSize:[23,23],iconAnchor:[12,12]});const m=L.marker(xy,{icon,keyboard:true,title:p.name}).addTo(map);m.bindPopup(`<strong>${escapeHTML(p.name)}</strong><br><small>${escapeHTML(p.area)}</small><br>${isDone?'✓ Already visited':'○ Still to visit'}<br><small>${escapeHTML(qualityLabel)}</small><br><button class="btn sm primary" data-mapedit="${escapeHTML(p.id)}">View pub / tick off</button><br><button class="btn sm" data-mapstart="${escapeHTML(p.id)}">Start a crawl here</button><br><button class="btn sm" data-mapfinish="${escapeHTML(p.id)}">Finish a crawl here</button><br><a href="${pubGoogleUrl(p)}" target="_blank" rel="noopener noreferrer">Exact location in Google Maps ↗</a>`);m.on('popupopen',evt=>{const box=evt.popup.getElement();box?.querySelector('[data-mapedit]')?.addEventListener('click',()=>{map?.closePopup();openEditor(p.id)});box?.querySelector('[data-mapstart]')?.addEventListener('click',()=>{$('crawlStartMode').value='pub';$('crawlStartPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')});box?.querySelector('[data-mapfinish]')?.addEventListener('click',()=>{$('crawlFinishMode').value='pub';$('crawlFinishPub').value=p.id;updateCrawlControls();map?.closePopup();showTab('crawl')})});pins.push(m)}if(walkDetails?.key===walkKey(routePubs())){const ps=routePubs().map(mapPoint).filter(Boolean);if(walkDetails.line.length>1)routeLine=L.polyline(walkDetails.line,{color:'#d4a354',weight:4,opacity:.9}).addTo(map);/* No fake street line for a rough estimate. Route stops are markers. */}$('mapStatus').textContent=`${pins.length} visible pins · ${Object.keys(STAGED_POI_BY_ID).length} preliminary venue/building points for the crawl generator · other pins are postcode estimates. Venue locations are preliminary; user-confirmed entrances are not surveyed GPS points.`}
 function nearList(){if(!userLatLng)return;const nearest=allPubs().filter(p=>eligible(p)&&!done(p.id)&&mapPoint(p)).map(p=>({p,dist:haversine(userLatLng,mapPoint(p))})).sort((a,b)=>a.dist-b.dist).slice(0,5);show('nearestList',true);$('nearestList').innerHTML=`<h3 class="section-title" style="margin-top:17px">Closest unvisited pubs</h3><p class="sub">Straight-line distance from your phone, not walking distance.</p>${nearest.map(({p,dist})=>`<div class="item"><div class="row"><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${dist.toFixed(1)} km away · ${escapeHTML(p.area)}</div></div><button class="btn sm" data-edit="${escapeHTML(p.id)}">View ↗</button></div></div>`).join('')||'<p class="sub">No nearby unvisited pubs with known postcodes.</p>'}`}
 $('locate').onclick=async()=>{try{$('locate').disabled=true;await startMap();const xy=await getLocation();map.setView(xy,15);if(userPin)map.removeLayer(userPin);userPin=L.marker(xy,{icon:L.divIcon({className:'',html:'<div class="marker user"></div>',iconSize:[23,23]})}).addTo(map).bindPopup('Your approximate location');nearList();show('mapLocationHelp',false);toast('Showing unvisited pubs near your location.')}catch(e){show('mapLocationHelp',true);toast('Could not find your location: '+e.message,true)}finally{$('locate').disabled=false}};
 $('mapFilters').onclick=e=>{const b=e.target.closest('[data-mapfilter]');if(!b)return;mapFilter=b.dataset.mapfilter;document.querySelectorAll('[data-mapfilter]').forEach(x=>x.classList.toggle('active',x===b));drawPins()};
@@ -763,21 +769,62 @@ function renderRoute(){
  const a=routePubs(),key=walkKey(a);
  $('routeCount').textContent=`${a.length} stops`;
  $('finishCrawl').disabled=a.length<1;$('clearRoute').disabled=a.length===0;
- $('routeList').innerHTML=a.length?a.map((p,i)=>`<div class="route-stop"><span class="number">${i+1}</span><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${escapeHTML(p.area)} · ${done(p.id)?'✓ Conquered':'Not visited yet'}${String(p.id)==='1'?' · shared building entrance':''}${!poiPoint(p)?' · precise venue point pending':''}</div>${walkDetails?.key===key&&walkLegForStop(walkDetails,i)?`<div class="detail" style="color:#eac27c;margin-top:5px">🚶 ${walkDetails.fromHere&&i===0?'From your position':`From stop ${i}`} · ${legText(walkLegForStop(walkDetails,i))}</div>`:''}</div><div class="mini-actions"><button title="Move up" aria-label="Move ${escapeHTML(p.name)} up" data-up="${i}" ${i===0||currentLive()?'disabled':''}>↑</button><button title="Move down" aria-label="Move ${escapeHTML(p.name)} down" data-down="${i}" ${i===a.length-1||currentLive()?'disabled':''}>↓</button><button title="Remove stop" aria-label="Remove ${escapeHTML(p.name)}" data-remove="${i}" ${currentLive()?'disabled':''}>×</button></div></div>`).join(''):'<p class="sub">No route yet. Generate one above or add pubs from the Pub list.</p>';
+ $('routeList').innerHTML=a.length?a.map((p,i)=>`<div class="route-stop"><span class="number">${i+1}</span><div><strong>${escapeHTML(p.name)}</strong><div class="detail">${escapeHTML(p.area)} · ${done(p.id)?'✓ Conquered':'Not visited yet'}${String(p.id)==='1'?' · shared building entrance':''}${!poiPoint(p)?' · precise venue point pending':''}</div>${walkDetails?.key===key&&walkLegForStop(walkDetails,i)?`<div class="detail" style="color:#eac27c;margin-top:5px">🚶 ${walkDetails.fromHere&&i===0?'From your position':`From stop ${i}`} · ${legText(walkLegForStop(walkDetails,i))}</div>`:''}${i<a.length-1?`<div><button type="button" class="btn soft sm" data-googleleg="${escapeHTML(p.id)}|${escapeHTML(a[i+1].id)}" style="margin-top:7px">🚶 To stop ${i+2} in Google Maps ↗</button></div>`:''}</div><div class="mini-actions"><button title="Move up" aria-label="Move ${escapeHTML(p.name)} up" data-up="${i}" ${i===0||currentLive()?'disabled':''}>↑</button><button title="Move down" aria-label="Move ${escapeHTML(p.name)} down" data-down="${i}" ${i===a.length-1||currentLive()?'disabled':''}>↓</button><button title="Remove stop" aria-label="Remove ${escapeHTML(p.name)}" data-remove="${i}" ${currentLive()?'disabled':''}>×</button></div></div>`).join(''):'<p class="sub">No route yet. Generate one above or add pubs from the Pub list.</p>';
  show('routeDistance',a.length>0);
  if(!a.length){$('routeDistance').textContent='';walkRefreshKey='';walkDetails=null;}
  else if(walkDetails?.key===key){$('routeDistance').textContent=walkSummary(walkDetails);}
  else if(a.some(p=>!poiPoint(p))){$('routeDistance').textContent='Some stops lack a researched venue point. Mileage cannot be verified until those stop locations are mapped; use Google Maps walking to check the trip.';}
  else if(a.length===1){$('routeDistance').textContent='One pub selected — no walking between pubs.';}
  else {$('routeDistance').textContent='Checking walking paths (rough estimate available if service is busy)…';scheduleFootRefresh(a);}
- const chunks=[];let start=0;while(start<a.length-1){let end=Math.min(a.length,start+5);if(end-start<2)break;chunks.push(a.slice(start,end));if(end===a.length)break;start=end-1}
- $('directionButtons').innerHTML=(a.length===1?'<button class="btn primary" data-directions="0">↗ Find this pub in Google Maps</button>':chunks.map((part,i)=>`<button class="btn ${i?'soft':'primary'}" data-directions="${i}">↗ Google Maps walking ${chunks.length>1?` · part ${i+1}`:''}</button>`).join(''));
+ const chunks=mapsRouteSections(a);
+ $('directionButtons').innerHTML=(a.length===1?'<button class="btn primary" data-directions="0">↗ Find this pub in Google Maps</button>':chunks.map((part,i)=>`<button class="btn ${i?'soft':'primary'}" data-directions="${i}">↗ Walking directions · stops ${1+i*(MOBILE_GOOGLE_MAX_STOPS-1)}–${Math.min(a.length,(i+1)*(MOBILE_GOOGLE_MAX_STOPS-1)+1)}</button>`).join(''));
  $('startLiveCrawl').disabled=a.length===0||!!currentLive();$('finishCrawl').disabled=a.length===0||!!currentLive();$('clearRoute').disabled=a.length===0||!!currentLive();drawCrawlPreviewSoon();
 }
 $('routeList').onclick=e=>{const b=e.target.closest('[data-up],[data-down],[data-remove]');if(!b)return;if(currentLive())return toast('Finish the live crawl before changing its stops.',true);const i=Number(b.dataset.up??b.dataset.down??b.dataset.remove),list=activeRouteIds();if(b.dataset.remove!==undefined)list.splice(i,1);else{const j=i+(b.dataset.up!==undefined?-1:1);if(j<0||j>=list.length)return;[list[i],list[j]]=[list[j],list[i]]}saveSettings({crawl:list})};
 $('clearRoute').onclick=()=>{if(currentLive())return toast('Finish your live crawl first.',true);if(confirm('Clear the planned route?'))saveSettings({crawl:[]})};
-function mapsDirections(part){if(part.length===1){window.open(pubGoogleUrl(part[0]),'_blank','noopener,noreferrer');return}if(part.length<2)return;const addr=p=>encodeURIComponent(pubNavQuery(p));const url='https://www.google.com/maps/dir/?api=1&travelmode=walking&origin='+addr(part[0])+'&destination='+addr(part[part.length-1])+(part.length>2?'&waypoints='+part.slice(1,-1).map(addr).join('%7C'):'');window.open(url,'_blank','noopener,noreferrer')}
-$('directionButtons').onclick=e=>{const b=e.target.closest('[data-directions]');if(!b)return;const part=Number(b.dataset.directions),a=routePubs(),start=part*4;mapsDirections(a.slice(start,Math.min(start+5,a.length)))};
+// Maps URLs support at most 3 intermediate waypoints in mobile browsers.
+// Keeping no more than 5 total pubs in a Google Maps section preserves order.
+// For every leg the app also offers a two-stop route, which needs no waypoint support.
+const MOBILE_GOOGLE_MAX_STOPS=5;
+function mapsPlace(p){
+ const xy=poiPoint(p);
+ return xy?`${xy[0].toFixed(6)},${xy[1].toFixed(6)}`:pubNavQuery(p);
+}
+function mapsDirectionsUrl(part){
+ if(!part.length)return '';
+ if(part.length===1)return pubGoogleUrl(part[0]);
+ if(part.length>MOBILE_GOOGLE_MAX_STOPS)throw Error('Split journeys into sections of at most five pubs for iPhone Google Maps.');
+ const addr=p=>encodeURIComponent(mapsPlace(p));
+ return 'https://www.google.com/maps/dir/?api=1&travelmode=walking'
+  +'&origin='+addr(part[0])+'&destination='+addr(part[part.length-1])
+  +(part.length>2?'&waypoints='+part.slice(1,-1).map(addr).join('%7C'):'');
+}
+function mapsDirections(part){
+ if(!part?.length)return;
+ window.open(mapsDirectionsUrl(part),'_blank','noopener,noreferrer');
+}
+function mapsRouteSections(pubs){
+ const parts=[];
+ for(let i=0;i<pubs.length-1;i+=MOBILE_GOOGLE_MAX_STOPS-1){
+  parts.push(pubs.slice(i,Math.min(i+MOBILE_GOOGLE_MAX_STOPS,pubs.length)));
+ }
+ return parts;
+}
+function googleLeg(idA,idB){
+ const a=getPub(idA),b=getPub(idB);
+ if(a&&b)mapsDirections([a,b]);
+}
+$('directionButtons').onclick=e=>{
+ const leg=e.target.closest('[data-googleleg]');
+ if(leg){const [a,b]=leg.dataset.googleleg.split('|');googleLeg(a,b);return}
+ const b=e.target.closest('[data-directions]');if(!b)return;
+ const pubList=routePubs();const part=pubList.length===1?pubList:mapsRouteSections(pubList)[Number(b.dataset.directions)];if(part)mapsDirections(part);
+};
+$('routeList').addEventListener('click',e=>{
+ const leg=e.target.closest('[data-googleleg]');if(!leg)return;
+ const [a,b]=leg.dataset.googleleg.split('|');googleLeg(a,b);
+});
+$('openCrawlMapDirections').onclick=()=>{const pubs=routePubs();if(pubs.length)mapsDirections(mapsRouteSections(pubs)[0]||pubs)};
 
 // SMART CRAWL 2.4 — walking route (community OSRM foot profile) with a
 // clearly labelled approximate backup. Public endpoint is best-effort and may throttle.
@@ -1080,25 +1127,69 @@ $('generateNear').onclick=()=>{$('crawlStartMode').value='here';updateCrawlContr
 $('useAreaFallback').onclick=()=>{show('locationHelp',false);$('crawlStartMode').value='area';updateCrawlControls();generateRoute(false)};
 function drawCrawlPreviewSoon(){if(miniMapScheduled)return;miniMapScheduled=true;requestAnimationFrame(()=>{miniMapScheduled=false;drawCrawlPreview()})}
 function drawCrawlPreview(){
- const planned=routePubs(),container=$('routePreviewWrap');show('routePreviewWrap',planned.length>0);if(activeTab!=='crawl'||!planned.length||!window.L)return;
- if(!miniMap){miniMap=L.map('crawlPreviewMap',{scrollWheelZoom:false,zoomControl:true}).setView([57.148,-2.108],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(miniMap)}
- setTimeout(()=>miniMap?.invalidateSize(),80);
- for(const m of miniMarkers)miniMap.removeLayer(m);miniMarkers=[];if(miniLine){miniMap.removeLayer(miniLine);miniLine=null}
- const line=planned.map(mapPoint).filter(Boolean);if(!line.length)return;
- const live=currentLive();for(let i=0;i<planned.length;i++){
-  const p=planned[i],xy=mapPoint(p);if(!xy)continue;const st=live?.route?.[live.currentIndex]===p.id?'current':done(p.id)?'done':'';
-  const icon=L.divIcon({className:'',html:`<span class="crawl-marker ${st}">${i+1}</span>`,iconSize:[30,30],iconAnchor:[15,15]});miniMarkers.push(L.marker(xy,{icon,title:p.name}).addTo(miniMap).bindPopup(`<strong>${escapeHTML(p.name)}</strong><br>${escapeHTML(p.area)}`));
+ const planned=routePubs();
+ show('routePreviewWrap',planned.length>0);
+ if(activeTab!=='crawl'||!planned.length||!window.L)return;
+ if(!miniMap){
+  miniMap=L.map('crawlPreviewMap',{scrollWheelZoom:false,zoomControl:true}).setView([57.148,-2.108],13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(miniMap);
  }
- if(walkDetails?.key===walkKey(planned)){
-  if(walkDetails.line.length>1){
-   miniLine=L.polyline(walkDetails.line,{color:'#eab15e',weight:5,opacity:.91}).addTo(miniMap);
-  }else if(walkDetails.estimate&&line.length>1){
-   miniLine=L.polyline(line,{color:'#9aaab6',weight:3,opacity:.9,dashArray:'6,8'}).addTo(miniMap);
+ miniMap.invalidateSize();
+ for(const m of miniMarkers)miniMap.removeLayer(m);miniMarkers=[];
+ if(miniLine){miniMap.removeLayer(miniLine);miniLine=null}
+ const located=planned.map((p,i)=>({p,i,xy:mapPoint(p)})).filter(x=>x.xy);
+ const missing=planned.filter(p=>!mapPoint(p));
+ const mapStatus=$('crawlMapRouteStatus');
+ const missingEl=$('crawlMapLocationWarning');
+ show('crawlMapLocationWarning',missing.length>0);
+ missingEl.className='crawl-route-warning'+(missing.length?'':' hidden');
+ missingEl.textContent=missing.length?`${located.length}/${planned.length} map pins available. Still waiting for a reliable location for: ${missing.map(p=>p.name).join(', ')}. All ${planned.length} stops remain listed below and in Google Maps directions.`:'';
+ const key=walkKey(planned),detail=walkDetails?.key===key?walkDetails:null;
+ const mappedFootPath=!!(detail?.line?.length>1&&!missing.length);
+ mapStatus.textContent=`${located.length}/${planned.length} stops mapped · ${mappedFootPath?'pedestrian route':'street route unavailable'}`;
+ if(mappedFootPath){
+  miniLine=L.polyline(detail.line,{color:'#eab15e',weight:5,opacity:.96}).addTo(miniMap);
+ }
+ // No invented straight-line 'walking route' in fallback mode. Numbered pins
+ // and per-leg Google walking links remain available regardless of service status.
+ const bounds=located.map(x=>x.xy);
+ if(mappedFootPath)bounds.push(...detail.line);
+ if(bounds.length===1)miniMap.setView(bounds[0],15);
+ else if(bounds.length>1)miniMap.fitBounds(L.latLngBounds(bounds),{padding:[34,34],maxZoom:16});
+ else miniMap.setView([57.148,-2.108],13);
+ // Sometimes 5 pubs are in 3 near-identical buildings. Offset ONLY the label
+ // (not the underlying latitude/longitude) so every numbered stop is visible.
+ // Markers/popup anchors retain the true researched POI point.
+ const placed=[];
+ for(const {p,i,xy} of located){
+  const where=miniMap.latLngToContainerPoint(xy);
+  let chosen=[0,0];
+  const attempts=[[0,0]];
+  for(const radius of [32,52,78,108])for(let k=0;k<12;k++){
+   const angle=2*Math.PI*k/12;
+   attempts.push([Math.round(radius*Math.cos(angle)),Math.round(radius*Math.sin(angle))]);
   }
+  for(const attempt of attempts){
+   if(placed.every(q=>Math.hypot(where.x+attempt[0]-q[0],where.y+attempt[1]-q[1])>=35)){
+    chosen=attempt;break;
+   }
+  }
+  placed.push([where.x+chosen[0],where.y+chosen[1]]);
+  const live=currentLive(),st=live?.route?.[live.currentIndex]===String(p.id)?'current':done(p.id)?'done':'';
+  const offset=chosen[0]||chosen[1]?` style="transform:translate(${chosen[0]}px,${chosen[1]}px)"`:'';
+  const icon=L.divIcon({className:'',html:`<span class="crawl-marker ${st}"${offset}>${i+1}</span>`,iconSize:[30,30],iconAnchor:[15,15]});
+  miniMarkers.push(L.marker(xy,{icon,title:`Stop ${i+1}: ${p.name}`,zIndexOffset:planned.length-i}).addTo(miniMap).bindPopup(`<strong>Stop ${i+1}/${planned.length}: ${escapeHTML(p.name)}</strong><br>${escapeHTML(p.area)}<br><small>Approximate venue position</small>`));
  }
- if(line.length===1)miniMap.setView(line[0],14);
- else miniMap.fitBounds(miniLine?miniLine.getBounds():L.latLngBounds(line),{padding:[29,29],maxZoom:15});
+ // Avoid layout/viewport timing on iPhone causing clipped/overlapping markers.
+ setTimeout(()=>miniMap?.invalidateSize(),90);
 }
+$('retryCrawlFootPath').onclick=()=>{
+ const pubs=routePubs();if(pubs.length<2)return;
+ walkRefreshKey='';walkDetails=null;
+ $('routeDistance').textContent='Retrying mapped pedestrian route…';
+ scheduleFootRefresh(pubs);
+};
+
 let archiveMode='plan';
 function openArchive(live=false){const route=live?(currentLive()?.route||[]):activeRouteIds();if(!route.length)return toast('Select a route first.',true);
  archiveMode=live?'live':'plan';$('crawlTitle').value=`${live?'Live crawl':'Pub crawl'} · ${formatDate(safeDate())}`;$('crawlMemo').value='';
@@ -1211,12 +1302,18 @@ function renderLiveMode(){const live=currentLive(),route=routePubs();show('liveC
 }
 $('startLiveCrawl').onclick=async()=>{if(currentLive())return toast('A live crawl is already active.',true);const route=routePubs();if(!route.length)return toast('Generate a crawl first.',true);
  const value={id:'live-'+id32(),route:route.map(p=>p.id),startedAt:new Date().toISOString(),date:safeDate(),currentIndex:0,paused:false};
- try{await saveLive(value);toast(isLocalDemo()?'Local Live Crawl Demo started ✓ No shared data changed.':'Live Crawl is on! Both phones now share the same stops.');renderLiveMode()}catch(e){toast('Could not start live crawl: '+e.message,true)}
+ try{await saveLive(value);toast(isLocalDemo()?'Local Live Crawl Demo started ✓ No shared data changed.':'Live Crawl is on! Both phones now share the same stops.');render();drawCrawlPreviewSoon()}catch(e){toast('Could not start live crawl: '+e.message,true)}
 };
 async function liveMove(delta){const live=currentLive();if(!live||live.paused)return;const idx=Math.max(0,Math.min(live.route.length-1,(Number(live.currentIndex)||0)+delta));if(idx===live.currentIndex)return;try{await saveLive({...live,currentIndex:idx})}catch(e){toast('Could not change live stop: '+e.message,true)}}
 $('liveBack').onclick=()=>liveMove(-1);$('liveNext').onclick=()=>liveMove(1);
 $('liveCheck').onclick=()=>{const live=currentLive();if(!live||live.paused)return;const id=live.route[live.currentIndex];if(!getPub(id))return;openEditor(id);$('visited').checked=true;if(!$('date').value)$('date').value=safeDate()};
-$('liveDirections').onclick=()=>{const live=currentLive();if(!live)return;const id=live.route[live.currentIndex],p=getPub(id);if(p)window.open(pubGoogleUrl(p),'_blank','noopener,noreferrer')};
+$('liveDirections').onclick=()=>{
+ const live=currentLive();if(!live)return;
+ const idx=Math.max(0,Math.min(live.route.length-1,Number(live.currentIndex)||0));
+ const here=getPub(live.route[idx]),next=getPub(live.route[idx+1]);
+ if(here&&next)mapsDirections([here,next]);
+ else if(here)window.open(pubGoogleUrl(here),'_blank','noopener,noreferrer');
+};
 $('livePause').onclick=async()=>{const live=currentLive();if(!live)return;try{await saveLive({...live,paused:!live.paused})}catch(e){toast('Could not update live crawl: '+e.message,true)}};
 $('liveFinish').onclick=()=>openArchive(true);
 
